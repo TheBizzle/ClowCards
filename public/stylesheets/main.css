@@ -1,0 +1,32 @@
+.tall {
+  height: 16em;
+}
+
+body {
+  background-color: #454545;
+}
+
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.date-input {
+  text-align: center;
+  width: 33%;
+}
+
+.round-bordered {
+  border: 6px solid #AFAFAF;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.has-headroom {
+  margin-top: 25px;
+}
+
+.dynamic-check-label {
+  margin: 5px;
+}
