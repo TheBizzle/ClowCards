@@ -43,7 +43,7 @@ Cards = {
   "Kelda":                       { enabled: true },
   "Kenku Sneak":                 { enabled: true },
   "Khosumet":                    { enabled: true },
-  "Knights of Weeston":          { enabled: true },
+  "Knights of Weston":           { enabled: true },
   "Kozuke Samurai":              { enabled: true },
   "Krav Maga Agents":            { enabled: true },
   "Krug":                        { enabled: true },
