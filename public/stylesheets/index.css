@@ -1,3 +1,7 @@
+.outer-wrapper {
+   overflow: auto;
+}
+
 .entry-wrapper {
   width:   240px;
   height:  180px;
