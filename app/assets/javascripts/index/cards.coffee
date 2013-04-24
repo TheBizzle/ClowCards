@@ -1,7 +1,7 @@
 Cards = {
   "Agent Carr":                  { enabled: true },
   "Airborne Elite":              { enabled: true },
-  "Alastair Macdirk":            { enabled: true },
+  "Alastair MacDirk":            { enabled: true },
   "Anubian Wolves":              { enabled: true },
   "Aphotia":                     { enabled: true },
   "Arkmer":                      { enabled: true },
@@ -57,7 +57,7 @@ Cards = {
   "Marrden Nagrubs":             { enabled: true },
   "Marro Drones":                { enabled: true },
   "Marro Drudge":                { enabled: true },
-  "Marro Hive":                  { enabled: true },
+  "Marro Hive":                  { enabled: false },
   "Marro Stingers":              { enabled: true },
   "Marro Warriors":              { enabled: true },
   "Me-Burq-Sa":                  { enabled: true },
