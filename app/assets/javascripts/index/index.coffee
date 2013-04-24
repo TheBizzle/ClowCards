@@ -22,9 +22,13 @@ class Index
 
   # => String
   generateRow = ->
+
     Max     = 5
-    baseObj = new SelectionState(exports.Cards, [])
-    cards   = _([1..Max]).foldl(refineSelectionState, baseObj).selecteds
+    baseObj = new SelectionState(exports.IndexGlobals.cardPool, [])
+
+    state   = _([1..Max]).foldl(refineSelectionState, baseObj)
+    exports.IndexGlobals.cardPool = state.pool
+    cards   = state.selecteds
     entries = _(cards).map(generateCardEntry)
     columns = _(entries).foldl(((acc, x) -> acc + "<td>#{x}</td>"), "")
     "<tr>#{columns}</tr>"

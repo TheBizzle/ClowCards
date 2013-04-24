@@ -4,7 +4,7 @@ $globals =
 
 # Other globals
 globals =
-  nothing: undefined
+  cardPool: undefined
 
 exports.$IndexGlobals = $globals
 exports.IndexGlobals  = globals
