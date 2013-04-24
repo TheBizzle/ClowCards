@@ -22,5 +22,6 @@ exports.Index = new Index
 window.addEventListener('load', ->
   $box   = $("#main-box")
   module = exports.Index
-  _(exports.CardNames).forEach((name) -> $box.append(module.generateCardEntry(name)))
+  for k, v in exports.Cards
+    $box.append(module.generateCardEntry(k))
 )
