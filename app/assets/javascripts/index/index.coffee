@@ -74,6 +74,10 @@ class Index
             <div class="row-divider"></div>
           </td>
           <td class="row-content">
+            <table>
+              <tr class="row-content-row">
+              </tr>
+            </table>
           </td>
         </tr>
       </table>
