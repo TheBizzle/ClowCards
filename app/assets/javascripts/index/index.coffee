@@ -32,6 +32,32 @@ class Index
 
   # => Unit
   genCards: ->
+    clearCardBuckets()
+    numCards = parseInt($globals.$cardNumSpinner.val())
+    _([0...numCards]).forEach((x) -> genCardForEachPlayer())
+
+  clearCardBuckets = ->
+    _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach(
+      (id) -> $("#" + id).find(".row-content-row").empty()
+    )
+
+  # => Unit
+  genCardForEachPlayer = ->
+    _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach((id) -> insertCardForID(id))
+
+  insertCardForID = (id) ->
+
+    pool = exports.IndexGlobals.cardPool
+    size = _(pool).size()
+    num  = Math.floor(Math.random() * size)
+    card = Object.keys(pool)[num]
+    entry  = generateCardEntry(card)
+    column = "<td>#{entry}</td>"
+
+    newPool = exports.BizzleLib.deleteFrom(pool, card)
+    exports.IndexGlobals.cardPool = newPool
+
+    $("#" + id).find(".row-content-row").append(column)
 
 
   # 3x (String) => String
