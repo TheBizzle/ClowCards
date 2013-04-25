@@ -10,6 +10,16 @@ class Index
   genRow: ->
     exports.$IndexGlobals.$cardTable.append($(generateRow()))
 
+  # (Event) => Unit
+  handleRowKey: (event) =>
+    switch (event.keyCode or event.which)
+      when 13 then @addRow()
+      else
+
+  # => Unit
+  addRow: ->
+
+
   # 3x (String) => String
   genCardNameURL   = (name) -> './assets/images/index/' + slugify(name.toLowerCase()) + '.png'
   genCardImageHTML = (url)  -> "<img class='entry-image round-bordered' src='#{url}'>"

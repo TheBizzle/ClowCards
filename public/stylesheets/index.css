@@ -1,5 +1,6 @@
 .outer-wrapper {
-   overflow: auto;
+  overflow: auto;
+  padding:  40px 45px;
 }
 
 .entry-wrapper {
@@ -33,4 +34,46 @@
 .entry-text-inner {
   margin-left:  auto;
   margin-right: auto;
+}
+
+.card-row {
+  height: 200px;
+  width: 100%;
+}
+
+.row-content {
+ height: 200px;
+ width:  79%;
+}
+
+
+
+#adder-div {
+  border: 5px solid white;
+}
+
+#adder-content {
+  height:  100%;
+  width:   25%;
+  padding: 10px 20px;
+}
+
+#adder-divider {
+  height: 70%;
+  width:  2px;
+  background-color: white
+}
+
+#adder-button {
+  font-size:   80px;
+  color:       #22FF22;
+  font-weight: bold;
+  cursor:      pointer;
+}
+
+#name-input {
+  width:          85%;
+  font-size:      20px;
+  vertical-align: middle;
+  padding:        5px 8px;
 }
