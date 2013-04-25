@@ -7,9 +7,6 @@ class Index
   class Replacement
     constructor: (@regex, @replacement) ->
 
-  class SelectionState
-    constructor: (@pool, @selecteds) ->
-
   # (Event) => Unit
   handleRowKey: (event) =>
     switch (event.keyCode or event.which)
@@ -118,39 +115,12 @@ class Index
     [fluff, num, none...] = _(id).words("-")
     parseInt(num)
 
-  # => String
-  generateCardRow = ->
-
-    Max     = 5
-    baseObj = new SelectionState(exports.IndexGlobals.cardPool, [])
-
-    state   = _([1..Max]).foldl(refineSelectionState, baseObj)
-    exports.IndexGlobals.cardPool = state.pool
-    cards   = state.selecteds
-    entries = _(cards).map(generateCardEntry)
-    columns = _(entries).foldl(((acc, x) -> acc + "<td>#{x}</td>"), "")
-    "<tr>#{columns}</tr>"
-
   # (String) => String
   generateCardEntry = (name) ->
     imgURL   = genCardNameURL(name)
     imgHTML  = genCardImageHTML(imgURL)
     textHTML = genCardTextHTML(name)
     "<div class='entry-wrapper horiz-centered-children round-bordered'>#{imgHTML}<br>#{textHTML}</div>"
-
-  # (SelectionState, Int) => SelectionState
-  refineSelectionState = (acc, x) ->
-
-    pool      = acc.pool
-    selecteds = acc.selecteds
-    size      = _(pool).size()
-    num       = Math.floor(Math.random() * size)
-    card      = Object.keys(pool)[num]
-
-    lib          = exports.BizzleLib
-    refinedCards = lib.deleteFrom(pool, card)
-    refinedRow   = lib.appendTo(selecteds, card)
-    new SelectionState(refinedCards, refinedRow)
 
 exports.IndexServices.Index = new Index
 
