@@ -12,14 +12,4 @@ BizzleLib =
     xss.push(x)
     xss
 
-  # (Array, Int) => Array
-  takeN: (xs, n) ->
-    helper = (xs, ys, n) ->
-      if n <= 0 or _(xs).isEmpty()
-        ys
-      else
-        [h, t...] = xs
-        helper(t, appendTo(ys, h), n - 1)
-    helper(xs, [], n)
-
 exports.BizzleLib = BizzleLib
