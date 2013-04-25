@@ -1,3 +1,5 @@
+$globals = exports.$IndexGlobals
+
 class Index
 
   class Replacement
@@ -6,9 +8,9 @@ class Index
   class SelectionState
     constructor: (@pool, @selecteds) ->
 
-  # => Unit
-  genRow: ->
-    exports.$IndexGlobals.$cardTable.append($(generateRow()))
+  # (String) => Unit
+  genRow: (name) =>
+    $(@generateRow(name)).insertBefore($globals.$adderTable)
 
   # (Event) => Unit
   handleRowKey: (event) =>
@@ -17,8 +19,11 @@ class Index
       else
 
   # => Unit
-  addRow: ->
-
+  addRow: =>
+    $input = $globals.$nameInput
+    name   = $input.val()
+    $input.val("")
+    @genRow(name)
 
   # 3x (String) => String
   genCardNameURL   = (name) -> './assets/images/index/' + slugify(name.toLowerCase()) + '.png'
@@ -30,8 +35,35 @@ class Index
     replacements = [new Replacement(/['.,]/g, ""), new Replacement(/\ /g, "-")]
     _(replacements).foldl(((acc, x) -> acc.replace(x.regex, x.replacement)), name)
 
+  # (String) => String
+  generateRow: (name) ->
+    """
+      <table class="player-table round-bordered card-row">
+        <tr>
+          <td class="player-content">
+            <table>
+              <tr>
+                <td>
+                  <span class="player-remove-button player-button" onclick='exports.IndexServices.Index.addRow()'>x</span>
+                </td>
+                <td class="player-spacer"></td>
+                <td>
+                  <span class="player-name">#{name}</span>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td>
+            <div class="row-divider"></div>
+          </td>
+          <td class="row-content">
+          </td>
+        </tr>
+      </table>
+    """
+
   # => String
-  generateRow = ->
+  generateCardRow = ->
 
     Max     = 5
     baseObj = new SelectionState(exports.IndexGlobals.cardPool, [])

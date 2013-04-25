@@ -1,4 +1,5 @@
 window.addEventListener('load', ->
-  exports.$IndexGlobals.$cardTable = $("#card-table")
-  exports.IndexGlobals.cardPool    = exports.Cards
+  exports.$IndexGlobals.$nameInput  = $("#name-input")
+  exports.$IndexGlobals.$adderTable = $("#adder-table")
+  exports.IndexGlobals.cardPool     = exports.Cards
 )

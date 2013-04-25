@@ -1,6 +1,7 @@
 # Variables into which to cache jQuery selector results
 $globals =
-  $cardTable: undefined
+  $nameInput:  undefined;
+  $adderTable: undefined;
 
 # Other globals
 globals =

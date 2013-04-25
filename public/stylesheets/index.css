@@ -46,34 +46,51 @@
  width:  79%;
 }
 
-
-
-#adder-div {
-  border: 5px solid white;
-}
-
-#adder-content {
-  height:  100%;
-  width:   25%;
-  padding: 10px 20px;
-}
-
-#adder-divider {
+.row-divider {
   height: 70%;
   width:  2px;
   background-color: white
 }
 
-#adder-button {
+.player-remove-button {
+  color: #FF2222;
+}
+
+.player-spacer {
+  width: 8%;
+}
+
+.player-content {
+  height:  100%;
+  width:   25%;
+  padding: 10px 20px;
+}
+
+.player-button {
   font-size:   80px;
-  color:       #22FF22;
   font-weight: bold;
   cursor:      pointer;
 }
 
-#name-input {
+.player-name {
   width:          85%;
   font-size:      20px;
   vertical-align: middle;
-  padding:        5px 8px;
 }
+
+.player-row {
+}
+
+
+
+#adder-button {
+  color: #22FF22;
+}
+
+#name-input {
+  padding:        5px 8px;
+  width:          85%;
+  font-size:      20px;
+  vertical-align: middle;
+}
+

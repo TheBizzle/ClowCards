@@ -7,32 +7,30 @@
       <script src="@routes.Assets.at("javascripts/index/index-onload.js")"   type="text/javascript"></script>
       <script src="@routes.Assets.at("javascripts/index/index.js")"          type="text/javascript"></script>
       <div id="main-box" class="ui-widget ui-widget-content ui-corner-all outer-wrapper">
-        <table id="card-table">
-          <tr id="adder-row">
-            <table id="adder-table" class="round-bordered card-row">
-              <tr>
-                <td id="adder-content">
-                  <table>
-                    <tr>
-                      <td>
-                        <span id="adder-button" onclick='exports.IndexServices.Index.addRow()' >+</span>
-                      </td>
-                      <td style="width: 8%;"></td>
-                      <td>
-                        <input id="name-input" type="text" onkeypress="exports.IndexServices.Index.handleRowKey(event)">
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-                <td>
-                  <div id="adder-divider"></div>
-                </td>
-                <td class="row-content">
-                </td>
-              </tr>
-            </table>
-          <tr>
-        </table>
+        <div id="card-container">
+          <table id="adder-table" class="round-bordered card-row">
+            <tr>
+              <td class="player-content">
+                <table>
+                  <tr>
+                    <td>
+                      <span id="adder-button" class="player-button" onclick='exports.IndexServices.Index.addRow()'>+</span>
+                    </td>
+                    <td class="player-spacer"></td>
+                    <td>
+                      <input id="name-input" type="text" onkeypress="exports.IndexServices.Index.handleRowKey(event)">
+                    </td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <div class="row-divider"></div>
+              </td>
+              <td class="row-content">
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
       <button type="button" onclick='exports.IndexServices.Index.genRow()'>Add Row!</button>
 }
