@@ -16,6 +16,17 @@ window.addEventListener('load', ->
     elem.tabs()
   )
 
+  $('.ui-spinner').each(->
+    elem = $(this)
+    elem.spinner()
+    elem.val("1")
+  )
+
+  $('.ui-spinner-button').click(->
+    elem = $(this)
+    elem.siblings('input').change()
+  )
+
   $('.checkboxes').each(->
     elem = $(this)
     elem.buttonset()
