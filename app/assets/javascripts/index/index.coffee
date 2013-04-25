@@ -8,10 +8,6 @@ class Index
   class SelectionState
     constructor: (@pool, @selecteds) ->
 
-  # (String) => Unit
-  genRow: (name) =>
-    $(@generateRow(name)).insertBefore($globals.$adderTable)
-
   # (Event) => Unit
   handleRowKey: (event) =>
     switch (event.keyCode or event.which)
@@ -23,7 +19,7 @@ class Index
     $input = $globals.$nameInput
     name   = $input.val()
     $input.val("")
-    @genRow(name)
+    genRow(name)
 
   # 3x (String) => String
   genCardNameURL   = (name) -> './assets/images/index/' + slugify(name.toLowerCase()) + '.png'
@@ -35,8 +31,12 @@ class Index
     replacements = [new Replacement(/['.,]/g, ""), new Replacement(/\ /g, "-")]
     _(replacements).foldl(((acc, x) -> acc.replace(x.regex, x.replacement)), name)
 
+  # (String) => Unit
+  genRow = (name) ->
+    $(generateRow(name)).insertBefore($globals.$adderTable)
+
   # (String) => String
-  generateRow: (name) ->
+  generateRow = (name) ->
     """
       <table class="player-table round-bordered card-row">
         <tr>
