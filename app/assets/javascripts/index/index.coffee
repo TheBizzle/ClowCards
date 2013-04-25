@@ -1,5 +1,6 @@
-$globals = exports.$IndexGlobals
-globals  = exports.IndexGlobals
+$globals  = exports.$IndexGlobals
+globals   = exports.IndexGlobals
+Constants = exports.IndexConstants
 
 class Index
 
@@ -25,7 +26,7 @@ class Index
   addRow: ->
     $input = $globals.$nameInput
     name   = $input.val()
-    if not _(name).isEmpty()
+    if not _(name).isEmpty() and _(globals.playerNums).size() < Constants.MaxPlayerCount
       $input.val("")
       genRow(name)
 
