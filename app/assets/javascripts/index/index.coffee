@@ -1,4 +1,5 @@
 $globals = exports.$IndexGlobals
+globals  = exports.IndexGlobals
 
 class Index
 
@@ -14,12 +15,19 @@ class Index
       when 13 then @addRow()
       else
 
+  # (String) => Unit
+  removeRow: (id) ->
+    $("#" + id).remove()
+    num = generateNumFromID(id)
+    globals.playerNums = _(globals.playerNums).filter((n) -> n != num)
+
   # => Unit
   addRow: ->
     $input = $globals.$nameInput
     name   = $input.val()
-    $input.val("")
-    genRow(name)
+    if not _(name).isEmpty()
+      $input.val("")
+      genRow(name)
 
   # => Unit
   genCards: ->
@@ -37,18 +45,22 @@ class Index
 
   # (String) => Unit
   genRow = (name) ->
-    $(generateRow(name)).insertBefore($globals.$adderTable)
+    nums = globals.playerNums
+    num  = if _(nums).isEmpty() then 1 else (_(nums).last() + 1)
+    globals.playerNums.push(num)
+    $(generateRow(name, num)).insertBefore($globals.$adderTable)
 
   # (String) => String
-  generateRow = (name) ->
+  generateRow = (name, num) ->
+    playerID = generatePlayerID(num)
     """
-      <table class="player-table round-bordered card-row has-headroom">
+      <table id="#{playerID}" class="player-table round-bordered card-row has-headroom">
         <tr>
           <td class="player-content">
             <table>
               <tr>
                 <td>
-                  <span class="player-remove-button player-button" onclick='exports.IndexServices.Index.addRow()'>x</span>
+                  <span class="player-remove-button player-button" onclick='exports.IndexServices.Index.removeRow("#{playerID}")'>x</span>
                 </td>
                 <td class="player-spacer"></td>
                 <td>
@@ -65,6 +77,15 @@ class Index
         </tr>
       </table>
     """
+
+  # (String) => String
+  generatePlayerID = (num) ->
+    "player-#{num}"
+
+  # (String) => Int
+  generateNumFromID = (id) ->
+    [fluff, num, none...] = _(id).words("-")
+    parseInt(num)
 
   # => String
   generateCardRow = ->
