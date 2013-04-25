@@ -98,3 +98,15 @@
   width: 75px;
   color: white;
 }
+
+#btnWrapper {
+  width:            450px;
+  padding:          8px;
+  background-color: #33B546;
+  border-radius:    10px 10px 10px 10px;
+}
+
+#pickBtn {
+  width:  100%;
+  border: 3px solid black;
+}

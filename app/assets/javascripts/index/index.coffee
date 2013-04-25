@@ -15,11 +15,15 @@ class Index
       else
 
   # => Unit
-  addRow: =>
+  addRow: ->
     $input = $globals.$nameInput
     name   = $input.val()
     $input.val("")
     genRow(name)
+
+  # => Unit
+  genCards: ->
+
 
   # 3x (String) => String
   genCardNameURL   = (name) -> './assets/images/index/' + slugify(name.toLowerCase()) + '.png'
@@ -38,7 +42,7 @@ class Index
   # (String) => String
   generateRow = (name) ->
     """
-      <table class="player-table round-bordered card-row">
+      <table class="player-table round-bordered card-row has-headroom">
         <tr>
           <td class="player-content">
             <table>
