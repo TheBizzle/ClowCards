@@ -11,7 +11,7 @@ class Index
   handleRowKey: (event) =>
     switch (event.keyCode or event.which)
       when 13 then @addRow()
-      else
+      else return
 
   # (String) => Unit
   removeRow: (id) ->
