@@ -6,10 +6,18 @@ window.addEventListener('load', ->
   exports.IndexGlobals.cardPool         = exports.Cards
 
   exports.$IndexGlobals.$cardNumSpinner.change(->
-    elem    = $(this)
-    value   = elem.val()
-    trimmed = _(value).filter((c) -> c >= 0 and c <= 9)
-    elem.val(trimmed)
+
+    elem  = $(this)
+    value = elem.val()
+
+    newValue =
+      if value < 0
+        0
+      else
+        _(value).filter((c) -> c >= 0 and c <= 9)
+
+    elem.val(newValue)
+
   )
 
 )
