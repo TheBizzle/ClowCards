@@ -11,7 +11,7 @@ class IndexHTML
     "<div class='entry-text-outer'><div class='entry-text-middle'><div class='entry-text-inner'>#{text}</div></div></div>"
 
   generateCardEntry: (imgHTML, textHTML) ->
-    "<div class='entry-wrapper horiz-centered-children round-bordered'>#{imgHTML}<br>#{textHTML}</div>"
+    "<div class='entry-wrapper horiz-centered-children'>#{imgHTML}<br>#{textHTML}</div>"
 
   generatePlayerRow: (name, id) ->
     """
