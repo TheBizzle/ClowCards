@@ -50,10 +50,10 @@ class Index
 
   insertCardForID = (id) ->
 
-    pool = globals.cardPool
-    size = _(pool).size()
-    num  = Math.floor(Math.random() * size)
-    card = Object.keys(pool)[num]
+    pool   = globals.cardPool
+    size   = _(pool).size()
+    num    = Math.floor(Math.random() * size)
+    card   = Object.keys(pool)[num]
     entry  = generateCardEntry(card)
     column = HTML.generateCardEntryColumn(entry)
 
