@@ -1,6 +1,7 @@
 $globals  = exports.$IndexGlobals
 globals   = exports.IndexGlobals
 Constants = exports.IndexConstants
+HTML      = exports.IndexServices.HTML
 
 class Index
 
@@ -49,7 +50,7 @@ class Index
     num  = Math.floor(Math.random() * size)
     card = Object.keys(pool)[num]
     entry  = generateCardEntry(card)
-    column = "<td>#{entry}</td>"
+    column = HTML.generateCardEntryColumn(entry)
 
     newPool = exports.BizzleLib.deleteFrom(pool, card)
     exports.IndexGlobals.cardPool = newPool
@@ -57,10 +58,8 @@ class Index
     $("#" + id).find(".row-content-row").append(column)
 
 
-  # 3x (String) => String
-  genCardNameURL   = (name) -> './assets/images/index/' + slugify(name.toLowerCase()) + '.png'
-  genCardImageHTML = (url)  -> "<img class='entry-image round-bordered' src='#{url}'>"
-  genCardTextHTML  = (text) -> "<div class='entry-text-outer'><div class='entry-text-middle'><div class='entry-text-inner'>#{text}</div></div></div>"
+  # (String) => String
+  genCardNameURL = (name) -> './assets/images/index/' + slugify(name.toLowerCase()) + '.png'
 
   # (String) => String
   slugify = (name) ->
@@ -71,40 +70,9 @@ class Index
   genRow = (name) ->
     nums = globals.playerNums
     num  = if _(nums).isEmpty() then 1 else (_(nums).last() + 1)
+    id   = generatePlayerID(num)
     globals.playerNums.push(num)
-    $(generateRow(name, num)).insertBefore($globals.$adderTable)
-
-  # (String) => String
-  generateRow = (name, num) ->
-    playerID = generatePlayerID(num)
-    """
-      <table id="#{playerID}" class="player-table round-bordered card-row has-headroom">
-        <tr>
-          <td class="player-content">
-            <table>
-              <tr>
-                <td>
-                  <span class="player-remove-button player-button" onclick='exports.IndexServices.Index.removeRow("#{playerID}")'>x</span>
-                </td>
-                <td class="player-spacer"></td>
-                <td>
-                  <span class="player-name">#{name}</span>
-                </td>
-              </tr>
-            </table>
-          </td>
-          <td>
-            <div class="row-divider"></div>
-          </td>
-          <td class="row-content">
-            <table>
-              <tr class="row-content-row">
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    """
+    $(HTML.generatePlayerRow(name, id)).insertBefore($globals.$adderTable)
 
   # (String) => String
   generatePlayerID = (num) ->
@@ -118,9 +86,9 @@ class Index
   # (String) => String
   generateCardEntry = (name) ->
     imgURL   = genCardNameURL(name)
-    imgHTML  = genCardImageHTML(imgURL)
-    textHTML = genCardTextHTML(name)
-    "<div class='entry-wrapper horiz-centered-children round-bordered'>#{imgHTML}<br>#{textHTML}</div>"
+    imgHTML  = HTML.generateCardImage(imgURL)
+    textHTML = HTML.generateCardText(name)
+    HTML.generateCardEntry(imgHTML, textHTML)
 
 exports.IndexServices.Index = new Index
 
