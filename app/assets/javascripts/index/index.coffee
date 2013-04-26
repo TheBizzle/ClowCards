@@ -2,6 +2,7 @@ $globals  = exports.$IndexGlobals
 globals   = exports.IndexGlobals
 Constants = exports.IndexConstants
 HTML      = exports.IndexServices.HTML
+Lib       = exports.BizzleLib
 
 class Index
 
@@ -49,15 +50,15 @@ class Index
 
   insertCardForID = (id) ->
 
-    pool = exports.IndexGlobals.cardPool
+    pool = globals.cardPool
     size = _(pool).size()
     num  = Math.floor(Math.random() * size)
     card = Object.keys(pool)[num]
     entry  = generateCardEntry(card)
     column = HTML.generateCardEntryColumn(entry)
 
-    newPool = exports.BizzleLib.deleteFrom(pool, card)
-    exports.IndexGlobals.cardPool = newPool
+    newPool = Lib.deleteFrom(pool, card)
+    globals.cardPool = newPool
 
     $("#" + id).find(".row-content-row").append(column)
 
