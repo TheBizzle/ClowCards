@@ -4,7 +4,7 @@ window.addEventListener('load', ->
   exports.$IndexGlobals.$adderTable     = $("#adder-table")
   exports.$IndexGlobals.$cardNumSpinner = $("#card-num-spinner")
 
-  exports.IndexGlobals.cardPool   = exports.Cards
+  exports.IndexGlobals.cardPool   = $.extend(true, {}, exports.Cards)
   exports.IndexGlobals.playerNums = []
 
   exports.$IndexGlobals.$cardNumSpinner.change(->
