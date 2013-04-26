@@ -16,7 +16,7 @@ window.addEventListener('load', ->
       if value < 0
         0
       else
-        _(value).filter((c) -> c >= 0 and c <= 9)
+        _(value).filter((c) -> c >= 0 and c <= 9).join("")
 
     elem.val(newValue)
 
