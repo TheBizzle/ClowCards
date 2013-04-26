@@ -21,7 +21,7 @@ class IndexHTML
           <table>
             <tr>
               <td>
-                <span class="player-remove-button player-button" onclick='exports.IndexServices.Index.removeRow("#{id}")'>x</span>
+                <span class="player-remove-button player-button unselectable" onclick='exports.IndexServices.Index.removeRow("#{id}")'>x</span>
               </td>
               <td class="player-spacer"></td>
               <td>
