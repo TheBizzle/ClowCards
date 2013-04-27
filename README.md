@@ -1,4 +1,4 @@
-## KeroCards
+## ClowCards
 
 A web-based Heroscape card random-drafter.
 

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea_modules/KeroCards.iml" filepath="$PROJECT_DIR$/.idea_modules/KeroCards.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea_modules/KeroCards-build.iml" filepath="$PROJECT_DIR$/.idea_modules/KeroCards-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea_modules/ClowCards.iml" filepath="$PROJECT_DIR$/.idea_modules/ClowCards.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea_modules/ClowCards-build.iml" filepath="$PROJECT_DIR$/.idea_modules/ClowCards-build.iml" />
     </modules>
   </component>
 </project>

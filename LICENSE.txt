@@ -1,4 +1,4 @@
-KeroCards
+ClowCards
 Copyright (c) 2013, Jason Bertsche
 All rights reserved.
 
