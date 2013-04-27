@@ -17,7 +17,7 @@ class Index
 
   # (String) => Unit
   removeRow: (id) ->
-    $("#" + id).remove()
+    $.byID(id).remove()
     num = generateNumFromID(id)
     globals.playerNums = _(globals.playerNums).filter((n) -> n != num)
 
@@ -43,7 +43,7 @@ class Index
   # => Unit
   clearCardBuckets = ->
     _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach(
-      (id) -> $("#" + id).find(".row-content-row").empty()
+      (id) -> $.byID(id).find(".row-content-row").empty()
     )
 
   # => Unit
@@ -63,7 +63,7 @@ class Index
     newPool = Lib.deleteFrom(pool, card)
     globals.cardPool = newPool
 
-    $("#" + id).find(".row-content-row").append(column)
+    $.byID(id).find(".row-content-row").append(column)
 
 
   # (String) => String
