@@ -55,8 +55,14 @@ class Index
 
     pool   = globals.cardPool
     size   = _(pool).size()
+
     num    = Math.floor(Math.random() * size)
     card   = Object.keys(pool)[num]
+
+    while (not pool[card].enabled) # //@ Fix better later
+      num    = Math.floor(Math.random() * size)
+      card   = Object.keys(pool)[num]
+
     entry  = generateCardEntry(card)
     column = HTML.generateCardEntryColumn(entry)
 
