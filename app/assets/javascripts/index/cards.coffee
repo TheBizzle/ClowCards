@@ -101,7 +101,7 @@ Cards = {
   "Tarn Viking Warriors":        { enabled: true },
   "Theracus":                    { enabled: true },
   "Thorgrim":                    { enabled: true },
-  "Tor-Kul-Na":                  { enabled: true },
+  "Tor-Kul-Na":                  { enabled: false },
   "Tornak":                      { enabled: true },
   "Ulginesh":                    { enabled: true },
   "Valguard":                    { enabled: true },
