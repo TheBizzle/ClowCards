@@ -35,10 +35,12 @@ class Index
     numCards = parseInt($globals.$cardNumSpinner.val())
     _([0...numCards]).forEach((x) -> genCardForEachPlayer())
 
+  # => Unit
   cleanupLastCardGen = ->
     clearCardBuckets()
     globals.cardPool = $.extend(true, {}, exports.Cards)
 
+  # => Unit
   clearCardBuckets = ->
     _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach(
       (id) -> $("#" + id).find(".row-content-row").empty()
@@ -48,6 +50,7 @@ class Index
   genCardForEachPlayer = ->
     _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach((id) -> insertCardForID(id))
 
+  # (String) => Unit
   insertCardForID = (id) ->
 
     pool   = globals.cardPool
