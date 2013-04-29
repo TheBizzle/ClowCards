@@ -1,17 +1,16 @@
-Lib = exports.BizzleLib
-
 # This is a kind of funky Iterator structure, which can mutate some item that it's iterating stuff out of
 # A more-functional version is forthcoming //@
 # Once `iterate` returns `undefined`, the Iterator is considered terminated
 class Iterator
 
+  # Assume that `state` is of type `T`, and `f` is of type `(T) => [U, T]`
   state = undefined
   f     = undefined
   atEnd = false
 
   # Takes an initial state (`state_`), and a function for iterating over that state (`f_`)
-  # `f_` should be a function that takes a single argument (`state_`) and returns some value (`undefined` only when iteration is complete)
-  # For the rest of this file, assume that `state` is of type `T`, and `f` is of type `(T) => U`
+  # `f_` should be a function that takes a single argument (`state_`) and returns `[x, newState]`,
+  # where `x` is some value, or `undefined` only when iteration is complete.
   constructor: (state_, f_) ->
     state = state_
     f     = f_
@@ -19,8 +18,9 @@ class Iterator
   # () => U
   iterate = =>
     if not atEnd
-      x = f(state)
+      [x, s, nothing...] = f(state)
       if x is undefined then atEnd = true
+      state = s
       x
     else
       undefined
@@ -39,7 +39,7 @@ class Iterator
         if x is undefined
           acc
         else
-          helper(n - 1, Lib.appendTo(acc, x))
+          helper(n - 1, acc.append(x))
     helper(n, [])
 
   # (Int) => Iterator[U]

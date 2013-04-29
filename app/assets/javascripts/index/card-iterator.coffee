@@ -1,26 +1,24 @@
+Obj = exports.Obj
+
 class CardIterator extends exports.Iterator
   constructor: ->
 
-    state = $.extend(true, {}, exports.Cards)
+    state = new Obj($.extend(true, {}, exports.Cards))
 
-    f = (pool) =>
+    f = (p) =>
 
-      g = ->
+      g = (pool) ->
 
-        size   = _(pool).size()
-        num    = Math.floor(Math.random() * size)
-        card   = Object.keys(pool)[num]
+        num    = Math.floor(Math.random() * pool.size())
+        card   = pool.fetchKeyByIndex(num)
 
-        if card is undefined or pool[card].enabled or card is undefined
-          card
+        if card is undefined or pool.get(card).enabled
+          [card, pool]
         else
-          delete pool[card] # //@ Absolutely disgusting
-          g()
+          g(pool.without(card))
 
-      card = g()
-
-      delete pool[card] # //@ Absolutely disgusting
-      card
+      [card, outPool, nothing...] = g(p)
+      [card, outPool.without(card)]
 
     super(state, f)
 
