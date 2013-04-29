@@ -1,5 +1,4 @@
-# This is a kind of funky Iterator structure, which can mutate some item that it's iterating stuff out of
-# A more-functional version is forthcoming //@
+# Currently, this structure is very similar in operation to a `State` monad
 # Once `iterate` returns `undefined`, the Iterator is considered terminated
 class Iterator
 
