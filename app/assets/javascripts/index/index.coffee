@@ -1,10 +1,13 @@
-$globals  = exports.$IndexGlobals
-globals   = exports.IndexGlobals
-Constants = exports.IndexConstants
-HTML      = exports.IndexServices.HTML
-Lib       = exports.BizzleLib
+$globals     = exports.$IndexGlobals
+globals      = exports.IndexGlobals
+CardIterator = exports.CardIterator
+Constants    = exports.IndexConstants
+HTML         = exports.IndexServices.HTML
+Lib          = exports.BizzleLib
 
 class Index
+
+  cardIterator = new CardIterator
 
   class Replacement
     constructor: (@regex, @replacement) ->
@@ -38,7 +41,8 @@ class Index
   # => Unit
   cleanupLastCardGen = ->
     clearCardBuckets()
-    globals.cardPool = $.extend(true, {}, exports.Cards)
+    cardIterator = new CardIterator()
+
 
   # => Unit
   clearCardBuckets = ->
@@ -53,24 +57,14 @@ class Index
   # (String) => Unit
   insertCardForID = (id) ->
 
-    pool   = globals.cardPool
-    size   = _(pool).size()
+    card = cardIterator.next()
 
-    num    = Math.floor(Math.random() * size)
-    card   = Object.keys(pool)[num]
-
-    while (not pool[card].enabled) # //@ Fix better later
-      num    = Math.floor(Math.random() * size)
-      card   = Object.keys(pool)[num]
-
-    entry  = generateCardEntry(card)
-    column = HTML.generateCardEntryColumn(entry)
-
-    newPool = Lib.deleteFrom(pool, card)
-    globals.cardPool = newPool
-
-    $.byID(id).find(".row-content-row").append(column)
-
+    if card
+      entry  = generateCardEntry(card)
+      column = HTML.generateCardEntryColumn(entry)
+      $.byID(id).find(".row-content-row").append(column)
+    else
+      alert("Card pool exhausted!  Pick fewer cards!")
 
   # (String) => String
   genCardNameURL = (name) ->
