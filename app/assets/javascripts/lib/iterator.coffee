@@ -16,7 +16,7 @@ class Iterator
     state = state_
     f     = f_
 
-  # => U
+  # () => U
   iterate = =>
     if not atEnd
       x = f(state)
@@ -25,9 +25,11 @@ class Iterator
     else
       undefined
 
+  # () => U
   next: ->
     _(@take(1)).head()
 
+  # (Int) => Array[U]
   take: (n) =>
     helper = (n, acc) =>
       if (n <= 0)
@@ -45,7 +47,7 @@ class Iterator
     @take(n)
     this
 
-  # => Boolean
+  # () => Boolean
   isEmpty: ->
     atEnd
 

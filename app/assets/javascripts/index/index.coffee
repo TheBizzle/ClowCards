@@ -24,7 +24,7 @@ class Index
     num = generateNumFromID(id)
     globals.playerNums = _(globals.playerNums).filter((n) -> n != num)
 
-  # => Unit
+  # () => Unit
   addRow: ->
     $input = $globals.$nameInput
     name   = $input.val()
@@ -32,25 +32,25 @@ class Index
       $input.val("")
       genRow(name)
 
-  # => Unit
+  # () => Unit
   genCards: ->
     cleanupLastCardGen()
     numCards = parseInt($globals.$cardNumSpinner.val())
     _([0...numCards]).forEach((x) -> genCardForEachPlayer())
 
-  # => Unit
+  # () => Unit
   cleanupLastCardGen = ->
     clearCardBuckets()
     cardIterator = new CardIterator()
 
 
-  # => Unit
+  # () => Unit
   clearCardBuckets = ->
     _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach(
       (id) -> $.byID(id).find(".row-content-row").empty()
     )
 
-  # => Unit
+  # () => Unit
   genCardForEachPlayer = ->
     _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach((id) -> insertCardForID(id))
 
