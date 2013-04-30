@@ -22,6 +22,7 @@ class Option
 
   foreach: (f) =>
     if not @isEmpty() then f(@get())
+    return
 
   collect: (f) =>
     if not @isEmpty()
