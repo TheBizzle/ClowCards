@@ -80,7 +80,7 @@ class Index
     nums = globals.playerNums
     num  = if _(nums).isEmpty() then 1 else (_(nums).last() + 1)
     id   = generatePlayerID(num)
-    globals.playerNums.push(num)
+    globals.playerNums = nums.append(num)
     $(HTML.generatePlayerRow(name, id)).insertBefore($globals.$adderTable)
 
   # (String) => String
