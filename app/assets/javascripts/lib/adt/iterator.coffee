@@ -11,7 +11,7 @@ class Iterator
   # () => U
   _iterate: =>
     if not @_atEnd
-      [x, s, nothing...] = @_f(@_state)
+      [x, s, []] = @_f(@_state)
       if x is undefined then @_atEnd = true
       @_state = s
       x

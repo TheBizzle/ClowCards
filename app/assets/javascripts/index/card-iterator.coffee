@@ -17,7 +17,7 @@ class CardIterator extends exports.Iterator
         else
           g(pool.without(card))
 
-      [card, outPool, nothing...] = g(p)
+      [card, outPool, []] = g(p)
       [card, outPool.without(card)]
 
     super(state, f)

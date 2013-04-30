@@ -89,7 +89,7 @@ class Index
 
   # (String) => Int
   generateNumFromID = (id) ->
-    [fluff, num, none...] = _(id).words("-")
+    [[], num, []] = _(id).words("-")
     parseInt(num)
 
   # (String) => String
