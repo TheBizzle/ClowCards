@@ -2,24 +2,18 @@
 # Once `iterate` returns `undefined`, the Iterator is considered terminated
 class Iterator
 
-  # Assume that `state` is of type `T`, and `f` is of type `(T) => [U, T]`
-  state = undefined
-  f     = undefined
-  atEnd = false
-
-  # Takes an initial state (`state_`), and a function for iterating over that state (`f_`)
-  # `f_` should be a function that takes a single argument (`state_`) and returns `[x, newState]`,
+  # Takes an initial state (_state: T), and a function for iterating over that state (_f: (T) => [U, T])
+  # `_f` should be a function that takes a single argument (`_state`) and returns `[x, newState]`,
   # where `x` is some value, or `undefined` only when iteration is complete.
-  constructor: (state_, f_) ->
-    state = state_
-    f     = f_
+  constructor: (@_state, @_f) ->
+    @_atEnd = false
 
   # () => U
-  iterate = =>
-    if not atEnd
-      [x, s, nothing...] = f(state)
-      if x is undefined then atEnd = true
-      state = s
+  _iterate: =>
+    if not @_atEnd
+      [x, s, nothing...] = @_f(@_state)
+      if x is undefined then @_atEnd = true
+      @_state = s
       x
     else
       undefined
@@ -34,7 +28,7 @@ class Iterator
       if (n <= 0)
         acc
       else
-        x = iterate()
+        x = @_iterate()
         if x is undefined
           acc
         else
@@ -48,7 +42,7 @@ class Iterator
 
   # () => Boolean
   isEmpty: ->
-    atEnd
+    @_atEnd
 
   #
   # //@ Everything below is currently undefined
