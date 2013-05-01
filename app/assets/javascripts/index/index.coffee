@@ -3,6 +3,7 @@ globals      = exports.IndexGlobals
 CardIterator = exports.CardIterator
 Constants    = exports.IndexConstants
 HTML         = exports.IndexServices.HTML
+Obj          = exports.Obj
 
 class Index
 
@@ -33,9 +34,20 @@ class Index
 
   # () => Unit
   genCards: ->
-    cleanupLastCardGen()
-    numCards = parseInt($globals.$cardNumSpinner.val())
-    _([0...numCards]).forEach((x) -> genCardForEachPlayer())
+
+    numCards   = parseInt($globals.$cardNumSpinner.val())
+    maxCards   = new Obj(globals.cardPool).filter((k, v) -> v.enabled).size() # Not really great, but... good enough, I guess --Jason (4/30/13)
+    totalCards = _(globals.playerNums).size() * numCards
+
+    if totalCards <= maxCards
+      cleanupLastCardGen()
+      _([0...numCards]).forEach((x) -> genCardForEachPlayer())
+    else
+      msg = """You attempted to generate #{totalCards} cards, but there are only #{maxCards} available.
+              |
+              |Please reduce the number of cards or players and try again.
+            """.stripMargin().trim()
+      alert(msg)
 
   # () => Unit
   cleanupLastCardGen = ->
