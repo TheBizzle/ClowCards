@@ -54,7 +54,6 @@ class Index
     clearCardBuckets()
     cardIterator = new CardIterator()
 
-
   # () => Unit
   clearCardBuckets = ->
     _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach(
