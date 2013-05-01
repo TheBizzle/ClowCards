@@ -2,6 +2,7 @@
 class Obj
 
   # The type of `@_obj` will be taken to be `Object[T, U]`
+  # Thus, this class will be referred to as `Obj[T, U]`
   constructor: (@_obj) ->
 
   # () => Object[T, U]
@@ -12,27 +13,27 @@ class Obj
   get: (x) =>
     @_obj[x]
 
-  # (T, U) => Obj[Object[T, U]]
+  # (T, U) => Obj[T, U]
   append: (x, y) =>
     @_withNew((out) => out[x] = y)
 
-  # (T) => Obj[Object[T, U]]
+  # (T) => Obj[T, U]
   without: (x) =>
     @_withNew((out) => delete out[x])
 
-  # ((T, U) => Boolean) => Obj[Object[T, U]]
+  # ((T, U) => Boolean) => Obj[T, U]
   filter: (f) =>
     @_morph((out, k, v) => if not f(k, v) then delete out[k])
 
-  # ((T, U) => Boolean) => Obj[Object[T, U]]
+  # ((T, U) => Boolean) => Obj[T, U]
   filterNot: (f) =>
     @_morph((out, k, v) => if f(k, v) then delete out[k])
 
-  # ((T) => Boolean) => Obj[Object[T, U]]
+  # ((T) => Boolean) => Obj[T, U]
   filterKeys: (f) =>
     @_morph((out, k, v) => if not f(k) then delete out[k])
 
-  # ((T, U) => [V, W]) => Obj[Object[V, W]]
+  # ((T, U) => [V, W]) => Obj[V, W]
   map: (f) =>
     @_comprehend(
       (out, k, v) =>
@@ -60,7 +61,7 @@ class Obj
   size: =>
     _(@_obj).size()
 
-  # ((Obj[Object[T, U]], T, U) => Obj[Object[V, W]]) => Obj[Object[V, W]]
+  # ((Obj[T, U], T, U) => Obj[V, W]) => Obj[V, W]
   _comprehend: (f) =>
     @_withNew(
       (out) =>
@@ -68,7 +69,7 @@ class Obj
           f(out, k, v)
     )
 
-  # ((Obj[Object[T, U]], T, U) => Unit) => Obj[Object[V, W]]
+  # ((Obj[T, U], T, U) => Unit) => Obj[V, W]
   _morph: (f) =>
     @_withNew(
       (out) =>
@@ -77,7 +78,7 @@ class Obj
         out
     )
 
-    # ((V) => X) => Obj[Object[T, U]]
+    # ((V) => X) => Obj[T, U]
   _withNew: (f) =>
     out = $.extend(true, {}, @_obj)
     f(out)
