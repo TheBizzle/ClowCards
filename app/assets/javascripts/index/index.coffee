@@ -3,7 +3,6 @@ globals      = exports.IndexGlobals
 CardIterator = exports.CardIterator
 Constants    = exports.IndexConstants
 HTML         = exports.IndexServices.HTML
-Lib          = exports.BizzleLib
 
 class Index
 
