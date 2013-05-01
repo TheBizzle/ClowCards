@@ -5,36 +5,36 @@ class Obj
   constructor: (@_obj) ->
 
   # () => Object[T, U]
-  value: ->
+  value: =>
     @_obj
 
   # (T) => U
-  get: (x) ->
+  get: (x) =>
     @_obj[x]
 
   # (T, U) => Obj[Object[T, U]]
-  append: (x, y) ->
-    @_withNew((out) -> out[x] = y)
+  append: (x, y) =>
+    @_withNew((out) => out[x] = y)
 
   # (T) => Obj[Object[T, U]]
-  without: (x) ->
-    @_withNew((out) -> delete out[x])
+  without: (x) =>
+    @_withNew((out) => delete out[x])
 
   # (Int) => T
-  fetchKeyByIndex: (n) ->
+  fetchKeyByIndex: (n) =>
     Object.keys(@_obj)[n]
 
   # (Int) => U
-  fetchValueByIndex: (n) ->
+  fetchValueByIndex: (n) =>
     key = @fetchKeyByIndex()
     @_obj[key]
 
   # () => Int
-  size: ->
+  size: =>
     _(@_obj).size()
 
     # ((V) => X) => Obj[Object[T, U]]
-  _withNew: (f) ->
+  _withNew: (f) =>
     out = $.extend(true, {}, @_obj)
     f(out)
     new Obj(out)
