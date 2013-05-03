@@ -78,7 +78,7 @@ class Index
 
   # (String) => String
   genCardNameURL = (name) ->
-    './assets/images/index/' + slugify(name.toLowerCase()) + '.png'
+    "./assets/images/index/#{ slugify(name.toLowerCase()) }.png"
 
   # (String) => String
   slugify = (name) ->
