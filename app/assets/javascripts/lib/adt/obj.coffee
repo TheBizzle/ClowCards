@@ -27,7 +27,7 @@ class Obj
 
   # ((T, U) => Boolean) => Obj[T, U]
   filterNot: (f) =>
-    @_morph((out, k, v) => if f(k, v) then delete out[k])
+    @filter((x) -> not f.apply(this, arguments))
 
   # ((T) => Boolean) => Obj[T, U]
   filterKeys: (f) =>
