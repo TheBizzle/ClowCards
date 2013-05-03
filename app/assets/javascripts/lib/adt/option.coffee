@@ -1,3 +1,5 @@
+# Introducing a class that represents data that is either there (`Some`) or not (`None`)
+# Functions and their implementations were heavily inspired by Scala's `Option` class
 class Option
 
   constructor: ->
