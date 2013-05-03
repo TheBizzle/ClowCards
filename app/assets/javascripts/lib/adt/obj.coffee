@@ -42,11 +42,10 @@ class Obj
         out[key] = value
     )
 
-  # ((T, U) => V) => Array[V]
-  mapToArray: (f) =>
-    clone = $.extend(true, {}, @_obj)
-    for k, v of clone
-      f(k, v)
+  # () => Array[Array[T, U]]
+  toArray: (f) =>
+    for k, v of @_obj
+      [k, v]
 
   # (Int) => T
   fetchKeyByIndex: (n) =>
