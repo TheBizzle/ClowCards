@@ -35,7 +35,7 @@ class Iterator
           helper(n - 1, acc.append(x))
     helper(n, [])
 
-  # (Int) => Iterator[U]
+  # (Int) => Iterator[T, U]
   drop: (n) =>
     @take(n)
     this
