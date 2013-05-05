@@ -6,15 +6,27 @@ class Iterator
   # `_f` should be a function that takes a single argument (`_state`) and returns `[x, newState]`,
   # where `x` is some value, or `undefined` only when iteration is complete.
   constructor: (@_state, @_f) ->
-    @_atEnd = false
+    @_atEnd   = false
+    @_filters = []
 
   # () => U
   _iterate: =>
-    if not @_atEnd
+
+    iterationFunc = =>
+
       [x, s, []] = @_f(@_state)
-      if x is undefined then @_atEnd = true
       @_state = s
-      x
+
+      if x is undefined
+        @_atEnd = true
+        x
+      else if _(@_filters).every((g) -> g(x) is true)
+        x
+      else
+        iterationFunc()
+
+    if not @_atEnd
+      iterationFunc()
     else
       undefined
 
@@ -44,6 +56,24 @@ class Iterator
   isEmpty: ->
     @_atEnd
 
+  # ((U) => Boolean) => Iterator[T, U]
+  filter: (g) =>
+    copy = @clone()
+    copy._filters.push(g)
+    copy
+
+  # ((U) => Boolean) => Iterator[T, U]
+  filterNot: (g) =>
+    @filter((x) -> not g.apply(this, arguments))
+
+  # () => Iterator[T, U]
+  clone: =>
+    # //@ How come `$.extend` doesn't work properly for this (in not carrying over filters)?
+    copy = new Iterator(@_state, @_f)
+    copy._atEnd   = @_atEnd
+    copy._filters = @_filters
+    copy
+
   #
   # //@ Everything below is currently undefined
   #
@@ -56,13 +86,6 @@ class Iterator
 
   # ((U) => Boolean) => Option[U]
   find: (g) ->
-
-  # ((U) => Boolean) => Iterator[U]
-  filter: (g) ->
-
-  # ((U) => Boolean) => Iterator[U]
-  filterNot: (g) =>
-    @filter((x) -> not g.apply(this, arguments))
 
   # ((U) => Boolean) => U
   maxBy: (g) ->
