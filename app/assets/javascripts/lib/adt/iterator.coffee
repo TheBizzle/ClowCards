@@ -68,7 +68,6 @@ class Iterator
 
   # () => Iterator[T, U]
   clone: =>
-    # //@ How come `$.extend` doesn't work properly for this (in not carrying over filters)?
     copy = new Iterator(@_state, @_f)
     copy._atEnd   = @_atEnd
     copy._filters = @_filters
