@@ -54,21 +54,8 @@ class Iterator
   # ((U) => V) => Iterator[V]
   map:  (g) ->
 
-  # ((U) => V) => Iterator[V]
-  collect: (g) ->
-    @map.andThen(@filter((x) -> x != undefined))(g)
-
-  # (V) => ((V, U) => V) => V
-  foldLeft: (zero) -> (g) ->
-
-  # (V) => ((U, V) => V) => V
-  foldRight: (zero) -> g ->
-
-  # ((U) => Boolean) => U
+  # ((U) => Boolean) => Option[U]
   find: (g) ->
-
-  # ((U) => Boolean) => Boolean
-  exists: (g) ->
 
   # ((U) => Boolean) => Iterator[U]
   filter: (g) ->
@@ -76,12 +63,6 @@ class Iterator
   # ((U) => Boolean) => Iterator[U]
   filterNot: (g) =>
     @filter((x) -> not g.apply(this, arguments))
-
-  # ((U) => Boolean) => Boolean
-  forall: (g) ->
-
-  # ((U) => Boolean) => Boolean
-  contains: (x) ->
 
   # ((U) => Boolean) => U
   maxBy: (g) ->
