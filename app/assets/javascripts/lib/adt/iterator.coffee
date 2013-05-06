@@ -1,3 +1,6 @@
+Option = exports.Option
+None   = exports.None
+
 # Currently, this structure is very similar in operation to a `State` monad
 # Once `iterate` returns `undefined`, the Iterator is considered terminated
 class Iterator
@@ -101,12 +104,27 @@ class Iterator
     copy._morpher = copy._morpher.andThen(g)
     copy
 
+  # ((U) => Boolean) => Option[U]
+  find: (g) =>
+
+    checkState = =>
+      x = @next()
+      if not @isEmpty()
+        checkG(x)
+      else
+        None
+
+    checkG = (x) =>
+      if g(x)
+        Option.from(x)
+      else
+        checkState()
+
+    checkState()
+
   #
   # //@ Everything below is currently undefined
   #
-
-  # ((U) => Boolean) => Option[U]
-  find: (g) ->
 
   # ((U) => Boolean) => U
   maxBy: (g) ->
