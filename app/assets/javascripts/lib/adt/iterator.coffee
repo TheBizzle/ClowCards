@@ -8,6 +8,7 @@ class Iterator
   constructor: (@_state, @_f) ->
     @_atEnd   = false
     @_filters = []
+    @_morpher = (x) -> x
 
   # () => U
   _iterate: =>
@@ -20,10 +21,12 @@ class Iterator
       if x is undefined
         @_atEnd = true
         x
-      else if _(@_filters).every((g) -> g(x) is true)
-        x
       else
-        iterationFunc()
+        morphed = @_morpher(x)
+        if _(@_filters).every((g) -> g(morphed) is true)
+          morphed
+        else
+          iterationFunc()
 
     if not @_atEnd
       iterationFunc()
@@ -92,12 +95,15 @@ class Iterator
     copy._filters = @_filters
     copy
 
+  # ((U) => V) => Iterator[T, V]
+  map: (g) =>
+    copy          = @clone()
+    copy._morpher = copy._morpher.andThen(g)
+    copy
+
   #
   # //@ Everything below is currently undefined
   #
-
-  # ((U) => V) => Iterator[V]
-  map:  (g) ->
 
   # ((U) => Boolean) => Option[U]
   find: (g) ->
