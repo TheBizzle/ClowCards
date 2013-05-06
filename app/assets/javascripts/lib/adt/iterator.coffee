@@ -66,6 +66,25 @@ class Iterator
   filterNot: (g) =>
     @filter((x) -> not g.apply(this, arguments))
 
+  # Implementation of this is questionable.  This strictly evaluates the structure,
+  # whereas most other similar methods are lazy in their effects.
+  # But, if `foreach` doesn't strictly evaluate it, what's the point of `foreach` on `Iterator`?
+  # ((U) => V) => Unit
+  foreach: (g) =>
+
+    checkState = =>
+      x = @next()
+      if not @isEmpty()
+        performG(x)
+      else
+        undefined
+
+    performG = (x) =>
+      g(x)
+      checkState()
+
+    checkState()
+
   # () => Iterator[T, U]
   clone: =>
     copy = new Iterator(@_state, @_f)
@@ -76,9 +95,6 @@ class Iterator
   #
   # //@ Everything below is currently undefined
   #
-
-  # ((U) => V) => Unit
-  foreach: (g) ->
 
   # ((U) => V) => Iterator[V]
   map:  (g) ->
