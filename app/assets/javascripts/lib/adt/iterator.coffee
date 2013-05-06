@@ -14,6 +14,8 @@ class Iterator
     @_morpher = (x) -> x
 
   # () => U
+  # //@ The interplay between morphers and filters here is pretty circumspect.
+  # I should probably maintain a history of them and run them chronologically....
   _iterate: =>
 
     iterationFunc = =>
