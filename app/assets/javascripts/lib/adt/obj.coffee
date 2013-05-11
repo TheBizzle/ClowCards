@@ -1,7 +1,7 @@
 # This class represents a wrapper around `Object`s, with some methods for doing things non-stupidly
 class Obj
 
-  # The type of `@_obj` will be taken to be `Object[T, U]`
+  # The type of `_obj` will be taken to be `Object[T, U]`
   # Thus, this class will be referred to as `Obj[T, U]`
   constructor: (@_obj) ->
 
