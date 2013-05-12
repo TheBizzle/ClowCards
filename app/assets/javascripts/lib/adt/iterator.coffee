@@ -5,6 +5,8 @@ None   = exports.None
 # Once `iterate` returns `undefined`, the Iterator is considered terminated
 class Iterator
 
+  _cached = undefined # Kinda gross, but... okay (necessary for `dropWhile`; nice for `takeWhile`)
+
   # Takes an initial state (_state: T), and a function for iterating over that state (_f: (T) => [U, T])
   # `_f` should be a function that takes a single argument (`_state`) and returns `[x, newState]`,
   # where `x` is some value, or `undefined` only when iteration is complete.
@@ -33,7 +35,11 @@ class Iterator
         else
           iterationFunc()
 
-    if not @_atEnd
+    if @_cached
+      x = @_cached
+      @_cached = undefined
+      x
+    else if not @_atEnd
       iterationFunc()
     else
       undefined
