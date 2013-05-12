@@ -146,20 +146,28 @@ class Iterator
 
     checkState()
 
-  #
-  # //@ Everything below is currently undefined
-  #
-
   # ((U) => Boolean) => U
   maxBy: (g) ->
+    arr = @toArray()
+    _(arr).max(g)
 
   # ((U) => Boolean) => U
   minBy: (g) ->
+    arr = @toArray()
+    _(arr).min(g)
 
   # ((U) => Boolean) => Array[U]
   sortBy: (g) ->
+    arr = @toArray()
+    _(arr).sortBy(g)
 
-  # ((U) => V) => Object[V, U]
+  # ((U) => V) => Object[V, Array[U]]
   groupBy: (g) ->
+    arr = @toArray()
+    _(arr).groupBy(g)
+
+  # () => Array[U]
+  toArray: ->
+    @takeWhile((x) -> true)
 
 exports.Iterator = Iterator
