@@ -61,9 +61,25 @@ class Iterator
           helper(n - 1, acc.append(x))
     helper(n, [])
 
+  # ((U) => Boolean) => Array[U]
+  takeWhile: (g) =>
+    helper = (acc, g) =>
+      x = @_iterate()
+      if x is undefined or not g(x)
+        @_cached = x
+        acc
+      else
+        helper(acc.append(x), g)
+    helper([], g)
+
   # (Int) => Iterator[T, U]
   drop: (n) =>
     @take(n)
+    this
+
+  # ((U) => Boolean) => Iterator[T, U]
+  dropWhile: (g) =>
+    @takeWhile(g)
     this
 
   # () => Boolean
