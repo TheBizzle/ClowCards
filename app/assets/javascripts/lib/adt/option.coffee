@@ -4,9 +4,9 @@ class Option
 
   constructor: ->
 
-  # (U) => U (such that U >: T)
+  # (() => U) => U (such that U >: T)
   getOrElse: (x) ->
-    if @isEmpty() then x else @get()
+    if @isEmpty() then x() else @get()
 
   # (T) => U
   map: (f) =>
