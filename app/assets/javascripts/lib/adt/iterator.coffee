@@ -2,7 +2,7 @@ Option = exports.Option
 None   = exports.None
 
 # Currently, this structure is very similar in operation to a `State` monad
-# Once `iterate` returns `undefined`, the Iterator is considered terminated
+# Once `iterate` returns `undefined`, the `Iterator` is considered to have reached the end of iteration
 class Iterator
 
   _cached = undefined # Kinda gross, but... okay (necessary for `dropWhile`; nice for `takeWhile`)
@@ -96,9 +96,6 @@ class Iterator
   filterNot: (g) =>
     @filter((x) -> not g.apply(this, arguments))
 
-  # Implementation of this is questionable.  This strictly evaluates the structure,
-  # whereas most other similar methods are lazy in their effects.
-  # But, if `foreach` doesn't strictly evaluate it, what's the point of `foreach` on `Iterator`?
   # ((U) => V) => Unit
   foreach: (g) =>
 
