@@ -5,8 +5,6 @@ None   = exports.None
 # Once `iterate` returns `undefined`, the `Iterator` is considered to have reached the end of iteration
 class Iterator
 
-  _cached = undefined # Kinda gross, but... okay (necessary for `dropWhile`; nice for `takeWhile`)
-
   # Takes an initial state (_state: T), and a function for iterating over that state (_f: (T) => [U, T])
   # `_f` should be a function that takes a single argument (`_state`) and returns `[x, newState]`,
   # where `x` is some value, or `undefined` only when iteration is complete.
@@ -14,6 +12,7 @@ class Iterator
     @_atEnd   = false
     @_filters = []
     @_morpher = (x) -> x
+    @_cached    = undefined # Kinda gross, but... okay (necessary for `dropWhile`; nice for `takeWhile`)
 
   # () => U
   # //@ The interplay between morphers and filters here is pretty circumspect.
