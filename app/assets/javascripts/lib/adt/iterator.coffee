@@ -9,14 +9,11 @@ class Iterator
   # `_f` should be a function that takes a single argument (`_state`) and returns `[x, newState]`,
   # where `x` is some value, or `undefined` only when iteration is complete.
   constructor: (@_state, @_f) ->
-    @_atEnd   = false
-    @_filters = []
-    @_morpher = (x) -> x
+    @_atEnd     = false
     @_cached    = undefined # Kinda gross, but... okay (necessary for `dropWhile`; nice for `takeWhile`)
+    @_manipList = new ManipList([])
 
   # () => U
-  # //@ The interplay between morphers and filters here is pretty circumspect.
-  # I should probably maintain a history of them and run them chronologically....
   _iterate: =>
 
     iterationFunc = =>
@@ -28,11 +25,7 @@ class Iterator
         @_atEnd = true
         x
       else
-        morphed = @_morpher(x)
-        if _(@_filters).every((g) -> g(morphed) is true)
-          morphed
-        else
-          iterationFunc()
+        @_manipList.processArg(x).getOrElse(-> iterationFunc())
 
     if @_cached
       x = @_cached
@@ -88,7 +81,7 @@ class Iterator
   # ((U) => Boolean) => Iterator[T, U]
   filter: (g) =>
     copy = @clone()
-    copy._filters.push(g)
+    copy._manipList.append(new FilterManip(g))
     copy
 
   # ((U) => Boolean) => Iterator[T, U]
@@ -120,8 +113,8 @@ class Iterator
 
   # ((U) => V) => Iterator[T, V]
   map: (g) =>
-    copy          = @clone()
-    copy._morpher = copy._morpher.andThen(g)
+    copy = @clone()
+    copy._manipList.append(new MapManip(g))
     copy
 
   # ((U) => Boolean) => Option[U]
@@ -165,5 +158,50 @@ class Iterator
   # () => Array[U]
   toArray: ->
     @takeWhile((x) -> true)
+
+
+
+# Private
+class ManipList
+
+  constructor: (@_arr) ->
+
+  # The `Z` here is the output type of the last `MapManip` that gets executed in the chain
+  # (T) => Option[Z]
+  processArg: (arg) ->
+    x = _(@_arr).foldl(((acc, manipulator) -> manipulator.manip(acc)), Option.from(arg))
+    console.log(x)
+    x
+
+  # (Manipulator) => ManipList
+  append: (manipulator) -> new ManipList(@_arr.append(manipulator))
+
+# Private interface
+class Manipulator
+
+  # (T) => U
+  @_f
+
+  # (Option[T]) => Option[V]
+  manip: (argOpt) -> argOpt
+
+# Private
+class FilterManip extends Manipulator
+
+  # f: (T) => Boolean
+  constructor: (@_f) ->
+
+  # (Option[T]) => Option[T]
+  manip: (argOpt) -> argOpt.flatMap((arg) -> if f(arg) then Option.from(arg) else None)
+
+# Private
+class MapManip extends Manipulator
+
+  constructor: (@_f) ->
+
+  # (Option[T]) => Option[U]
+  manip: (argOpt) -> argOpt.map((arg) -> f(arg))
+
+
 
 exports.Iterator = Iterator
