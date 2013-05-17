@@ -81,7 +81,7 @@ class Iterator
   # ((U) => Boolean) => Iterator[T, U]
   filter: (g) =>
     copy = @clone()
-    copy._manipList.append(new FilterManip(g))
+    copy._manipList = copy._manipList.append(new FilterManip(g))
     copy
 
   # ((U) => Boolean) => Iterator[T, U]
@@ -114,7 +114,7 @@ class Iterator
   # ((U) => V) => Iterator[T, V]
   map: (g) =>
     copy = @clone()
-    copy._manipList.append(new MapManip(g))
+    copy._manipList = copy._manipList.append(new MapManip(g))
     copy
 
   # ((U) => Boolean) => Option[U]
@@ -164,43 +164,46 @@ class Iterator
 # Private
 class ManipList
 
+  # _arr: Array[Manipulator]
   constructor: (@_arr) ->
 
   # The `Z` here is the output type of the last `MapManip` that gets executed in the chain
   # (T) => Option[Z]
-  processArg: (arg) ->
-    x = _(@_arr).foldl(((acc, manipulator) -> manipulator.manip(acc)), Option.from(arg))
-    console.log(x)
-    x
+  processArg: (arg) =>
+    _(@_arr).foldl(((acc, manipulator) -> manipulator.manip(acc)), Option.from(arg))
 
   # (Manipulator) => ManipList
-  append: (manipulator) -> new ManipList(@_arr.append(manipulator))
+  append: (manipulator) =>
+    new ManipList(@_arr.append(manipulator))
 
 # Private interface
 class Manipulator
 
-  # (T) => U
-  @_f
+  # _f: (T) => U
+  constructor: (@_f) ->
 
   # (Option[T]) => Option[V]
-  manip: (argOpt) -> argOpt
+  manip: (argOpt) => argOpt
 
 # Private
 class FilterManip extends Manipulator
 
-  # f: (T) => Boolean
-  constructor: (@_f) ->
+  # _f: (T) => Boolean
+  constructor: (_f) ->
+    super(_f)
 
   # (Option[T]) => Option[T]
-  manip: (argOpt) -> argOpt.flatMap((arg) -> if f(arg) then Option.from(arg) else None)
+  manip: (argOpt) => argOpt.flatMap((arg) => if @_f(arg) then Option.from(arg) else None)
 
 # Private
 class MapManip extends Manipulator
 
-  constructor: (@_f) ->
+  # _f: (T) => U
+  constructor: (_f) ->
+    super(_f)
 
   # (Option[T]) => Option[U]
-  manip: (argOpt) -> argOpt.map((arg) -> f(arg))
+  manip: (argOpt) => argOpt.map((arg) => @_f(arg))
 
 
 
