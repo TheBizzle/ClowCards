@@ -9,8 +9,8 @@ class CardIterator extends exports.Iterator
 
       g = (pool) ->
 
-        num    = Math.floor(Math.random() * pool.size())
-        card   = pool.fetchKeyByIndex(num)
+        num  = Math.floor(Math.random() * pool.size())
+        card = pool.fetchKeyByIndex(num)
 
         if card is undefined or pool.get(card).enabled
           [card, pool]
