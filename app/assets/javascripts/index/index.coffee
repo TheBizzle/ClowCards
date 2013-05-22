@@ -7,10 +7,8 @@ Obj          = exports.Obj
 
 class Index
 
-  cardIterator = new CardIterator
-
-  class Replacement
-    constructor: (@regex, @replacement) ->
+  constructor: ->
+    @_cardIterator = new CardIterator(getCards())
 
   # (Event) => Unit
   handleRowKey: (event) =>
@@ -36,7 +34,7 @@ class Index
   genCards: ->
 
     numCards   = parseInt($globals.$cardNumSpinner.val())
-    maxCards   = new Obj(globals.cardPool).filter((k, v) -> v.enabled).size() # Not really great, but... good enough, I guess --Jason (4/30/13)
+    maxCards   = new Obj(getCards()).filter((k, v) -> v.enabled).size() # Not really great, but... good enough, I guess --Jason (4/30/13)
     totalCards = _(globals.playerNums).size() * numCards
 
     if totalCards <= maxCards
@@ -52,7 +50,7 @@ class Index
   # () => Unit
   cleanupLastCardGen = ->
     clearCardBuckets()
-    cardIterator = new CardIterator()
+    @_cardIterator = new CardIterator(getCards())
 
   # () => Unit
   clearCardBuckets = ->
@@ -67,7 +65,7 @@ class Index
   # (String) => Unit
   insertCardForID = (id) ->
 
-    card = cardIterator.next()
+    card = _cardIterator.next()
 
     if card
       entry  = generateCardEntry(card)
@@ -78,12 +76,7 @@ class Index
 
   # (String) => String
   genCardNameURL = (name) ->
-    "./assets/images/index/#{ slugify(name.toLowerCase()) }.png"
-
-  # (String) => String
-  slugify = (name) ->
-    replacements = [new Replacement(/['.,]/g, ""), new Replacement(/\ /g, "-")]
-    _(replacements).foldl(((acc, x) -> acc.replace(x.regex, x.replacement)), name)
+    "./assets/images/index/#{name.slugify()}.png"
 
   # (String) => Unit
   genRow = (name) ->
@@ -109,5 +102,19 @@ class Index
     textHTML = HTML.generateCardText(name)
     HTML.generateCardEntry(imgHTML, textHTML)
 
-exports.IndexServices.Index = new Index
+  getCards = ->
+
+    cardObj     = $.extend(true, {}, exports.Cards)
+    labels      = $globals.$cardHolder.children("label").map(-> $(this))
+    idNamePairs = _(labels).map((elem) -> [elem.attr("for"), elem.text()])
+
+    _(idNamePairs).forEach(
+      (pair) ->
+        [id, name, []]        = pair
+        cardObj[name].enabled = $.byID(id)[0].checked # Mutation == meh
+    )
+
+    cardObj
+
+exports.IndexServices.IndexClass = Index
 

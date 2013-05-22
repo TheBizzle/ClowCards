@@ -1,10 +1,11 @@
+# Initialize variables and event listeners
 window.addEventListener('load', ->
 
   exports.$IndexGlobals.$nameInput      = $("#name-input")
   exports.$IndexGlobals.$adderTable     = $("#adder-table")
   exports.$IndexGlobals.$cardNumSpinner = $("#card-num-spinner")
+  exports.$IndexGlobals.$cardHolder     = $("#card-holder")
 
-  exports.IndexGlobals.cardPool   = $.extend(true, {}, exports.Cards)
   exports.IndexGlobals.playerNums = []
 
   exports.$IndexGlobals.$cardNumSpinner.change(->
@@ -22,4 +23,49 @@ window.addEventListener('load', ->
 
   )
 
+)
+
+# Populate `card-holder`
+window.addEventListener('load', ->
+
+  $cardHolder = exports.$IndexGlobals.$cardHolder
+  cardPool    = $.extend(true, {}, exports.Cards)
+
+  for cardname, obj of cardPool
+     name    = cardname.slugify()
+     checked = if obj.enabled then " checked" else ""
+     $cardHolder.append(
+       """<input type="checkbox" id="check-#{name}" name="version" class="check-button version-button dynamic-check-button"#{checked}/>
+         |<label for="check-#{name}" class="unselectable check-label dynamic-check-label">#{cardname}</label>""".stripMargin()
+     )
+
+  $cardHolder.children(".dynamic-check-button").each(->
+    elem = $(this)
+    elem.button()
+  )
+
+  $cardHolder.children(".dynamic-check-label").each(->
+    elem = $(this)
+    elem.click(->
+
+      btn = $.byID(elem.attr("for"))
+      btn[0].checked = not btn[0].checked
+      btn.button("refresh")
+      btn.change()
+
+      checkAll = $("#check-all")
+      checkAll.attr("checked", false)
+      checkAll.button("refresh")
+      checkAll.change()
+
+      false
+
+    )
+  )
+
+)
+
+# Initialize `Index` object
+window.addEventListener('load', ->
+  exports.IndexServices.Index = new exports.IndexServices.IndexClass
 )

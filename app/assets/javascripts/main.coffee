@@ -2,7 +2,6 @@ window.addEventListener('load', ->
 
   $('.collapsible-accordion').accordion({
     collapsible: true,
-    active: false,
     heightStyle: "content"
   })
 

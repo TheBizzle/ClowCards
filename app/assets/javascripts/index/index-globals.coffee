@@ -3,10 +3,10 @@ $globals =
   $nameInput:      undefined
   $adderTable:     undefined
   $cardNumSpinner: undefined
+  $cardHolder:     undefined
 
 # Other globals
 globals =
-  cardPool:   undefined
   playerNums: undefined
 
 exports.$IndexGlobals = $globals

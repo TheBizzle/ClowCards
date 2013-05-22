@@ -1,9 +1,7 @@
 Obj = exports.Obj
 
 class CardIterator extends exports.Iterator
-  constructor: ->
-
-    state = new Obj($.extend(true, {}, exports.Cards))
+  constructor: (state) ->
 
     f = (p) =>
 
@@ -20,6 +18,6 @@ class CardIterator extends exports.Iterator
       [card, outPool, []] = g(p)
       [card, outPool.without(card)]
 
-    super(state, f)
+    super(new Obj(state), f)
 
 exports.CardIterator = CardIterator
