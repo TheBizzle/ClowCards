@@ -42,6 +42,10 @@ class Obj
         out[key] = value
     )
 
+  # () => Obj[T, U]
+  clone: =>
+    new Obj($.extend(true, {}, @_obj))
+
   # () => Array[Array[T, U]]
   toArray: (f) =>
     for k, v of @_obj
@@ -79,7 +83,7 @@ class Obj
 
   # ((Object[T, U]) => V) => Obj[T, U]
   _withNew: (f) =>
-    out = $.extend(true, {}, @_obj)
+    out = @clone().value()
     f(out)
     new Obj(out)
 

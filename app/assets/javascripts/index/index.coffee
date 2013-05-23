@@ -105,7 +105,7 @@ class Index
   # () => Object[String, Object[String, Any]]
   getCards = ->
 
-    cardObj     = $.extend(true, {}, exports.Cards)
+    cardObj     = new Obj(exports.Cards).clone().value()
     labels      = $globals.$cardHolder.children("label").map(-> $(this))
 
     _(labels).forEach(

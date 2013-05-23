@@ -29,7 +29,7 @@ window.addEventListener('load', ->
 window.addEventListener('load', ->
 
   $cardHolder = exports.$IndexGlobals.$cardHolder
-  cardPool    = $.extend(true, {}, exports.Cards)
+  cardPool    = new exports.Obj(exports.Cards).clone().value()
 
   for cardname, obj of cardPool
      name    = cardname.slugify()
