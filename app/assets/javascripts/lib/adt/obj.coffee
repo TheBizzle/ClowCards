@@ -68,7 +68,7 @@ class Obj
           f(out, k, v)
     )
 
-  # ((Obj[T, U], T, U) => Unit) => Obj[V, W]
+  # ((Obj[T, U], T, U) => Unit) => Obj[T, U]
   _morph: (f) =>
     @_withNew(
       (out) =>
@@ -77,7 +77,7 @@ class Obj
         out
     )
 
-    # ((V) => X) => Obj[T, U]
+  # ((Object[T, U]) => V) => Obj[T, U]
   _withNew: (f) =>
     out = $.extend(true, {}, @_obj)
     f(out)

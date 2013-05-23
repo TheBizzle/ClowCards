@@ -102,6 +102,7 @@ class Index
     textHTML = HTML.generateCardText(name)
     HTML.generateCardEntry(imgHTML, textHTML)
 
+  # () => Object[String, Object[String, Any]]
   getCards = ->
 
     cardObj     = $.extend(true, {}, exports.Cards)
