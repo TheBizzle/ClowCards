@@ -107,11 +107,11 @@ class Index
 
     cardObj     = $.extend(true, {}, exports.Cards)
     labels      = $globals.$cardHolder.children("label").map(-> $(this))
-    idNamePairs = _(labels).map((elem) -> [elem.attr("for"), elem.text()])
 
-    _(idNamePairs).forEach(
-      (pair) ->
-        [id, name, []]        = pair
+    _(labels).forEach(
+      (elem) ->
+        id   = elem.attr("for")
+        name = elem.text()
         cardObj[name].enabled = $.byID(id)[0].checked # Mutation == meh
     )
 
