@@ -1,8 +1,7 @@
 window.addEventListener('load', ->
 
   $('.collapsible-accordion').accordion({
-    collapsible: true,
-    heightStyle: "content"
+    heightStyle: "fill"
   })
 
   $('.ui-button').each(->
