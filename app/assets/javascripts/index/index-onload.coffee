@@ -47,19 +47,11 @@ window.addEventListener('load', ->
   $cardHolder.children(".dynamic-check-label").each(->
     elem = $(this)
     elem.click(->
-
       btn = $.byID(elem.attr("for"))
       btn[0].checked = not btn[0].checked
       btn.button("refresh")
       btn.change()
-
-      checkAll = $("#check-all")
-      checkAll.attr("checked", false)
-      checkAll.button("refresh")
-      checkAll.change()
-
       false
-
     )
   )
 
