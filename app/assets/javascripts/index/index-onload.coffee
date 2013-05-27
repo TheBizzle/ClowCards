@@ -28,8 +28,12 @@ window.addEventListener('load', ->
 # Populate `card-holder`
 window.addEventListener('load', ->
 
-  $cardHolder = exports.$IndexGlobals.$cardHolder
-  cardPool    = new exports.Obj(exports.Cards).clone().value()
+  $IndexGlobals = exports.$IndexGlobals
+  Cards         = exports.Cards
+  Obj           = exports.Obj
+
+  $cardHolder = $IndexGlobals.$cardHolder
+  cardPool    = new Obj(Cards).clone().value()
 
   for cardname, obj of cardPool
      name    = cardname.slugify()
