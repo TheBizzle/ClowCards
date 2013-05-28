@@ -1,6 +1,7 @@
-Obj = exports.Obj
+Iterator = exports.Iterator
+Obj      = exports.Obj
 
-class CardIterator extends exports.Iterator
+class CardIterator extends Iterator
   constructor: (state) ->
 
     f = (p) =>
