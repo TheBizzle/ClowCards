@@ -5,7 +5,7 @@ class Option
   constructor: ->
 
   # (() => U) => U (such that U >: T)
-  getOrElse: (x) ->
+  getOrElse: (x) =>
     if @isEmpty() then x() else @get()
 
   # (T) => U
@@ -59,11 +59,11 @@ class Some extends Option
     super
 
   # () => T
-  get: ->
+  get: =>
     @_value
 
   # () => Boolean
-  isEmpty: ->
+  isEmpty: =>
     false
 
 
@@ -73,18 +73,18 @@ class None extends Option
     super
 
   # () => T
-  get: ->
+  get: =>
     throw new Error("None.get")
 
   # () => Boolean
-  isEmpty: ->
+  isEmpty: =>
     true
 
 
 OptionCompanion = {
 
   # (T) => Option[T]
-  from: (value) -> if value then new Some(value) else @empty
+  from: (value) => if value then new Some(value) else @empty
 
   # () => None
   empty: new None

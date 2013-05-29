@@ -37,7 +37,7 @@ class Iterator
       undefined
 
   # () => U
-  next: ->
+  next: =>
     _(@take(1)).head()
 
   # (Int) => Array[U]
@@ -75,7 +75,7 @@ class Iterator
     this
 
   # () => Boolean
-  isEmpty: ->
+  isEmpty: =>
     @_atEnd
 
   # ((U) => Boolean) => Iterator[T, U]
@@ -136,28 +136,28 @@ class Iterator
     checkState()
 
   # ((U) => Boolean) => U
-  maxBy: (g) ->
+  maxBy: (g) =>
     arr = @toArray()
     _(arr).max(g)
 
   # ((U) => Boolean) => U
-  minBy: (g) ->
+  minBy: (g) =>
     arr = @toArray()
     _(arr).min(g)
 
   # ((U) => Boolean) => Array[U]
-  sortBy: (g) ->
+  sortBy: (g) =>
     arr = @toArray()
     _(arr).sortBy(g)
 
   # ((U) => V) => Object[V, Array[U]]
-  groupBy: (g) ->
+  groupBy: (g) =>
     arr = @toArray()
     _(arr).groupBy(g)
 
   # () => Array[U]
-  toArray: ->
-    @takeWhile((x) -> true)
+  toArray: =>
+    @takeWhile((x) => true)
 
 
 
