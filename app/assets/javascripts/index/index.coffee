@@ -1,6 +1,7 @@
 $globals     = exports.$IndexGlobals
 globals      = exports.IndexGlobals
 CardIterator = exports.CardIterator
+Cards        = exports.Cards
 Constants    = exports.IndexConstants
 HTML         = exports.IndexServices.HTML
 Obj          = exports.Obj
@@ -98,14 +99,14 @@ class Index
   # (String) => String
   generateCardEntry = (name) ->
     imgURL   = genCardNameURL(name)
-    imgHTML  = HTML.generateCardImage(imgURL)
+    imgHTML  = HTML.generateCardImage(imgURL, Cards[name].faction)
     textHTML = HTML.generateCardText(name)
     HTML.generateCardEntry(imgHTML, textHTML)
 
   # () => Object[String, Object[String, Any]]
   getCards = ->
 
-    cardObj     = new Obj(exports.Cards).clone().value()
+    cardObj     = new Obj(Cards).clone().value()
     labels      = $globals.$cardHolder.children("label").map(-> $(this))
 
     _(labels).forEach(

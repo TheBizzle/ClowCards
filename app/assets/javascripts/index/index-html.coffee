@@ -4,8 +4,8 @@ class IndexHTML
   generateCardEntryColumn: (innerHTML) ->
     "<td>#{innerHTML}</td>"
 
-  generateCardImage: (url) ->
-    "<img class='entry-image round-bordered' src='#{url}'>"
+  generateCardImage: (url, faction) ->
+    "<img class='entry-image round-bordered #{faction.toLowerCase()}-backgrounded' src='#{url}'>"
 
   generateCardText: (text) ->
     "<div class='entry-text-outer'><div class='entry-text-middle'><div class='entry-text-inner'>#{text}</div></div></div>"

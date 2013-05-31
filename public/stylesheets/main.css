@@ -38,3 +38,34 @@ body {
 .accordian-div {
   height: 600px;
 }
+
+
+/* Faction Background Colors */
+
+.choobar-backgrounded {
+  background-color: #9151B3;
+}
+
+.einar-backgrounded {
+  background-color: #D08A51;
+}
+
+.jandar-backgrounded {
+  background-color: #3333FF;
+}
+
+.jacob-backgrounded {
+  background-color: #BBAA00;
+}
+
+.ullar-backgrounded {
+  background-color: #5ACF6F;
+}
+
+.utgar-backgrounded {
+  background-color: #E03438;
+}
+
+.vydar-backgrounded {
+  background-color: #A8A8B7;
+}
