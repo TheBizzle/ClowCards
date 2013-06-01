@@ -21,13 +21,13 @@ class Iterator
       [x, s, []] = @_f(@_state)
       @_state = s
 
-      if x is undefined
+      if not x?
         @_atEnd = true
         x
       else
         @_manipList.processArg(x).getOrElse(-> iterationFunc())
 
-    if @_cached
+    if @_cached?
       x = @_cached
       @_cached = undefined
       x
@@ -43,11 +43,11 @@ class Iterator
   # (Int) => Array[U]
   take: (n) =>
     helper = (n, acc) =>
-      if (n <= 0)
+      if n <= 0
         acc
       else
         x = @_iterate()
-        if x is undefined
+        if not x?
           acc
         else
           helper(n - 1, acc.append(x))
@@ -57,7 +57,7 @@ class Iterator
   takeWhile: (g) =>
     helper = (acc, g) =>
       x = @_iterate()
-      if x is undefined or not g(x)
+      if not x? or not g(x)
         @_cached = x
         acc
       else

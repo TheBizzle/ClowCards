@@ -68,7 +68,7 @@ class Index
 
     card = _cardIterator.next()
 
-    if card
+    if card?
       entry  = generateCardEntry(card)
       column = HTML.generateCardEntryColumn(entry)
       $.byID(id).find(".row-content-row").append(column)

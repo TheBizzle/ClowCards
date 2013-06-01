@@ -37,7 +37,7 @@ class Option
   collect: (f) =>
     if not @isEmpty()
       result = f(@get())
-      if result
+      if result?
         new Some(result)
       else
         exports.None
@@ -84,7 +84,7 @@ class None extends Option
 OptionCompanion = {
 
   # (T) => Option[T]
-  from: (value) => if value then new Some(value) else @empty
+  from: (value) => if value? then new Some(value) else @empty
 
   # () => None
   empty: new None

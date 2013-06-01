@@ -11,7 +11,7 @@ class CardIterator extends Iterator
         num  = Math.floor(Math.random() * pool.size())
         card = pool.fetchKeyByIndex(num)
 
-        if card is undefined or pool.get(card).enabled
+        if not card? or pool.get(card).enabled
           [card, pool]
         else
           g(pool.without(card))
