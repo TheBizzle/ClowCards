@@ -107,8 +107,9 @@ class Iterator
   # () => Iterator[T, U]
   clone: =>
     copy = new Iterator(@_state, @_f)
-    copy._atEnd   = @_atEnd
-    copy._filters = @_filters
+    copy._atEnd     = @_atEnd
+    copy._cached    = @_cached
+    copy._manipList = @_manipList
     copy
 
   # ((U) => V) => Iterator[T, V]
