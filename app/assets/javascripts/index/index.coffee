@@ -106,14 +106,14 @@ class Index
   # () => Object[String, Object[String, Any]]
   getCards = ->
 
-    cardObj     = new Obj(Cards).clone().value()
-    labels      = $globals.$cardHolder.children("label").map(-> $(this))
+    cardObj = new Obj(Cards).clone().value()
+    labels  = $globals.$cardHolder.children("label").map(-> $(this))
 
     _(labels).forEach(
       (elem) ->
         id   = elem.attr("for")
         name = elem.text()
-        cardObj[name].enabled = $.byID(id)[0].checked # Mutation == meh
+        cardObj[name].enabled = $.byID(id)[0].checked
     )
 
     cardObj
