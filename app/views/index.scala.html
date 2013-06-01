@@ -42,7 +42,7 @@
           </div>
           <div class="has-headroom">
             <label for="card-num-spinner">Number of cards:</label>
-            <input id="card-num-spinner" class="ui-spinner" name="value" />
+            <input id="card-num-spinner" class="ui-spinner" name="value" onkeyup="exports.IndexServices.Index.handleNumPickerKey(event)"/>
             <div id="btn-wrapper" class="has-headroom">
               <button id="pick-btn" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
                       role="button" aria-disabled="false" onclick="exports.IndexServices.Index.genCards()">

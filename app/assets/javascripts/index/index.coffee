@@ -17,6 +17,11 @@ class Index
       when 13 then @addRow()
       else return
 
+  handleNumPickerKey: (event) =>
+    switch (event.keyCode or event.which)
+      when 13 then @genCards()
+      else return
+
   # (String) => Unit
   removeRow: (id) ->
     $.byID(id).remove()
