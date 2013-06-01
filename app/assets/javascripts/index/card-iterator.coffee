@@ -4,21 +4,25 @@ Obj      = exports.Obj
 class CardIterator extends Iterator
   constructor: (state) ->
 
-    f = (p) =>
+    iterateFunc = (p) =>
 
-      g = (pool) ->
+      iterateHelper = (pool) ->
 
         num  = Math.floor(Math.random() * pool.size())
         card = pool.fetchKeyByIndex(num)
 
-        if not card? or pool.get(card).enabled
+        if not card?
           [card, pool]
         else
-          g(pool.without(card))
+          cardObj = pool.get(card)
+          newPool = pool.without(card)
+          if cardObj.enabled
+            [card, newPool]
+          else
+            iterateHelper(newPool)
 
-      [card, outPool, []] = g(p)
-      [card, outPool.without(card)]
+      iterateHelper(p)
 
-    super(new Obj(state), f)
+    super(new Obj(state), iterateFunc)
 
 exports.CardIterator = CardIterator
