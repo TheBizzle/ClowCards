@@ -1,4 +1,4 @@
-# All public functions should be of type `(String+) => String`
+# All public functions should be of type `(String*) => String`
 class IndexHTML
 
   generateCardEntryColumn: (innerHTML) ->
