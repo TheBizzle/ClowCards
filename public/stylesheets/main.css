@@ -39,6 +39,10 @@ body {
   height: 800px;
 }
 
+.hidden {
+  display: none;
+}
+
 
 /* Faction Background Colors */
 
