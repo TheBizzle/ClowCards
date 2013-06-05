@@ -36,6 +36,16 @@ class Index
       $input.val("")
       genRow(name)
 
+  # (String) => Unit
+  makeImageVisible: (id) ->
+
+    loaderID = "#{id}-loading"
+    img      = $.byID(id)
+    loader   = $.byID(loaderID)
+
+    img.removeClass("hidden")
+    loader.remove()
+
   # () => Unit
   genCards: ->
 
@@ -104,7 +114,7 @@ class Index
   # (String) => String
   generateCardEntry = (name) ->
     imgURL   = genCardNameURL(name)
-    imgHTML  = HTML.generateCardImage(imgURL, Cards[name].faction)
+    imgHTML  = HTML.generateCardImage(name.slugify(), imgURL, Cards[name].faction)
     textHTML = HTML.generateCardText(name)
     HTML.generateCardEntry(imgHTML, textHTML)
 
