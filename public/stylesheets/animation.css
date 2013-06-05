@@ -1,0 +1,97 @@
+/* Ball/Loading Animation */
+
+.ball-anim-wrapper {
+  position: relative;
+  display:  inline-block;
+}
+
+.ball-anim-ball {
+
+  width:            16px;
+  height:           16px;
+  background-color: #181818;
+  border-radius:    9px;
+  position:         absolute;
+  top:              29px;
+
+  -moz-animation-name:    ball-anim;
+  -webkit-animation-name: ball-anim;
+  animation-name:         ball-anim;
+
+  -moz-animation-duration:    0.85s;
+  -webkit-animation-duration: 0.85s;
+  animation-duration:         0.85s;
+
+  -moz-animation-iteration-count:    infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count:         infinite;
+
+  -moz-animation-direction:    linear;
+  -webkit-animation-direction: linear;
+  animation-direction:         linear;
+
+}
+
+.ball-anim-1 {
+  left: 5px;
+  -moz-animation-delay:    0.34s;
+  -webkit-animation-delay: 0.34s;
+  animation-delay:         0.34s;
+}
+
+.ball-anim-2 {
+  left: 21px;
+  -moz-animation-delay:    0.51s;
+  -webkit-animation-delay: 0.51s;
+  animation-delay:         0.51s;
+}
+
+.ball-anim-3 {
+  left: 37px;
+  -moz-animation-delay:    0.68s;
+  -webkit-animation-delay: 0.68s;
+  animation-delay:         0.68s;
+}
+
+.ball-anim-4 {
+  left: 53px;
+  -moz-animation-delay:    0.85s;
+  -webkit-animation-delay: 0.85s;
+  animation-delay:         0.85s;
+}
+
+@-moz-keyframes ball-anim {
+
+  0% {
+    background-color: #181818;
+  }
+
+  100% {
+    background-color: #FFFFFF;
+  }
+
+}
+
+@-webkit-keyframes ball-anim {
+
+  0% {
+    background-color: #181818;
+  }
+
+  100% {
+    background-color: #FFFFFF;
+  }
+
+}
+
+@keyframes ball-anim {
+
+  0% {
+    background-color: #181818;
+  }
+
+  100% {
+    background-color: #FFFFFF;
+  }
+
+}
