@@ -1,26 +1,28 @@
-/* Ball/Loading Animation */
+/* Circle/Loading Animation */
 
-.ball-anim-wrapper {
+.fade-anim-wrapper {
   position: relative;
   display:  inline-block;
 }
 
-.ball-anim-ball {
+.fade-anim-circle {
 
-  width:            16px;
-  height:           16px;
-  background-color: #181818;
-  border-radius:    9px;
+  width:            10px;
+  height:           10px;
+  background-color: #FFFFFF;
   position:         absolute;
-  top:              29px;
 
-  -moz-animation-name:    ball-anim;
-  -webkit-animation-name: ball-anim;
-  animation-name:         ball-anim;
+  -moz-border-radius:    5px;
+  -webkit-border-radius: 5px;
+  border-radius:         5px;
 
-  -moz-animation-duration:    0.85s;
-  -webkit-animation-duration: 0.85s;
-  animation-duration:         0.85s;
+  -moz-animation-name:    fade-anim;
+  -webkit-animation-name: fade-anim;
+  animation-name:         fade-anim;
+
+  -moz-animation-duration:    0.78s;
+  -webkit-animation-duration: 0.78s;
+  animation-duration:         0.78s;
 
   -moz-animation-iteration-count:    infinite;
   -webkit-animation-iteration-count: infinite;
@@ -32,35 +34,55 @@
 
 }
 
-.ball-anim-1 {
-  left: 5px;
-  -moz-animation-delay:    0.34s;
-  -webkit-animation-delay: 0.34s;
-  animation-delay:         0.34s;
+.fade-anim-1 {
+  left: 10px;
+  top:  34px;
+  -moz-animation-delay:    0.39s;
+  -webkit-animation-delay: 0.39s;
+  animation-delay:         0.39s;
 }
 
-.ball-anim-2 {
+.fade-anim-2 {
   left: 21px;
-  -moz-animation-delay:    0.51s;
-  -webkit-animation-delay: 0.51s;
-  animation-delay:         0.51s;
+  top:  12px;
+  -moz-animation-delay:    0.52s;
+  -webkit-animation-delay: 0.52s;
+  animation-delay:         0.52s;
 }
 
-.ball-anim-3 {
-  left: 37px;
-  -moz-animation-delay:    0.68s;
-  -webkit-animation-delay: 0.68s;
-  animation-delay:         0.68s;
+.fade-anim-3 {
+  right: 21px;
+  top:   12px;
+  -moz-animation-delay:    0.65s;
+  -webkit-animation-delay: 0.65s;
+  animation-delay:         0.65s;
 }
 
-.ball-anim-4 {
-  left: 53px;
-  -moz-animation-delay:    0.85s;
-  -webkit-animation-delay: 0.85s;
-  animation-delay:         0.85s;
+.fade-anim-4 {
+  right: 10px;
+  top:   34px;
+  -moz-animation-delay:    0.78s;
+  -webkit-animation-delay: 0.78s;
+  animation-delay:         0.78s;
 }
 
-@-moz-keyframes ball-anim {
+.fade-anim-5 {
+  right:  21px;
+  bottom: 12px;
+  -moz-animation-delay:    0.91s;
+  -webkit-animation-delay: 0.91s;
+  animation-delay:         0.91s;
+}
+
+.fade-anim-6 {
+  left:   21px;
+  bottom: 12px;
+  -moz-animation-delay:    1.04s;
+  -webkit-animation-delay: 1.04s;
+  animation-delay:         1.04s;
+}
+
+@-moz-keyframes fade-anim {
 
   0% {
     background-color: #181818;
@@ -72,7 +94,7 @@
 
 }
 
-@-webkit-keyframes ball-anim {
+@-webkit-keyframes fade-anim {
 
   0% {
     background-color: #181818;
@@ -84,7 +106,7 @@
 
 }
 
-@keyframes ball-anim {
+@keyframes fade-anim {
 
   0% {
     background-color: #181818;

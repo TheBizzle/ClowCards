@@ -56,11 +56,13 @@ class IndexHTML
   generateLoadingAnimationHTML: (idBasis, bgClass) ->
     id = "#{idBasis}-loading"
     """
-    <div id='#{id}' class='entry-image round-bordered #{bgClass} ball-anim-wrapper'>
-      <div class="ball-anim-ball ball-anim-1"></div>
-      <div class="ball-anim-ball ball-anim-2"></div>
-      <div class="ball-anim-ball ball-anim-3"></div>
-      <div class="ball-anim-ball ball-anim-4"></div>
+    <div id='#{id}' class='entry-image round-bordered #{bgClass} fade-anim-wrapper'>
+      <div class="fade-anim-circle fade-anim-1"></div>
+      <div class="fade-anim-circle fade-anim-2"></div>
+      <div class="fade-anim-circle fade-anim-3"></div>
+      <div class="fade-anim-circle fade-anim-4"></div>
+      <div class="fade-anim-circle fade-anim-5"></div>
+      <div class="fade-anim-circle fade-anim-6"></div>
     </div>
     """
 
