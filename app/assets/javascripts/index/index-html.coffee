@@ -6,10 +6,13 @@ class IndexHTML
 
   generateCardImage: (name, url, faction) ->
 
-    r        = Math.floor(Math.random() * 10000)
-    id       = "#{name}-#{r}"
-    bgClass  = "#{faction.toLowerCase()}-backgrounded"
-    animHTML = @generateLoadingAnimationHTML(id, bgClass)
+    # Given how this is currently implemented, this number is irrelevant; if multiple of the same card can be drawn though,
+    # this then make it so that ID collisions are unlikely.  As for how to do something with this randomly-generated ID... --Jason (6/8/13)
+    safetyNum = 10000
+    r         = Math.floor(Math.random() * 10000)
+    id        = "#{name}-#{r}"
+    bgClass   = "#{faction.toLowerCase()}-backgrounded"
+    animHTML  = @generateLoadingAnimationHTML(id, bgClass)
 
     """
     <span class="outer-image-border">
