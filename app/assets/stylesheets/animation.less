@@ -1,4 +1,35 @@
-/* Circle/Loading Animation */
+// ========================
+// Circle/Loading Animation
+// ========================
+
+// Functions
+
+.prefixed(@prop, @value) {
+  -:~`";"+"@{prop}:@{value};-webkit-@{prop}:@{value};-moz-@{prop}:@{value};-o-@{prop}:@{value};-ms-@{prop}:@{value}".replace(/'/g,"")`;
+}
+
+.anim-delay(@value) {
+  .prefixed('animation-delay', @value);
+}
+
+
+// Values
+
+@light-color:     #FFFFFF;
+@dark-color:      #181818;
+@circle-diameter: 10px;
+
+@vert-middle-push-horiz: 10px;
+@vert-middle-push-down:  34px;
+
+@top-bottom-push-horiz: 21px;
+@top-bottom-push-vert:  12px;
+
+@duration:     0.13s;
+@circle-count: 6;
+
+
+// Rules
 
 .fade-anim-wrapper {
   position: relative;
@@ -7,89 +38,63 @@
 
 .fade-anim-circle {
 
-  width:            10px;
-  height:           10px;
-  background-color: #FFFFFF;
+  width:            @circle-diameter;
+  height:           @circle-diameter;
+  background-color: @light-color;
   position:         absolute;
 
-  -moz-border-radius:    5px;
-  -webkit-border-radius: 5px;
-  border-radius:         5px;
-
-  -moz-animation-name:    fade-anim;
-  -webkit-animation-name: fade-anim;
-  animation-name:         fade-anim;
-
-  -moz-animation-duration:    0.78s;
-  -webkit-animation-duration: 0.78s;
-  animation-duration:         0.78s;
-
-  -moz-animation-iteration-count:    infinite;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count:         infinite;
-
-  -moz-animation-direction:    linear;
-  -webkit-animation-direction: linear;
-  animation-direction:         linear;
+  .prefixed('border-radius',              5px);
+  .prefixed('animation-name',            'fade-anim');
+  .prefixed('animation-duration',         @duration * @circle-count);
+  .prefixed('animation-iteration-count', 'infinite');
+  .prefixed('animation-direction',       'normal');
 
 }
 
 .fade-anim-1 {
-  left: 10px;
-  top:  34px;
-  -moz-animation-delay:    0.39s;
-  -webkit-animation-delay: 0.39s;
-  animation-delay:         0.39s;
+  left: @vert-middle-push-horiz;
+  top:  @vert-middle-push-down;
+  .anim-delay(@duration * 0);
 }
 
 .fade-anim-2 {
-  left: 21px;
-  top:  12px;
-  -moz-animation-delay:    0.52s;
-  -webkit-animation-delay: 0.52s;
-  animation-delay:         0.52s;
+  left: @top-bottom-push-horiz;
+  top:  @top-bottom-push-vert;
+  .anim-delay(@duration * 1);
 }
 
 .fade-anim-3 {
-  right: 21px;
-  top:   12px;
-  -moz-animation-delay:    0.65s;
-  -webkit-animation-delay: 0.65s;
-  animation-delay:         0.65s;
+  right: @top-bottom-push-horiz;
+  top:   @top-bottom-push-vert;
+  .anim-delay(@duration * 2);
 }
 
 .fade-anim-4 {
-  right: 10px;
-  top:   34px;
-  -moz-animation-delay:    0.78s;
-  -webkit-animation-delay: 0.78s;
-  animation-delay:         0.78s;
+  right: @vert-middle-push-horiz;
+  top:   @vert-middle-push-down;
+  .anim-delay(@duration * 3);
 }
 
 .fade-anim-5 {
-  right:  21px;
-  bottom: 12px;
-  -moz-animation-delay:    0.91s;
-  -webkit-animation-delay: 0.91s;
-  animation-delay:         0.91s;
+  right:  @top-bottom-push-horiz;
+  bottom: @top-bottom-push-vert;
+  .anim-delay(@duration * 4);
 }
 
 .fade-anim-6 {
-  left:   21px;
-  bottom: 12px;
-  -moz-animation-delay:    1.04s;
-  -webkit-animation-delay: 1.04s;
-  animation-delay:         1.04s;
+  left:   @top-bottom-push-horiz;
+  bottom: @top-bottom-push-vert;
+  .anim-delay(@duration * 5);
 }
 
 @-moz-keyframes fade-anim {
 
   0% {
-    background-color: #181818;
+    background-color: @dark-color;
   }
 
   100% {
-    background-color: #FFFFFF;
+    background-color: @light-color;
   }
 
 }
@@ -97,11 +102,11 @@
 @-webkit-keyframes fade-anim {
 
   0% {
-    background-color: #181818;
+    background-color: @dark-color;
   }
 
   100% {
-    background-color: #FFFFFF;
+    background-color: @light-color;
   }
 
 }
@@ -109,11 +114,11 @@
 @keyframes fade-anim {
 
   0% {
-    background-color: #181818;
+    background-color: @dark-color;
   }
 
   100% {
-    background-color: #FFFFFF;
+    background-color: @light-color;
   }
 
 }

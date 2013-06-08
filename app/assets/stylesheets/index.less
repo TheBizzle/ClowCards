@@ -1,3 +1,14 @@
+// Functions
+
+
+
+// Values
+
+@image-side-length: 75px;
+
+
+// Class Rules
+
 .outer-wrapper {
   overflow: auto;
   padding:  40px 45px;
@@ -10,8 +21,8 @@
 }
 
 .entry-image {
-  height: 75px;
-  width:  75px;
+  height: @image-side-length;
+  width:  @image-side-length;
   border: 10px double #eeeeee;
 }
 
@@ -37,7 +48,7 @@
 
 .card-row {
   height: 200px;
-  width: 100%;
+  width:  100%;
 }
 
 .row-content {
@@ -77,10 +88,8 @@
   vertical-align: middle;
 }
 
-.player-row {
-}
 
-
+// ID Rules
 
 #adder-button {
   color: #22FF22;
@@ -102,7 +111,7 @@
   width:            450px;
   padding:          8px;
   background-color: #33B546;
-  border-radius:    10px 10px 10px 10px;
+  border-radius:    10px;
 }
 
 #pick-btn {
