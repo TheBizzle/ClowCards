@@ -6,7 +6,7 @@ class IndexHTML
 
   generateCardImage: (name, url, faction) ->
 
-    r        = Math.floor(Math.random() * 10,000)
+    r        = Math.floor(Math.random() * 10000)
     id       = "#{name}-#{r}"
     bgClass  = "#{faction.toLowerCase()}-backgrounded"
     animHTML = @generateLoadingAnimationHTML(id, bgClass)
