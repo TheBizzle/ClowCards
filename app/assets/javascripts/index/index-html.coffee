@@ -12,9 +12,14 @@ class IndexHTML
     animHTML = @generateLoadingAnimationHTML(id, bgClass)
 
     """
-    <img id='#{id}' class='entry-image round-bordered #{bgClass} hidden' src='#{url}'
-     onload='exports.IndexServices.Index.makeImageVisible("#{id}")'>
-    #{animHTML}
+    <span class="outer-image-border">
+      <span class="middle-image-border #{bgClass}">
+        <span class="inner-image-border">
+          <img id='#{id}' class='entry-image hidden' src='#{url}' onload='exports.IndexServices.Index.makeImageVisible("#{id}")'>
+          #{animHTML}
+        </span>
+      </span>
+    </span>
     """
 
   generateCardText: (text) ->

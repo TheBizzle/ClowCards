@@ -4,7 +4,21 @@
 
 // Values
 
-@image-side-length: 75px;
+@image-side-length:        75px;
+@image-border-trim-color:  #EEEEEE;
+@image-border-size-total:  15px;
+@image-border-outer-size:  3px;
+@image-border-middle-size: 5px;
+@image-border-inner-size:  3px;
+@base-border-radius:       10px;
+
+
+// Abstract Rules
+
+.image-border {
+  display: inline-block;
+  border:  none;
+}
 
 
 // Class Rules
@@ -21,9 +35,11 @@
 }
 
 .entry-image {
-  height: @image-side-length;
-  width:  @image-side-length;
-  border: 10px double #eeeeee;
+  height:        @image-side-length;
+  width:         @image-side-length;
+  border:        none;
+  margin-top:    @image-border-inner-size;
+  border-radius: @base-border-radius;
 }
 
 .entry-text-outer {
@@ -86,6 +102,43 @@
   width:          85%;
   font-size:      20px;
   vertical-align: middle;
+}
+
+.inner-image-border {
+
+  .image-border;
+  @mySize: @image-side-length + (2 * @image-border-inner-size);
+
+  height:        @mySize;
+  width:         @mySize;
+  background:    @image-border-trim-color;
+  margin-top:    @image-border-middle-size;
+  border-radius: @base-border-radius + 2;
+
+}
+
+.middle-image-border {
+
+  .image-border;
+  @mySize: @image-side-length + (2 * (@image-border-inner-size + @image-border-middle-size));
+
+  height:        @mySize;
+  width:         @mySize;
+  margin-top:    @image-border-outer-size;
+  border-radius: @base-border-radius + 5;
+
+}
+
+.outer-image-border {
+
+  .image-border;
+  @mySize: @image-side-length + (2 * (@image-border-inner-size + @image-border-middle-size + @image-border-outer-size));
+
+  height:        @mySize;
+  width:         @mySize;
+  background:    @image-border-trim-color;
+  border-radius: @base-border-radius + 7;
+
 }
 
 
