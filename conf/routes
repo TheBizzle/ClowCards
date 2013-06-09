@@ -5,5 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index
 
+# Override default assets route for 'index' images
+GET     /assets/images/index/*file  controllers.Application.indexImage(path="/public/images/index", file)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
