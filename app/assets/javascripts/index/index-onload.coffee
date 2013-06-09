@@ -65,3 +65,11 @@ window.addEventListener('load', ->
 window.addEventListener('load', ->
   exports.IndexServices.Index = new exports.IndexServices.IndexClass
 )
+
+# Preload card images
+window.addEventListener('load', ->
+  Cards = exports.Cards
+  Index = exports.IndexServices.Index
+  keys  = Object.keys(Cards)
+  _(keys).forEach((key) -> $('<img/>').attr('src', Index.genCardNameURL(key)))
+)
