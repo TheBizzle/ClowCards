@@ -63,6 +63,10 @@ class Index
             """.stripMargin().trim()
       alert(msg)
 
+  # (String) => String
+  genCardNameURL: (name) ->
+    _genCardNameURL(name)
+
   # () => Unit
   cleanupLastCardGen = ->
     clearCardBuckets()
@@ -91,7 +95,7 @@ class Index
       alert("Card pool exhausted!  Pick fewer cards!")
 
   # (String) => String
-  genCardNameURL = (name) ->
+  _genCardNameURL = (name) ->
     "./assets/images/index/#{name.slugify()}.png"
 
   # (String) => Unit
@@ -113,7 +117,7 @@ class Index
 
   # (String) => String
   generateCardEntry = (name) ->
-    imgURL   = genCardNameURL(name)
+    imgURL   = _genCardNameURL(name)
     imgHTML  = HTML.generateCardImage(name.slugify(), imgURL, Cards[name].faction)
     textHTML = HTML.generateCardText(name)
     HTML.generateCardEntry(imgHTML, textHTML)
