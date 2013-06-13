@@ -1,98 +1,103 @@
-# Introducing a class that represents data that is either there (`Some`) or not (`None`)
-# Functions and their implementations were heavily inspired by Scala's `Option` class
-class Option
+require.config({
+  paths: {
+    'r': '/assets/javascripts'
+  }
+})
 
-  constructor: ->
+define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
 
-  # (() => U) => U (such that U >: T)
-  getOrElse: (x) =>
-    if @isEmpty() then x() else @get()
+  class Option
 
-  # (T) => U
-  map: (f) =>
-    if @isEmpty() then exports.None else new Some(f(@get()))
+    constructor: ->
 
-  # (T) => Option[U]
-  flatMap: (f) =>
-    if @isEmpty() then exports.None else f(@get())
+      # (() => U) => U (such that U >: T)
+    getOrElse: (x) =>
+      if @isEmpty() then x() else @get()
 
-  # (T) => Boolean
-  filter: (f) =>
-    if @isEmpty() or f(@get()) then this else exports.None
+    # (T) => U
+    map: (f) =>
+      if @isEmpty() then None else new Some(f(@get()))
 
-  # (T) => Boolean
-  filterNot: (f) =>
-    if @isEmpty() or not f(@get()) then this else exports.None
+    # (T) => Option[U]
+    flatMap: (f) =>
+      if @isEmpty() then None else f(@get())
 
-  # (T) => Boolean
-  exists: (f) =>
-    not @isEmpty() and f(@get())
+    # (T) => Boolean
+    filter: (f) =>
+      if @isEmpty() or f(@get()) then this else None
 
-  # (T) => Unit
-  foreach: (f) =>
-    if not @isEmpty() then f(@get())
-    return
+    # (T) => Boolean
+    filterNot: (f) =>
+      if @isEmpty() or not f(@get()) then this else None
 
-  # ((V) => U) => Option[U] (such that T >: V)
-  collect: (f) =>
-    if not @isEmpty()
-      result = f(@get())
-      if result?
-        new Some(result)
+    # (T) => Boolean
+    exists: (f) =>
+      not @isEmpty() and f(@get())
+
+    # (T) => Unit
+    foreach: (f) =>
+      if not @isEmpty() then f(@get())
+      return
+
+    # ((V) => U) => Option[U] (such that T >: V)
+    collect: (f) =>
+      if not @isEmpty()
+        result = f(@get())
+        if result?
+          new Some(result)
+        else
+          None
       else
-        exports.None
-    else
-      exports.None
+        None
 
-  # (Option[U]) => Option[U] (such that U >: T)
-  orElse: (opt) =>
-    if @isEmpty() then opt else this
+    # (Option[U]) => Option[U] (such that U >: T)
+    orElse: (opt) =>
+      if @isEmpty() then opt else this
 
-  # () => Array[T]
-  toArray: =>
-    if @isEmpty() then [] else [].append(@get())
+    # () => Array[T]
+    toArray: =>
+      if @isEmpty() then [] else [].append(@get())
 
+  class Some extends Option
 
-class Some extends Option
+    constructor: (@_value) ->
+      super
 
-  constructor: (@_value) ->
-    super
+    # () => T
+    get: =>
+      @_value
 
-  # () => T
-  get: =>
-    @_value
+    # () => Boolean
+    isEmpty: =>
+      false
 
-  # () => Boolean
-  isEmpty: =>
-    false
+  class None extends Option
 
+    constructor: ->
+      super
 
-class None extends Option
+    # () => T
+    get: =>
+      throw new Error("None.get")
 
-  constructor: ->
-    super
+    # () => Boolean
+    isEmpty: =>
+      true
 
-  # () => T
-  get: =>
-    throw new Error("None.get")
+  OptionCompanion = {
 
-  # () => Boolean
-  isEmpty: =>
-    true
+    # (T) => Option[T]
+    from: (value) => if value? then new Some(value) else @empty
 
+    # () => None
+    empty: new None
 
-OptionCompanion = {
+  }
 
-  # (T) => Option[T]
-  from: (value) => if value? then new Some(value) else @empty
+  {
+    Some:   Some
+    None:   OptionCompanion.empty,
+    Option: OptionCompanion
+  }
 
-  # () => None
-  empty: new None
-
-}
-
-
-exports.None   = OptionCompanion.empty
-exports.Some   = Some
-exports.Option = OptionCompanion
-
+)

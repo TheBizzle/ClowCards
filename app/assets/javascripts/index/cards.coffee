@@ -1,4 +1,10 @@
-Cards = {
+require.config({
+  paths: {
+    'r': '/assets/javascripts'
+  }
+})
+
+define({
   "Agent Carr":                  { enabled: true,  faction: "Vydar"   },
   "Airborne Elite":              { enabled: true,  faction: "Jandar"  },
   "Alastair MacDirk":            { enabled: true,  faction: "Jandar"  },
@@ -115,6 +121,5 @@ Cards = {
   "Warriors of Ashra":           { enabled: true,  faction: "Ullar"   },
   "Wolves of Badru":             { enabled: true,  faction: "Utgar"   },
   "Zettian Guards":              { enabled: true,  faction: "Utgar"   }
-}
+})
 
-exports.Cards = Cards

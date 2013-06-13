@@ -1,24 +1,24 @@
+require.config({
+  paths: {
+    'r': '/assets/javascripts'
+  }
+})
+
 # All public functions should be of type `(String*) => String`
-class IndexHTML
+define({
 
   generateCardEntryColumn: (innerHTML) ->
     "<td>#{innerHTML}</td>"
 
-  generateCardImage: (name, url, faction) ->
-
-    # Given how this is currently implemented, this number is irrelevant; if multiple of the same card can be drawn though,
-    # this then make it so that ID collisions are unlikely.  As for how to do something with this randomly-generated ID... --Jason (6/8/13)
-    safetyNum = 10000
-    r         = Math.floor(Math.random() * safetyNum)
-    id        = "#{name}-#{r}"
-    bgClass   = "#{faction.toLowerCase()}-backgrounded"
-    animHTML  = @generateLoadingAnimationHTML(id, bgClass)
+  generateCardImage: (id, url, faction) ->
+    bgClass  = "#{faction.toLowerCase()}-backgrounded"
+    animHTML = @generateLoadingAnimationHTML(id, bgClass)
 
     """
     <span class="outer-image-border">
       <span class="middle-image-border #{bgClass}">
         <span class="inner-image-border">
-          <img id='#{id}' class='entry-image hidden' src='#{url}' onload='exports.IndexServices.Index.makeImageVisible("#{id}")'>
+          <img id='#{id}' class='entry-image hidden' src='#{url}'>
           #{animHTML}
         </span>
       </span>
@@ -31,7 +31,7 @@ class IndexHTML
   generateCardEntry: (imgHTML, textHTML) ->
     "<div class='entry-wrapper horiz-centered-children'>#{imgHTML}<br>#{textHTML}</div>"
 
-  generatePlayerRow: (name, id) ->
+  generatePlayerRow: (name, id, spanID) ->
     """
     <table id="#{id}" class="player-table round-bordered card-row has-headroom">
       <tr>
@@ -39,7 +39,7 @@ class IndexHTML
           <table>
             <tr>
               <td>
-                <span class="player-remove-button player-button unselectable" onclick='exports.IndexServices.Index.removeRow("#{id}")'>x</span>
+                <span id='#{spanID}' class="player-remove-button player-button unselectable">x</span>
               </td>
               <td class="player-spacer"></td>
               <td>
@@ -74,5 +74,5 @@ class IndexHTML
     </div>
     """
 
-exports.IndexServices.HTML = new IndexHTML
+})
 

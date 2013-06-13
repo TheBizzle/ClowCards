@@ -1,69 +1,79 @@
-window.addEventListener('load', ->
+require.config({
+  paths: {
+    'r': '/assets/javascripts'
+  }
+})
 
-  $('.collapsible-accordion').accordion({
-    heightStyle: "fill"
-  })
+define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
 
-  $('.ui-button').each(->
-    elem = $(this)
-    elem.button()
-  )
+  window.addEventListener('load', ->
 
-  $('.ui-tabs').each(->
-    elem = $(this)
-    elem.tabs()
-  )
+    $('.collapsible-accordion').accordion({
+      heightStyle: "fill"
+    })
 
-  $('.ui-spinner').each(->
-    elem = $(this)
-    elem.spinner()
-    elem.val("1")
-  )
-
-  $('.ui-spinner-button').click(->
-    elem = $(this)
-    elem.siblings('input').change()
-  )
-
-  $('.checkboxes').each(->
-    elem = $(this)
-    elem.buttonset()
-  )
-
-  $('.check-set').each(->
-    elem = $(this)
-    elem.buttonset()
-  )
-
-  $('.radio-set').each(->
-    elem = $(this)
-    elem.buttonset()
-  )
-
-  $('.check-button').each(->
-    elem = $(this)
-    elem.button()
-  )
-
-  $('.check-label').each(->
-    elem = $(this)
-    elem.click(->
-      btn = $("#" + elem.attr("for"))
-      btn[0].checked = not btn[0].checked
-      btn.button("refresh")
-      btn.change()
-      false
+    $('.ui-button').each(->
+      elem = $(this)
+      elem.button()
     )
-  )
 
-  $('.os-button').each(->
-    elem = $(this)
-    if not elem[0].checked then elem.click()
-  )
+    $('.ui-tabs').each(->
+      elem = $(this)
+      elem.tabs()
+    )
 
-  $('.date-chooser').each(->
-    elem = $(this)
-    elem.datepicker()
+    $('.ui-spinner').each(->
+      elem = $(this)
+      elem.spinner()
+      elem.val("1")
+    )
+
+    $('.ui-spinner-button').click(->
+      elem = $(this)
+      elem.siblings('input').change()
+    )
+
+    $('.checkboxes').each(->
+      elem = $(this)
+      elem.buttonset()
+    )
+
+    $('.check-set').each(->
+      elem = $(this)
+      elem.buttonset()
+    )
+
+    $('.radio-set').each(->
+      elem = $(this)
+      elem.buttonset()
+    )
+
+    $('.check-button').each(->
+      elem = $(this)
+      elem.button()
+    )
+
+    $('.check-label').each(->
+      elem = $(this)
+      elem.click(->
+        btn = $("#" + elem.attr("for"))
+        btn[0].checked = not btn[0].checked
+        btn.button("refresh")
+        btn.change()
+        false
+      )
+    )
+
+    $('.os-button').each(->
+      elem = $(this)
+      if not elem[0].checked then elem.click()
+    )
+
+    $('.date-chooser').each(->
+      elem = $(this)
+      elem.datepicker()
+    )
+
   )
 
 )

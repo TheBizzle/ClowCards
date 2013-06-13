@@ -1,28 +1,36 @@
-Iterator = exports.Iterator
-Obj      = exports.Obj
+require.config({
+  paths: {
+    'r': '/assets/javascripts'
+  }
+})
 
-class CardIterator extends Iterator
-  constructor: (state) ->
+define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes', 'r/lib/adt/iterator', 'r/lib/adt/obj']
+     , ( $,                      [],                         Iterator,             Obj) ->
 
-    iterateFunc = (p) =>
+  class CardIterator extends Iterator
+    constructor: (state) ->
 
-      iterateHelper = (pool) ->
+      iterateFunc = (p) =>
 
-        num  = Math.floor(Math.random() * pool.size())
-        card = pool.fetchKeyByIndex(num)
+        iterateHelper = (pool) ->
 
-        if not card?
-          [card, pool]
-        else
-          cardObj = pool.get(card)
-          newPool = pool.without(card)
-          if cardObj.enabled
-            [card, newPool]
+          num  = Math.floor(Math.random() * pool.size())
+          card = pool.fetchKeyByIndex(num)
+
+          if not card?
+            [card, pool]
           else
-            iterateHelper(newPool)
+            cardObj = pool.get(card)
+            newPool = pool.without(card)
+            if cardObj.enabled
+              [card, newPool]
+            else
+              iterateHelper(newPool)
 
-      iterateHelper(p)
+        iterateHelper(p)
 
-    super(new Obj(state), iterateFunc)
+      super(new Obj(state), iterateFunc)
 
-exports.CardIterator = CardIterator
+  CardIterator
+
+)
