@@ -15,27 +15,21 @@
 
 // Abstract Rules
 
+.has-row-height {
+  height: 200px;
+}
+
 .image-border {
   display: inline-block;
   border:  none;
 }
 
-.has-row-height {
-  height: 200px;
-}
-
 
 // Class Rules
 
-.outer-wrapper {
-  overflow: auto;
-  padding:  40px 45px;
-}
-
-.entry-wrapper {
-  width:   240px;
-  height:  180px;
-  padding: 35px 20px;
+.card-row {
+  .has-row-height;
+  width:  100%;
 }
 
 .entry-image {
@@ -46,12 +40,9 @@
   border-radius: @base-border-radius;
 }
 
-.entry-text-outer {
-  height:   110px;
-  width:    100%;
-  display:  table;
-  overflow: hidden;
-  position: static;
+.entry-text-inner {
+  margin-left:  auto;
+  margin-right: auto;
 }
 
 .entry-text-middle {
@@ -61,51 +52,18 @@
   position:       static;
 }
 
-.entry-text-inner {
-  margin-left:  auto;
-  margin-right: auto;
+.entry-text-outer {
+  height:   110px;
+  width:    100%;
+  display:  table;
+  overflow: hidden;
+  position: static;
 }
 
-.card-row {
-  .has-row-height;
-  width:  100%;
-}
-
-.row-content {
- .has-row-height;
- width:  79%;
-}
-
-.row-divider {
-  height: 70%;
-  width:  2px;
-  background-color: white
-}
-
-.player-remove-button {
-  color: #FF2222;
-}
-
-.player-spacer {
-  width: 8%;
-}
-
-.player-content {
-  height:  100%;
-  width:   25%;
-  padding: 10px 20px;
-}
-
-.player-button {
-  font-size:   80px;
-  font-weight: bold;
-  cursor:      pointer;
-}
-
-.player-name {
-  width:          85%;
-  font-size:      20px;
-  vertical-align: middle;
+.entry-wrapper {
+  width:   240px;
+  height:  180px;
+  padding: 35px 20px;
 }
 
 .inner-image-border {
@@ -148,23 +106,53 @@
 
 }
 
-
-// ID Rules
-
-#adder-button {
-  color: #22FF22;
+.outer-wrapper {
+  overflow: auto;
+  padding:  40px 45px;
 }
 
-#name-input {
-  padding:        5px 8px;
+.player-button {
+  font-size:   80px;
+  font-weight: bold;
+  cursor:      pointer;
+}
+
+.player-content {
+  height:  100%;
+  width:   25%;
+  padding: 10px 20px;
+}
+
+.player-name {
   width:          85%;
   font-size:      20px;
   vertical-align: middle;
 }
 
-#card-num-spinner {
-  width: 75px;
-  color: white;
+.player-remove-button {
+  color: #FF2222;
+}
+
+.player-spacer {
+  width: 8%;
+}
+
+.row-content {
+ .has-row-height;
+ width:  79%;
+}
+
+.row-divider {
+  height: 70%;
+  width:  2px;
+  background-color: white
+}
+
+
+// ID Rules
+
+#adder-button {
+  color: #22FF22;
 }
 
 #btn-wrapper {
@@ -174,11 +162,23 @@
   border-radius:    10px;
 }
 
+#card-holder {
+  text-align: justify;
+}
+
+#card-num-spinner {
+  width: 75px;
+  color: white;
+}
+
+#name-input {
+  padding:        5px 8px;
+  width:          85%;
+  font-size:      20px;
+  vertical-align: middle;
+}
+
 #pick-btn {
   width:  100%;
   border: 3px solid black;
-}
-
-#card-holder {
-  text-align: justify;
 }
