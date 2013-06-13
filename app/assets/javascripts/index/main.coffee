@@ -20,7 +20,7 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
         when 13 then @addRow()
         else return
 
-    # //@ Add type annotation
+    # (Event) => Unit
     handleNumPickerKey: (event) =>
       switch (event.keyCode or event.which)
         when 13 then @genCards()
