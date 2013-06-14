@@ -26,12 +26,6 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
         when 13 then @genCards()
         else return
 
-    # (String) => Unit
-    removeRow: (id) ->
-      $.byID(id).remove()
-      num = generateNumFromID(id)
-      globals.playerNums = _(globals.playerNums).filter((n) -> n != num)
-
     # () => Unit
     addRow: ->
       $input = $globals.$nameInput
@@ -41,17 +35,10 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
         @_genRow(name)
 
     # (String) => Unit
-    _genRow: (name) =>
-
-      nums   = globals.playerNums
-      num    = if _(nums).isEmpty() then 1 else (_(nums).last() + 1)
-      id     = generatePlayerID(num)
-      spanID = "#{id}-span"
-
-      globals.playerNums = nums.append(num)
-
-      $(HTML.generatePlayerRow(name, id, spanID)).insertBefore($globals.$adderTable)
-      $.byID(spanID).click(=> @removeRow(id))
+    removeRow: (id) ->
+      $.byID(id).remove()
+      num = generateNumFromID(id)
+      globals.playerNums = _(globals.playerNums).filter((n) -> n != num)
 
     # () => Unit
     genCards: =>
@@ -69,6 +56,23 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
                 |Please reduce the number of cards or players and try again.
               """.stripMargin().trim()
         alert(msg)
+
+    # (String) => String
+    genCardNameURL: (name) ->
+      _genCardNameURL(name)
+
+    # (String) => Unit
+    _genRow: (name) =>
+
+      nums   = globals.playerNums
+      num    = if _(nums).isEmpty() then 1 else (_(nums).last() + 1)
+      id     = generatePlayerID(num)
+      spanID = "#{id}-span"
+
+      globals.playerNums = nums.append(num)
+
+      $(HTML.generatePlayerRow(name, id, spanID)).insertBefore($globals.$adderTable)
+      $.byID(spanID).click(=> @removeRow(id))
 
     # () => Unit
     _genCardForEachPlayer: =>
@@ -91,10 +95,6 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
         $.byID(cardID).load(-> makeImageVisible(cardID))
       else
         alert("Card pool exhausted!  Pick fewer cards!")
-
-    # (String) => String
-    genCardNameURL: (name) ->
-      _genCardNameURL(name)
 
     # () => Unit
     _cleanupLastCardGen: ->
