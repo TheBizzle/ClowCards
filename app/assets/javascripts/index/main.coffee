@@ -12,7 +12,7 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
   class Index
 
     constructor: ->
-      @_cardIterator = new CardIterator(getCards())
+      @_resetIterator()
 
     # (Event) => Unit
     handleRowKey: (event) =>
@@ -99,6 +99,10 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
     # () => Unit
     _cleanupLastCardGen: ->
       clearCardBuckets()
+      @_resetIterator()
+
+    # () => Unit
+    _resetIterator: ->
       @_cardIterator = new CardIterator(getCards())
 
     # (String) => Unit
