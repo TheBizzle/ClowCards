@@ -15,13 +15,13 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
       @_resetIterator()
 
     # (Event) => Unit
-    handleRowKey: (event) =>
+    handleRowKey: (event) ->
       switch (event.keyCode or event.which)
         when 13 then @addRow()
         else return
 
     # (Event) => Unit
-    handleNumPickerKey: (event) =>
+    handleNumPickerKey: (event) ->
       switch (event.keyCode or event.which)
         when 13 then @genCards()
         else return
@@ -41,7 +41,7 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
       globals.playerNums = _(globals.playerNums).filter((n) -> n != num)
 
     # () => Unit
-    genCards: =>
+    genCards: ->
 
       numCards   = parseInt($globals.$cardNumSpinner.val())
       maxCards   = new Obj(getCards()).filter((k, v) -> v.enabled).size() # Not really great, but... good enough, I guess --Jason (4/30/13)
@@ -79,7 +79,7 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
       _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach((id) => @_insertCardForID(id))
 
     # (String) => Unit
-    _insertCardForID: (id) ->
+    _insertCardForID: (id) =>
 
       card = @_cardIterator.next()
 
@@ -97,12 +97,12 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
         alert("Card pool exhausted!  Pick fewer cards!")
 
     # () => Unit
-    _cleanupLastCardGen: ->
+    _cleanupLastCardGen: =>
       clearCardBuckets()
       @_resetIterator()
 
     # () => Unit
-    _resetIterator: ->
+    _resetIterator: =>
       @_cardIterator = new CardIterator(getCards())
 
     # (String) => Unit
