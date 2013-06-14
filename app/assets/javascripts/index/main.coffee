@@ -96,6 +96,11 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
     genCardNameURL: (name) ->
       _genCardNameURL(name)
 
+    # () => Unit
+    _cleanupLastCardGen: ->
+      clearCardBuckets()
+      @_cardIterator = new CardIterator(getCards())
+
     # (String) => Unit
     makeImageVisible = (id) ->
 
@@ -105,11 +110,6 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
 
       img.removeClass("hidden")
       loader.remove()
-
-    # () => Unit
-    _cleanupLastCardGen: ->
-      clearCardBuckets()
-      @_cardIterator = new CardIterator(getCards())
 
     # () => Unit
     clearCardBuckets = ->
