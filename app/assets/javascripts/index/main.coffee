@@ -61,7 +61,7 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
       totalCards = _(globals.playerNums).size() * numCards
 
       if totalCards <= maxCards
-        cleanupLastCardGen()
+        @_cleanupLastCardGen()
         _([0...numCards]).forEach((x) => @_genCardForEachPlayer())
       else
         msg = """You attempted to generate #{totalCards} cards, but there are only #{maxCards} available.
@@ -77,7 +77,7 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
     # (String) => Unit
     _insertCardForID: (id) ->
 
-      card = _cardIterator.next()
+      card = @_cardIterator.next()
 
       if card?
         # Given how this is currently implemented, this number is irrelevant; if multiple of the same card can be drawn though,
@@ -107,7 +107,7 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
       loader.remove()
 
     # () => Unit
-    cleanupLastCardGen = ->
+    _cleanupLastCardGen: ->
       clearCardBuckets()
       @_cardIterator = new CardIterator(getCards())
 
