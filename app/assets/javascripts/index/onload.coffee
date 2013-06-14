@@ -64,7 +64,7 @@ define(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/jglobals', 'r/ind
   window.addEventListener('load', ->
     Index = Services.Index
     keys  = Object.keys(Cards)
-    _(keys).forEach((key) -> $('<img/>').attr('src', Index.genCardNameURL(key)))
+    _(keys).forEach((key) -> $('<img/>').attr('src', Index.genCardImageURL(key)))
   )
 
   # Initialize event listeners

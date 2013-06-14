@@ -58,8 +58,8 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
         alert(msg)
 
     # (String) => String
-    genCardNameURL: (name) ->
-      _genCardNameURL(name)
+    genCardImageURL: (name) ->
+      _genCardImageURL(name)
 
     # (String) => Unit
     _genRow: (name) =>
@@ -122,7 +122,7 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
       )
 
     # (String) => String
-    _genCardNameURL = (name) ->
+    _genCardImageURL = (name) ->
       "./assets/images/index/#{name.slugify()}.png"
 
     # (String) => String
@@ -136,7 +136,7 @@ define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/protot
 
     # (String) => String
     generateCardEntry = (name, id) ->
-      imgURL   = _genCardNameURL(name)
+      imgURL   = _genCardImageURL(name)
       imgHTML  = HTML.generateCardImage(id, imgURL, Cards[name].faction)
       textHTML = HTML.generateCardText(name)
       HTML.generateCardEntry(imgHTML, textHTML)
