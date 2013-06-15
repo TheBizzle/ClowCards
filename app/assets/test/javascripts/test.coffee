@@ -1,3 +1,4 @@
 QUnit.config.autostart = false
 
-require([], -> QUnit.start())
+require(['./lib/enhance/prototype/array.test', './lib/enhance/prototype/function.test', './lib/enhance/prototype/string.test'], -> QUnit.start())
+
