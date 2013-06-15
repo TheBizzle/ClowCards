@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(->
+define(['r/lib/enhance/underscore'], (_) ->
 
   class Replacement
     constructor: (@regex, @replacement) ->
@@ -19,6 +19,5 @@ define(->
     lowered = this.toLowerCase()
     replacements = [new Replacement(/['.,]/g, ""), new Replacement(/\ /g, "-")]
     _(replacements).foldl(((acc, x) -> acc.replace(x.regex, x.replacement)), lowered)
-
 )
 
