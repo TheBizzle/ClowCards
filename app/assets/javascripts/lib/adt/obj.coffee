@@ -66,7 +66,7 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes', 'r/lib/enhance/under
 
     # (Int) => U
     fetchValueByIndex: (n) =>
-      key = @fetchKeyByIndex()
+      key = @fetchKeyByIndex(n)
       @_obj[key]
 
     # () => Int
