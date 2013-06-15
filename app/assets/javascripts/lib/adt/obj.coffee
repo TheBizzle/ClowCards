@@ -55,7 +55,7 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes', 'r/lib/enhance/under
     clone: =>
       new Obj($.extend(true, {}, @_obj))
 
-    # () => Array[Array[T, U]]
+    # () => Array[Array[T|U]]
     toArray: (f) =>
       for k, v of @_obj
         [k, v]
