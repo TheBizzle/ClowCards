@@ -16,19 +16,19 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
 
     # (T) => U
     map: (f) =>
-      if @isEmpty() then None else new Some(f(@get()))
+      if @isEmpty() then NoneObj else new Some(f(@get()))
 
     # (T) => Option[U]
     flatMap: (f) =>
-      if @isEmpty() then None else f(@get())
+      if @isEmpty() then NoneObj else f(@get())
 
     # (T) => Boolean
     filter: (f) =>
-      if @isEmpty() or f(@get()) then this else None
+      if @isEmpty() or f(@get()) then this else NoneObj
 
     # (T) => Boolean
     filterNot: (f) =>
-      if @isEmpty() or not f(@get()) then this else None
+      if @isEmpty() or not f(@get()) then this else NoneObj
 
     # (T) => Boolean
     exists: (f) =>
@@ -46,9 +46,9 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
         if result?
           new Some(result)
         else
-          None
+          NoneObj
       else
-        None
+        NoneObj
 
     # (Option[U]) => Option[U] (such that U >: T)
     orElse: (opt) =>
@@ -94,9 +94,11 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
 
   }
 
+  NoneObj = OptionCompanion.empty
+
   {
     Some:   Some
-    None:   OptionCompanion.empty,
+    None:   NoneObj
     Option: OptionCompanion
   }
 
