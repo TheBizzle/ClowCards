@@ -5,6 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index
 
+GET     /test/js                    controllers.Test.javascripts
+
 # Override default assets route for 'index' images
 GET     /assets/images/index/*file  controllers.Application.indexImage(path="/public/images/index", file)
 
