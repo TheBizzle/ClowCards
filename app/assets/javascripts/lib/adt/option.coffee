@@ -10,7 +10,7 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
 
     constructor: ->
 
-      # (() => U) => U (such that U >: T)
+    # (() => U) => U (such that U >: T)
     getOrElse: (x) =>
       if @isEmpty() then x() else @get()
 
@@ -89,7 +89,7 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
     # (T) => Option[T]
     from: (value) => if value? then new Some(value) else @empty
 
-    # () => None
+    # None
     empty: new None
 
   }
