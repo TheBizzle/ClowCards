@@ -94,7 +94,7 @@ define(['r/lib/adt/option'], (Opt) ->
   test("collect", ->
     deepEqual(some.collect((x) -> x + "!"),                                       new Some(someStr + "!"))
     deepEqual(some.collect((x) -> x.length),                                      new Some(someStr.length))
-    deepEqual(some.collect((x) -> if x is "apples" then "derp" else undefined),   new Some("derp"))
+    deepEqual(some.collect((x) -> if x is   "apples" then "derp" else undefined), new Some("derp"))
     deepEqual(some.collect((x) -> if x is "crapples" then "derp" else undefined), None)
     deepEqual(None.collect((x) -> x + "!"),                                       None)
     deepEqual(None.collect((x) -> x.length),                                      None)
