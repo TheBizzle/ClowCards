@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/api/prototypes', 'r/lib/enhance/jquery'], ([], $) ->
+define(['r/api/prototypes', 'r/api/jquery'], ([], $) ->
 
   window.addEventListener('load', ->
 

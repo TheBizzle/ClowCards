@@ -5,7 +5,7 @@ require.config({
 })
 
 define(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/jglobals', 'r/index/main', 'r/index/services'
-       ,'r/api/prototypes', 'r/lib/adt/obj', 'r/lib/enhance/jquery', 'r/lib/enhance/underscore']
+       ,'r/api/prototypes', 'r/lib/adt/obj', 'r/api/jquery', 'r/api/underscore']
       , ([],       Cards,           globals,           $globals,           Index,          Services
        , [],                 Obj,             $,                      _) ->
 

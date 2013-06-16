@@ -6,7 +6,7 @@ require.config({
 
 # Assume that `this` is an `Array[T]`
 # Kind of gross to depend on Underscore...
-define(['r/lib/enhance/underscore'], (_) ->
+define(['r/api/underscore'], (_) ->
 
   # (T) => Array[T]
   Array::append = (x) ->

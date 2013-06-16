@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/lib/adt/iterator', 'r/lib/adt/option', 'r/lib/enhance/underscore'], (Iterator, Opt, _) ->
+define(['r/lib/adt/iterator', 'r/lib/adt/option', 'r/api/underscore'], (Iterator, Opt, _) ->
 
   None   = Opt.None
   Option = Opt.Option

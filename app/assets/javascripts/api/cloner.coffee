@@ -4,6 +4,6 @@ require.config({
   }
 })
 
-define(['r/lib/enhance/jquery'], ($) ->
+define(['r/api/jquery'], ($) ->
   (o) -> $.extend(true, {}, o)
 )

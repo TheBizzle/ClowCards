@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/lib/enhance/underscore'], (_) ->
+define(['r/api/underscore'], (_) ->
 
   class Replacement
     # regex:       Regex
