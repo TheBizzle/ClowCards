@@ -23,4 +23,12 @@ define(['r/lib/enhance/prototype/array'], ([]) ->
 
   )
 
+  test("distinct", ->
+    deepEqual([].                                                                              distinct(), [])
+    deepEqual([1, 2, 3].                                                                       distinct(), [1, 2, 3])
+    deepEqual([1, 1, 5, 4, 2, 3, 2, 1, 5, 1, 6, 1, 6, 1, 2, 3].                                distinct(), [1, 5, 4, 2, 3, 6])
+    deepEqual(["1", "2", "3"].                                                                 distinct(), ["1", "2", "3"])
+    deepEqual(["1", "1", "5", "4", "2", "3", "2", "1", "5", "1", "6", "1", "6", "1", "2", "3"].distinct(), ["1", "5", "4", "2", "3", "6"])
+  )
+
 )
