@@ -87,7 +87,7 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
   OptionCompanion = {
 
     # (T) => Option[T]
-    from: (value) => if value? then new Some(value) else @empty
+    from: (value) -> if value? then new Some(value) else @empty
 
     # None
     empty: new None
