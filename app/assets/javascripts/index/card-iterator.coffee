@@ -8,6 +8,8 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes', 'r/lib/adt/iterator'
       , ($,                      [],                         Iterator,             Obj) ->
 
   class CardIterator extends Iterator
+
+    # state: Object[T, U] //@ Aren't `Object`'s keys always `String`s?
     constructor: (state) ->
 
       iterateFunc = (p) =>

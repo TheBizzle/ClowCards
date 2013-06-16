@@ -6,6 +6,7 @@ require.config({
 
 define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
 
+  # Type Parameter: T (the type that is maybe (or maybe not) wrapped inside of the `Option`)
   class Option
 
     constructor: ->
@@ -60,6 +61,7 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
 
   class Some extends Option
 
+    # _value: T
     constructor: (@_value) ->
       super
 

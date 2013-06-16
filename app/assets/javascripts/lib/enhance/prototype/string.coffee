@@ -7,6 +7,8 @@ require.config({
 define(['r/lib/enhance/underscore'], (_) ->
 
   class Replacement
+    # regex:       Regex
+    # replacement: String
     constructor: (@regex, @replacement) ->
 
   # (String) => String
