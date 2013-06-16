@@ -5,8 +5,8 @@ require.config({
 })
 
 # This class represents a wrapper around `Object`s, with some methods for doing things non-stupidly
-define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes', 'r/lib/enhance/underscore']
-     , ( $,                      [],                         _) ->
+define(['r/api/cloner', 'r/lib/enhance/prototypes', 'r/lib/enhance/underscore']
+     , ( Cloner,             [],                         _) ->
 
   class Obj
 
@@ -53,7 +53,7 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes', 'r/lib/enhance/under
 
     # () => Obj[T, U]
     clone: =>
-      new Obj($.extend(true, {}, @_obj))
+      new Obj(Cloner(@_obj))
 
     # () => Array[Array[T|U]]
     toArray: (f) =>

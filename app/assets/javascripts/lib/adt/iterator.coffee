@@ -6,8 +6,8 @@ require.config({
 
 # Currently, this structure is very similar in operation to a `State` monad
 # Once `iterate` returns `undefined`, the `Iterator` is considered to have reached the end of iteration
-define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes', 'r/lib/adt/option', 'r/lib/enhance/underscore']
-     , ( $,                      [],                         Opt,                _) ->
+define(['r/lib/enhance/prototypes', 'r/lib/adt/option', 'r/lib/enhance/underscore']
+     , ( [],                         Opt,                _) ->
 
   Option = Opt.Option
   None   = Opt.None
