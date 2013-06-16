@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/lib/enhance/prototypes'], ([]) ->
+define(['r/api/prototypes'], ([]) ->
 
   # Type Parameter: T (the type that is maybe (or maybe not) wrapped inside of the `Option`)
   class Option

@@ -4,9 +4,9 @@ require.config({
   }
 })
 
-define(["r/main", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/prototypes", "r/lib/enhance/underscore", "r/lib/adt/option"
+define(["r/main", "r/api/prototypes", "r/lib/adt/obj", "r/lib/enhance/jquery", "r/lib/enhance/underscore", "r/lib/adt/option"
        ,"r/index/card-iterator", "r/index/cards", "r/index/constants", "r/index/globals", "r/index/html", "r/index/jglobals", "r/index/onload"]
-      , (main,     Obj,             $,                      [],                         _,                          Opt
+      , (main,     [],                 Obj,             $,                      _,                          Opt
        , CardIterator,            Cards,           Constants,           globals,           HTML,           $globals,           []) ->
 
   class Index

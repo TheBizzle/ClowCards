@@ -5,8 +5,8 @@ require.config({
 })
 
 # This class represents a wrapper around `Object`s, with some methods for doing things non-stupidly
-define(['r/api/cloner', 'r/lib/enhance/prototypes', 'r/lib/enhance/underscore']
-     , ( Cloner,             [],                         _) ->
+define(['r/api/cloner', 'r/api/prototypes', 'r/lib/enhance/underscore']
+     , ( Cloner,         [],                 _) ->
 
   class Obj
 

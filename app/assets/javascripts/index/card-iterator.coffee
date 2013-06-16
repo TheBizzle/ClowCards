@@ -4,8 +4,8 @@ require.config({
   }
 })
 
-define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes', 'r/lib/adt/iterator', 'r/lib/adt/obj']
-      , ($,                      [],                         Iterator,             Obj) ->
+define(['r/api/prototypes', 'r/lib/enhance/jquery', 'r/lib/adt/iterator', 'r/lib/adt/obj']
+      , ([],                 $,                      Iterator,             Obj) ->
 
   class CardIterator extends Iterator
 
