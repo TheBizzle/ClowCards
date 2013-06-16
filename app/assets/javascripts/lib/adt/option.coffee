@@ -50,9 +50,9 @@ define(['r/lib/enhance/jquery', 'r/lib/enhance/prototypes'], ($, []) ->
       else
         NoneObj
 
-    # (Option[U]) => Option[U] (such that U >: T)
-    orElse: (opt) =>
-      if @isEmpty() then opt else this
+    # (() => Option[U]) => Option[U] (such that U >: T)
+    orElse: (optFunc) =>
+      if @isEmpty() then optFunc() else this
 
     # () => Array[T]
     toArray: =>
