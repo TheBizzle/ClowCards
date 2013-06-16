@@ -1,6 +1,6 @@
 require.config({
   paths: {
-    'prototype': '/assets/javascripts/lib/enhance/prototype'
+    'prototype': '/assets/javascripts/api/prototype'
   }
 })
 

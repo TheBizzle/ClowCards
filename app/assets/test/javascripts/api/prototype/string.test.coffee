@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/lib/enhance/prototype/string'], ([]) ->
+define(['r/api/prototype/string'], ([]) ->
 
   module("String Tests")
 

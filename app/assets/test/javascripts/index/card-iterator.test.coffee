@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/index/card-iterator', 'r/lib/enhance/prototype/array'], (CardIterator, []) ->
+define(['r/index/card-iterator', 'r/api/prototype/array'], (CardIterator, []) ->
 
   module("CardIterator Tests")
 

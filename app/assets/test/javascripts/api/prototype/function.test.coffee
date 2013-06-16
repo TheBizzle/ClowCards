@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/lib/enhance/prototype/function'], ([]) ->
+define(['r/api/prototype/function'], ([]) ->
 
   module("Function Tests")
 

@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/lib/enhance/prototype/array'], ([]) ->
+define(['r/api/prototype/array'], ([]) ->
 
   module("Array Tests")
 

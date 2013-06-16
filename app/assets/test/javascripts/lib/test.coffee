@@ -4,4 +4,4 @@ require.config({
   }
 })
 
-define(['tr/lib/adt/test', 'tr/lib/enhance/prototype/test'])
+define(['tr/lib/adt/test'])

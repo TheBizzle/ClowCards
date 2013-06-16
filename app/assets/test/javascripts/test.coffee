@@ -1,3 +1,3 @@
 QUnit.config.autostart = false
 
-require(['./index/test', './lib/test'], -> QUnit.start())
+require(['./api/prototype/test', './index/test', './lib/test'], -> QUnit.start())
