@@ -86,7 +86,7 @@ define(['r/lib/adt/option'], (Opt) ->
     deepEqual(someCounter, 10)
 
     noneCounter = 0
-    None.foreach((x) -> someCounter += 10)
+    None.foreach((x) -> noneCounter += 10)
     deepEqual(noneCounter, 0)
 
   )
