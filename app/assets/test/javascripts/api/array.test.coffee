@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/api/prototype/array'], ([]) ->
+define(['r/api/prototypes'], ([]) ->
 
   module("Array Tests")
 

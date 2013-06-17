@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/api/prototype/string'], ([]) ->
+define(['r/api/prototypes'], ([]) ->
 
   module("String Tests")
 
