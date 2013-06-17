@@ -38,13 +38,13 @@ define(['r/api/prototypes'], ([]) ->
   )
 
   test("slugify", ->
-    deepEqual("apples".slugify(),                                          "apples")
-    deepEqual("derptown expressway".slugify(),                             "derptown-expressway")
-    deepEqual("DERPTOWN EXPRESSWAY".slugify(),                             "derptown-expressway")
-    deepEqual("DErptOwN ExpREssWay".slugify(),                             "derptown-expressway")
-    deepEqual("Hi, there".slugify(),                                       "hi-there")
+    deepEqual("apples".                                         slugify(), "apples")
+    deepEqual("derptown expressway".                            slugify(), "derptown-expressway")
+    deepEqual("DERPTOWN EXPRESSWAY".                            slugify(), "derptown-expressway")
+    deepEqual("DErptOwN ExpREssWay".                            slugify(), "derptown-expressway")
+    deepEqual("Hi, there".                                      slugify(), "hi-there")
     deepEqual("This is quite wonderful, don't you think. I do.".slugify(), "this-is-quite-wonderful-dont-you-think-i-do")
-    deepEqual("DErp,t OwN'-ExpRE..ss'Way".slugify(),                       "derpt-own-expressway")
+    deepEqual("DErp,t OwN'-ExpRE..ss'Way".                      slugify(), "derpt-own-expressway")
   )
 
 )
