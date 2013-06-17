@@ -4,4 +4,4 @@ require.config({
   }
 })
 
-define("prototypes", ['prototype/array', 'prototype/function', 'prototype/string'])
+require(['prototype/array', 'prototype/function', 'prototype/string'])
