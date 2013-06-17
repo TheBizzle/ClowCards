@@ -6,8 +6,8 @@ require.config({
 
 # Currently, this structure is very similar in operation to a `State` monad
 # Once `iterate` returns `undefined`, the `Iterator` is considered to have reached the end of iteration
-define(['r/api/prototypes', 'r/lib/adt/option', 'r/api/underscore']
-     , ( [],                 Opt,                _) ->
+define(['r/api/prototypes', 'r/adt/option', 'r/api/underscore']
+     , ( [],                 Opt,            _) ->
 
   Option = Opt.Option
   None   = Opt.None

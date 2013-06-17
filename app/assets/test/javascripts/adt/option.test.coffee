@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/lib/adt/option'], (Opt) ->
+define(['r/adt/option'], (Opt) ->
 
   Option = Opt.Option
   Some   = Opt.Some

@@ -4,8 +4,8 @@ require.config({
   }
 })
 
-define(['r/api/prototypes', 'r/api/jquery', 'r/lib/adt/iterator', 'r/lib/adt/obj']
-      , ([],                 $,                      Iterator,             Obj) ->
+define(['r/api/prototypes', 'r/api/jquery', 'r/adt/iterator', 'r/adt/obj']
+      , ([],                 $,              Iterator,         Obj) ->
 
   class CardIterator extends Iterator
 

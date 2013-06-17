@@ -5,9 +5,9 @@ require.config({
 })
 
 require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/jglobals', 'r/index/main', 'r/index/services'
-        ,'r/api/prototypes', 'r/lib/adt/obj', 'r/api/jquery', 'r/api/underscore']
+        ,'r/api/prototypes', 'r/adt/obj', 'r/api/jquery', 'r/api/underscore']
        , ([],       Cards,           globals,           $globals,           Index,          Services
-        , [],                 Obj,             $,                      _) ->
+        , [],                 Obj,         $,              _) ->
 
   # Initialize globals and selectors
   window.addEventListener('load', ->

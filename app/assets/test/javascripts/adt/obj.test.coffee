@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/lib/adt/obj'], (Obj) ->
+define(['r/adt/obj'], (Obj) ->
 
   module("Obj Tests")
 
