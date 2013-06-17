@@ -4,4 +4,4 @@ require.config({
   }
 })
 
-define(['tr/api/prototype/array.test', 'tr/api/prototype/function.test', 'tr/api/prototype/string.test'])
+require(['tr/api/prototype/array.test', 'tr/api/prototype/function.test', 'tr/api/prototype/string.test'])

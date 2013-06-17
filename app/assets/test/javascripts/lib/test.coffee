@@ -4,4 +4,4 @@ require.config({
   }
 })
 
-define(['tr/lib/adt/test'])
+require(['tr/lib/adt/test'])

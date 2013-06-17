@@ -4,4 +4,4 @@ require.config({
   }
 })
 
-define(['tr/index/card-iterator.test'])
+require(['tr/index/card-iterator.test'])

@@ -4,4 +4,4 @@ require.config({
   }
 })
 
-define(['tr/lib/adt/iterator.test', 'tr/lib/adt/obj.test', 'tr/lib/adt/option.test'])
+require(['tr/lib/adt/iterator.test', 'tr/lib/adt/obj.test', 'tr/lib/adt/option.test'])
