@@ -5,7 +5,7 @@ require.config({
 })
 
 # Assume that `this` is a `Function[T, U]`
-define(->
+require(->
 
   # (Function[U, V]) => Function[T, V]
   Function::andThen = (g) ->

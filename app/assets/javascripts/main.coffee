@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-define(['r/api/prototypes', 'r/api/jquery'], ([], $) ->
+require(['r/api/prototypes', 'r/api/jquery'], ([], $) ->
 
   window.addEventListener('load', ->
 
