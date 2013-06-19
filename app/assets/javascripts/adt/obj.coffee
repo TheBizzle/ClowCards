@@ -56,7 +56,7 @@ define(['r/api/cloner', 'r/api/prototypes', 'r/api/underscore']
       new Obj(Cloner(@_obj))
 
     # () => Array[Array[T|U]]
-    toArray: (f) =>
+    toArray: =>
       for k, v of @_obj
         [k, v]
 
