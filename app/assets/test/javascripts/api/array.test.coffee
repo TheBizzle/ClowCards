@@ -24,11 +24,28 @@ define(['r/api/prototypes'], ([]) ->
   )
 
   test("distinct", ->
-    deepEqual([].                                                                              distinct(), [])
-    deepEqual([1, 2, 3].                                                                       distinct(), [1, 2, 3])
-    deepEqual([1, 1, 5, 4, 2, 3, 2, 1, 5, 1, 6, 1, 6, 1, 2, 3].                                distinct(), [1, 5, 4, 2, 3, 6])
-    deepEqual(["1", "2", "3"].                                                                 distinct(), ["1", "2", "3"])
-    deepEqual(["1", "1", "5", "4", "2", "3", "2", "1", "5", "1", "6", "1", "6", "1", "2", "3"].distinct(), ["1", "5", "4", "2", "3", "6"])
+
+    arr1    = []
+    target1 = []
+
+    arr2    = [1, 2, 3]
+    target2 = [1, 2, 3]
+
+    arr3    = [1, 1, 5, 4, 2, 3, 2, 1, 5, 1, 6, 1, 6, 1, 2, 3]
+    target3 = [1, 5, 4, 2, 3, 6]
+
+    arr4    = ["1", "2", "3"]
+    target4 = ["1", "2", "3"]
+
+    arr5    = ["1", "1", "5", "4", "2", "3", "2", "1", "5", "1", "6", "1", "6", "1", "2", "3"]
+    target5 = ["1", "5", "4", "2", "3", "6"]
+
+    deepEqual(arr1.distinct(), target1)
+    deepEqual(arr2.distinct(), target2)
+    deepEqual(arr3.distinct(), target3)
+    deepEqual(arr4.distinct(), target4)
+    deepEqual(arr5.distinct(), target5)
+
   )
 
 )
