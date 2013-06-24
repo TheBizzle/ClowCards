@@ -1,13 +1,16 @@
 package controllers
 
 import
+  org.joda.time.Duration
+
+import
   play.api.mvc.{ Action, Controller }
 
 object Application extends Controller {
 
   def indexImage(path: String, file: String) = Action {
     request =>
-      val CacheTime = 60 * 60 * 24 // Cache duration (seconds): 1 day
+      val CacheTime = Duration.standardDays(1).getStandardSeconds
       Assets.at(path, file)(request).withHeaders("Cache-Control" -> s"public, max-age=$CacheTime")
   }
 
