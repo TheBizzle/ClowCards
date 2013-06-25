@@ -9,7 +9,7 @@ define(['r/api/prototypes', 'r/api/jquery', 'r/adt/iterator', 'r/adt/obj']
 
   class CardIterator extends Iterator
 
-    # state: Object[T, U] //@ Aren't `Object`'s keys always `String`s?
+    # state: Object[T]
     constructor: (state) ->
 
       iterateFunc = (p) =>

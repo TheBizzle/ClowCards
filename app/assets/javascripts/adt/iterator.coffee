@@ -160,7 +160,7 @@ define(['r/api/prototypes', 'r/adt/option', 'r/api/underscore']
       arr = @toArray()
       _(arr).sortBy(g)
 
-    # ((U) => V) => Object[V, Array[U]]
+    # ((U) => String) => Object[Array[U]]
     groupBy: (g) =>
       arr = @toArray()
       _(arr).groupBy(g)

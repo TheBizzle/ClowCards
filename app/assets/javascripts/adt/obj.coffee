@@ -10,39 +10,39 @@ define(['r/api/cloner', 'r/api/prototypes', 'r/api/underscore']
 
   class Obj
 
-    # The type of `_obj` will be taken to be `Object[T, U]`
-    # Thus, this class will be referred to as `Obj[T, U]`
+    # The type of `_obj` will be taken to be `Object[T]`
+    # Thus, this class will be referred to as `Obj[T]`
     constructor: (@_obj) ->
 
-    # () => Object[T, U]
+    # () => Object[T]
     value: =>
       @_obj
 
-    # (T) => U
+    # (String) => T
     get: (x) =>
       @_obj[x]
 
-    # (T, U) => Obj[T, U]
+    # (String, T) => Obj[T]
     append: (x, y) =>
       @_withNew((out) => out[x] = y)
 
-    # (T) => Obj[T, U]
+    # (String) => Obj[T]
     without: (x) =>
       @_withNew((out) => delete out[x])
 
-    # ((T, U) => Boolean) => Obj[T, U]
+    # ((String, T) => Boolean) => Obj[T]
     filter: (f) =>
       @_morph((out, k, v) => if not f(k, v) then delete out[k])
 
-    # ((T, U) => Boolean) => Obj[T, U]
+    # ((String, T) => Boolean) => Obj[T]
     filterNot: (f) =>
       @filter((x) -> not f.apply(this, arguments))
 
-    # ((T) => Boolean) => Obj[T, U]
+    # ((String) => Boolean) => Obj[T]
     filterKeys: (f) =>
       @_morph((out, k, v) => if not f(k) then delete out[k])
 
-    # ((T, U) => [V, W]) => Obj[V, W]
+    # ((String, T) => [String, U]) => Obj[U]
     map: (f) =>
       @_comprehend(
         (out, k, v) =>
@@ -51,20 +51,20 @@ define(['r/api/cloner', 'r/api/prototypes', 'r/api/underscore']
           out[key] = value
       )
 
-    # () => Obj[T, U]
+    # () => Obj[T]
     clone: =>
       new Obj(Cloner(@_obj))
 
-    # () => Array[Array[T|U]]
+    # () => Array[Array[String|T]]
     toArray: =>
       for k, v of @_obj
         [k, v]
 
-    # (Int) => T
+    # (Int) => String
     fetchKeyByIndex: (n) =>
       Object.keys(@_obj)[n]
 
-    # (Int) => U
+    # (Int) => T
     fetchValueByIndex: (n) =>
       key = @fetchKeyByIndex(n)
       @_obj[key]
@@ -73,7 +73,7 @@ define(['r/api/cloner', 'r/api/prototypes', 'r/api/underscore']
     size: =>
       _(@_obj).size()
 
-    # ((Obj[T, U], T, U) => Obj[V, W]) => Obj[V, W]
+    # ((Obj[T], String, T) => Obj[U]) => Obj[U]
     _comprehend: (f) =>
       @_withNew(
         (out) =>
@@ -81,7 +81,7 @@ define(['r/api/cloner', 'r/api/prototypes', 'r/api/underscore']
             f(out, k, v)
       )
 
-    # ((Obj[T, U], T, U) => Unit) => Obj[T, U]
+    # ((Obj[T], String, T) => Unit) => Obj[T]
     _morph: (f) =>
       @_withNew(
         (out) =>
@@ -90,7 +90,7 @@ define(['r/api/cloner', 'r/api/prototypes', 'r/api/underscore']
           out
       )
 
-    # ((Object[T, U]) => V) => Obj[T, U]
+    # ((Object[T]) => U) => Obj[T]
     _withNew: (f) =>
       out = @clone().value()
       f(out)
