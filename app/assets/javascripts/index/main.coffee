@@ -27,12 +27,21 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
         else return
 
     # () => Unit
+    clearErrorFuzz: ->
+      $globals.$nameInput.removeClass('glowing-border')
+
+    # () => Unit
     addRow: ->
+
       $input = $globals.$nameInput
       name   = $input.val()
-      if not _(name).isEmpty() and _(globals.playerNums).size() < Constants.MaxPlayerCount
-        $input.val("")
-        @_genRow(name)
+
+      if not _(name).isEmpty()
+        if _(globals.playerNums).size() < Constants.MaxPlayerCount
+          $input.val("")
+          @_genRow(name)
+      else
+        $input.addClass('glowing-border')
 
     # (String) => Unit
     removeRow: (id) ->
