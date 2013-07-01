@@ -31,7 +31,7 @@ define({
   generateCardEntry: (imgHTML, textHTML) ->
     "<div class='entry-wrapper horiz-centered-children'>#{imgHTML}<br>#{textHTML}</div>"
 
-  generatePlayerRow: (name, id, spanID) ->
+  generatePlayerRow: (name, id, imgID) ->
     """
     <table id="#{id}" class="player-table round-bordered card-row has-headroom">
       <tr>
@@ -39,11 +39,10 @@ define({
           <table>
             <tr>
               <td>
-                <span id='#{spanID}' class="player-remove-button player-button unselectable">x</span>
-              </td>
-              <td class="player-spacer"></td>
-              <td>
                 <span class="player-name">#{name}</span>
+              </td>
+              <td>
+                <img id='#{imgID}' src='/assets/images/index/simple-x.png' class="player-button">
               </td>
             </tr>
           </table>
