@@ -30,7 +30,7 @@ require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/html', 'r/index/
     cardPool    = new Obj(Cards).clone().value()
 
     for cardname, obj of cardPool
-      $cardHolder.append(HTML.generateCardCheckbox(cardname, obj))
+      $cardHolder.append(HTML.generateCardCheckbox(cardname, obj.enabled))
 
     $cardHolder.children(".dynamic-check-button").each(->
       elem = $(this)
