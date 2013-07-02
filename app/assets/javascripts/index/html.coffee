@@ -73,5 +73,11 @@ define({
     </div>
     """
 
+  generateCardCheckbox: (cardname, obj) ->
+    name    = cardname.slugify()
+    checked = if obj.enabled then " checked" else ""
+    """<input type="checkbox" id="check-#{name}" name="version" class="check-button version-button dynamic-check-button"#{checked}/>
+      |<label for="check-#{name}" class="unselectable check-label dynamic-check-label">#{cardname}</label>""".stripMargin()
+
 })
 

@@ -4,9 +4,9 @@ require.config({
   }
 })
 
-require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/jglobals', 'r/index/main', 'r/index/services'
+require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/html', 'r/index/jglobals', 'r/index/main', 'r/index/services'
         ,'r/api/prototypes', 'r/adt/obj', 'r/api/jquery', 'r/api/underscore']
-       , ([],       Cards,           globals,           $globals,           Index,          Services
+       , ([],       Cards,           globals,           HTML,           $globals,           Index,          Services
         , [],                 Obj,         $,              _) ->
 
   # Initialize globals and selectors
@@ -30,12 +30,7 @@ require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/jglobals', 'r/in
     cardPool    = new Obj(Cards).clone().value()
 
     for cardname, obj of cardPool
-       name    = cardname.slugify()
-       checked = if obj.enabled then " checked" else ""
-       $cardHolder.append(
-         """<input type="checkbox" id="check-#{name}" name="version" class="check-button version-button dynamic-check-button"#{checked}/>
-           |<label for="check-#{name}" class="unselectable check-label dynamic-check-label">#{cardname}</label>""".stripMargin()
-       )
+      $cardHolder.append(HTML.generateCardCheckbox(cardname, obj))
 
     $cardHolder.children(".dynamic-check-button").each(->
       elem = $(this)
