@@ -63,7 +63,7 @@ define({
   generateLoadingAnimationHTML: (idBasis, bgClass) ->
     id = "#{idBasis}-loading"
     """
-    <div id='#{id}' class='entry-image round-bordered #{bgClass} fade-anim-wrapper'>
+    <div id='#{id}' class='entry-image #{bgClass} fade-anim-wrapper'>
       <div class="fade-anim-circle fade-anim-1"></div>
       <div class="fade-anim-circle fade-anim-2"></div>
       <div class="fade-anim-circle fade-anim-3"></div>
