@@ -1,6 +1,6 @@
 require.config({
   paths: {
-    'prototype': '/assets/javascripts/api/prototype'
+    'r': '/assets/javascripts'
   }
 })
 
