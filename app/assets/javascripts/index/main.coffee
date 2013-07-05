@@ -132,7 +132,7 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
 
     # (String) => String
     _genCardImageURL = (name) ->
-      "./assets/images/index/#{name.slugify()}.png"
+      "/assets/images/index/#{name.slugify()}.png"
 
     # (String) => String
     generatePlayerID = (num) ->
