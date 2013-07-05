@@ -70,6 +70,10 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
     genCardImageURL: (name) ->
       _genCardImageURL(name)
 
+    # (String) => String
+    genPriorityImageURL: (name) ->
+      "/assets/images/index/priority/#{name}.png"
+
     # (String) => Unit
     _genRow: (name) =>
 

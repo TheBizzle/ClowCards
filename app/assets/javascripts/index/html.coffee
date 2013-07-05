@@ -42,7 +42,7 @@ define({
                 <span class="player-name">#{name}</span>
               </td>
               <td>
-                <img id='#{imgID}' src='/assets/images/index/simple-x.png' class="player-button">
+                <img id='#{imgID}' src='/assets/images/index/priority/simple-x.png' class="player-button">
               </td>
             </tr>
           </table>
