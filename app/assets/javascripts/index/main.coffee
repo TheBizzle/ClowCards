@@ -154,7 +154,7 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
       textHTML = HTML.generateCardText(name)
       HTML.generateCardEntry(imgHTML, textHTML)
 
-    # () => Object[Object[Any]]
+    # () => Obj[Object[Any]]
     getCards = ->
 
       cardObj = new Obj(Cards).clone().value()

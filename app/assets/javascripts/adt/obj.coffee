@@ -10,8 +10,7 @@ define(['r/api/cloner', 'r/api/prototypes', 'r/api/underscore']
 
   class Obj
 
-    # The type of `_obj` will be taken to be `Object[T]`
-    # Thus, this class will be referred to as `Obj[T]`
+    # _obj: Object[T]
     constructor: (@_obj) ->
 
     # () => Object[T]
