@@ -4,6 +4,7 @@ require.config({
   }
 })
 
+# (Object[T]) => Object[T]
 define(['r/api/jquery'], ($) ->
   (o) -> $.extend(true, {}, o)
 )
