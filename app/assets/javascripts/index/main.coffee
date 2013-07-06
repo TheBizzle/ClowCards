@@ -33,6 +33,8 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
     # () => Unit
     addRow: ->
 
+      @clearErrorFuzz()
+
       $input = $globals.$nameInput
       name   = $input.val()
 
@@ -51,6 +53,8 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
 
     # () => Unit
     genCards: ->
+
+      @clearErrorFuzz()
 
       numCards   = parseInt($globals.$cardNumSpinner.val())
       maxCards   = new Obj(getCards()).filter((k, v) -> v.enabled).size() # Not really great, but... good enough, I guess --Jason (4/30/13)
