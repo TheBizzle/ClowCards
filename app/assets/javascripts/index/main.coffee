@@ -140,7 +140,18 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
 
     # (String) => String
     _genCardImageURL = (name) ->
-      "/assets/images/index/#{name.slugify()}.png"
+
+      origURL = "/assets/images/index/#{name.slugify()}.png"
+
+      request = new XMLHttpRequest()
+      request.open('GET', origURL, false)
+      request.send(null)
+
+      # //@ Improve this!
+      if request.status is 200
+        origURL
+      else
+        "/assets/images/index/priority/question-mark.png"
 
     # (String) => String
     generatePlayerID = (num) ->
