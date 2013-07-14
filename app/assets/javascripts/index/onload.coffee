@@ -23,6 +23,11 @@ require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/html', 'r/index/
 
   )
 
+  # Cleaning individual element CSS after jQuery-UI inits
+  window.addEventListener('load', ->
+    $.byID("main-box").css('overflow', 'auto')
+  )
+
   # Populate `card-holder`
   window.addEventListener('load', ->
 
