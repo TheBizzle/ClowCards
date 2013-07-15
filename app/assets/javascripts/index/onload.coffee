@@ -83,6 +83,7 @@ require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/element', 'r/ind
     $globals.$adderButton.   click   (        -> Index.addRow())
     $globals.$nameInput.     keypress((event) -> Index.handleRowKey(event))
     $globals.$nameInput.     focus   (        -> Index.clearErrorFuzz())
+    $globals.$nameInput.     unfocus (        -> if not _($(this).val()).isEmpty() then Index.addRow())
     $globals.$cardNumSpinner.keyup   ((event) -> Index.handleNumPickerKey(event))
     $globals.$pickBtn.       click   (        -> Index.genCards())
 
