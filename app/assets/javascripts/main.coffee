@@ -6,7 +6,7 @@ require.config({
 
 require(['r/api/prototypes', 'r/api/jquery'], ([], $) ->
 
-  window.addEventListener('load', ->
+  $(document).ready(->
 
     $('.collapsible-accordion').accordion({
       heightStyle: "fill"
