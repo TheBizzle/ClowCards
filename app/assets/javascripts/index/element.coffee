@@ -6,9 +6,6 @@ require.config({
 
 # All public functions should be of type `(String*) => jQuery`
 
-# //@ This is actually kind of bad.  We shouldn't return HTML; we should return jQuery objects so we can manipulate them before bubbling them up
-#     There's at least one place I remember where that would have been useful
-
 define({
 
   generateCardEntryColumn: (innerHTML) ->
