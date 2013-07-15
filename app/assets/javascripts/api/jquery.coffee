@@ -16,6 +16,14 @@ define(['jquery-ui'], ($) ->
   # (String) => jQuery
   $.byID = (id) -> $('#' + id)
 
+  # Selector enhancements
+  $.fn.extend({
+
+    # (Unit) => String
+    outerHTML: ->  $(this).clone().wrap('<div></div>').parent().html()
+
+  })
+
   $
 
 )

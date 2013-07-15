@@ -5,9 +5,9 @@ require.config({
 })
 
 define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery", "r/api/underscore"
-       ,"r/index/card-iterator", "r/index/cards", "r/index/constants", "r/index/globals", "r/index/html", "r/index/jglobals", "r/index/onload"]
+       ,"r/index/card-iterator", "r/index/cards", "r/index/constants", "r/index/globals", "r/index/element", "r/index/jglobals", "r/index/onload"]
       , (main,     [],                 Obj,         Opt,            $,              _
-       , CardIterator,            Cards,           Constants,           globals,           HTML,           $globals,           []) ->
+       , CardIterator,            Cards,           Constants,           globals,           Element,           $globals,           []) ->
 
   class Index
 
@@ -88,7 +88,7 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
 
       globals.playerNums = nums.append(num)
 
-      $(HTML.generatePlayerRow(name, id, spanID)).insertBefore($globals.$adderTable)
+      Element.generatePlayerRow(name, id, spanID).insertBefore($globals.$adderTable)
       $.byID(spanID).click(=> @removeRow(id))
 
     # () => Unit
@@ -106,8 +106,8 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
         safetyNum = 10000
         r         = Math.floor(Math.random() * safetyNum)
         cardID    = "#{card.slugify()}-#{r}"
-        entry     = generateCardEntry(card, cardID)
-        column    = HTML.generateCardEntryColumn(entry)
+        entry     = generateCardEntry(card, cardID).outerHTML()
+        column    = Element.generateCardEntryColumn(entry)
         $.byID(id).find(".row-content-row").append(column)
         $.byID(cardID).load(-> makeImageVisible(cardID))
       else
@@ -165,9 +165,9 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
     # (String) => String
     generateCardEntry = (name, id) ->
       imgURL   = _genCardImageURL(name)
-      imgHTML  = HTML.generateCardImage(id, imgURL, Cards[name].faction)
-      textHTML = HTML.generateCardText(name)
-      HTML.generateCardEntry(imgHTML, textHTML)
+      imgHTML  = Element.generateCardImage(id, imgURL, Cards[name].faction).outerHTML()
+      textHTML = Element.generateCardText(name).outerHTML()
+      Element.generateCardEntry(imgHTML, textHTML)
 
     # () => Obj[Object[Any]]
     getCards = ->
