@@ -12,19 +12,31 @@ define({
     $("<td>#{innerHTML}</td>")
 
   generateCardImage: (id, url, faction) ->
-    bgClass  = "#{faction.toLowerCase()}-backgrounded"
-    animHTML = @generateLoadingAnimationHTML(id, bgClass).outerHTML()
-    $(
+
+    bgClass = "#{faction.toLowerCase()}-backgrounded"
+    anim    = @generateLoadingAnimationHTML(id, bgClass)
+    img     = @generateCardCoreImage(id, url, anim)
+
+    elem = $(
       """
       <span class="outer-image-border">
         <span class="middle-image-border #{bgClass}">
-          <span class="inner-image-border">
-            <img id='#{id}' class='entry-image hidden' src='#{url}'>
-            #{animHTML}
-          </span>
+          <span class="inner-image-border"></span>
         </span>
       </span>
       """
+    )
+
+    elem.find(".inner-image-border").append(img, anim)
+
+    elem
+
+  generateCardCoreImage: (id, url, anim) ->
+    domCopyOf = (elem) -> $.byID(elem.attr('id'))
+    $("<img id='#{id}' class='entry-image hidden' src='#{url}'>").load(
+      ->
+        domCopyOf(anim).remove()
+        domCopyOf($(this)).removeClass("hidden")
     )
 
   generateCardText: (text) ->

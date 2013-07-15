@@ -109,7 +109,6 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
         entry     = generateCardEntry(card, cardID).outerHTML()
         column    = Element.generateCardEntryColumn(entry)
         $.byID(id).find(".row-content-row").append(column)
-        $.byID(cardID).load(-> makeImageVisible(cardID))
       else
         alert("Card pool exhausted!  Pick fewer cards!")
 
