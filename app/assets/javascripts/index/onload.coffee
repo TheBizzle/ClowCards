@@ -37,6 +37,8 @@ require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/element', 'r/ind
     for cardname, obj of cardPool
       $cardHolder.append(Element.generateCardCheckbox(cardname, obj.enabled))
 
+    # So I don't try this a fourth time, let's get this straight: this CANNOT be refactored into `Element`,
+    # since jQuery-UI methods (like `button`) don't work unless there's a DOM object for them --Jason (7/15/13)
     $cardHolder.children(".dynamic-check-button").each(->
       elem = $(this)
       elem.button()
