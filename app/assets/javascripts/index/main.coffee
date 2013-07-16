@@ -84,12 +84,11 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
       nums   = globals.playerNums
       num    = if _(nums).isEmpty() then 1 else (_(nums).last() + 1)
       id     = generatePlayerID(num)
-      spanID = "#{id}-span"
+      elemID = "#{id}-elem"
 
       globals.playerNums = nums.append(num)
 
-      Element.generatePlayerRow(name, id, spanID).insertBefore($globals.$adderTable)
-      $.byID(spanID).click(=> @removeRow(id))
+      Element.generatePlayerRow(name, id, elemID, => @removeRow(id)).insertBefore($globals.$adderTable)
 
     # () => Unit
     _genCardForEachPlayer: =>

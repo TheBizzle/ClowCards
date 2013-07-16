@@ -4,7 +4,7 @@ require.config({
   }
 })
 
-# All public functions should be of type `(String*) => jQuery`
+# All public functions should return a single object of type `jQuery`
 
 define({
 
@@ -31,8 +31,10 @@ define({
   generateCardEntry: (imgHTML, textHTML) ->
     $("<div class='entry-wrapper horiz-centered-children'>#{imgHTML}<br>#{textHTML}</div>")
 
-  generatePlayerRow: (name, id, imgID) ->
-    $(
+  # (String, String, String, () => Unit) => jQuery
+  generatePlayerRow: (name, id, imgID, onclick) ->
+    img  = $("""<img id='#{imgID}' src='/assets/images/index/priority/simple-x.png' class="player-button">""").click(onclick)
+    elem = $(
       """
       <table id="#{id}" class="player-table round-bordered card-row has-headroom">
         <tr>
@@ -43,7 +45,7 @@ define({
                   <span class="player-name">#{name}</span>
                 </td>
                 <td>
-                  <img id='#{imgID}' src='/assets/images/index/priority/simple-x.png' class="player-button">
+                  <div class="placeholder">
                 </td>
               </tr>
             </table>
@@ -61,6 +63,8 @@ define({
       </table>
       """
     )
+    elem.find(".placeholder").replaceWith(img)
+    elem
 
   generateLoadingAnimationHTML: (idBasis, bgClass) ->
     id = "#{idBasis}-loading"
