@@ -57,8 +57,12 @@
 }
 
 .glowing-border {
-  border-color: #ED0000;
-  box-shadow: 0 0 40px #ED0000;
+
+  @color: #ED0000;
+
+  border-color: @color;
+  box-shadow: 0 0 40px @color;
+
 }
 
 .outer-wrapper {
