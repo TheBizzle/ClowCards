@@ -105,8 +105,8 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
         safetyNum = 10000
         r         = Math.floor(Math.random() * safetyNum)
         cardID    = "#{card.slugify()}-#{r}"
-        entry     = generateCardEntry(card, cardID).outerHTML()
-        column    = Element.generateCardEntryColumn(entry)
+        imgURL    = _genCardImageURL(card)
+        column    = Element.generateCardEntryColumn(card, cardID, imgURL, Cards[card].faction)
         $.byID(id).find(".row-content-row").append(column)
       else
         alert("Card pool exhausted!  Pick fewer cards!")
@@ -159,13 +159,6 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
     generateNumFromID = (id) ->
       [[], num, []] = _(id).words("-")
       parseInt(num)
-
-    # (String) => String
-    generateCardEntry = (name, id) ->
-      imgURL   = _genCardImageURL(name)
-      imgHTML  = Element.generateCardImage(id, imgURL, Cards[name].faction).outerHTML()
-      textHTML = Element.generateCardText(name).outerHTML()
-      Element.generateCardEntry(imgHTML, textHTML)
 
     # () => Obj[Object[Any]]
     getCards = ->
