@@ -33,7 +33,7 @@ define(['r/api/jquery', 'r/api/prototypes'], ($, []) ->
     bgClass = "#{faction.toLowerCase()}-backgrounded"
     anim    = _generateLoadingAnimationHTML(id, bgClass)
     img     = _generateCardCoreImage(id, url, anim, bgClass)
-    img.insertBefore(anim)
+    $("<span></span>").append(img, anim)
 
   # (String) => jQuery
   _generateCardText = (text) ->
