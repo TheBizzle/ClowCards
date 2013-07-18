@@ -62,21 +62,6 @@ require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/element', 'r/ind
     Services.Index = new Index
   )
 
-  # Preload priority images
-  window.addEventListener('load', ->
-    Index      = Services.Index
-    imageNames = ['simple-plus', 'simple-x']
-    urls       = _(imageNames).map((name) -> Index.genPriorityImageURL(name))
-    _(urls).forEach(preload)
-  )
-
-  # Preload card images
-  window.addEventListener('load', ->
-    Index = Services.Index
-    urls  = Object.keys(Cards).map((key) -> Index.genCardImageURL(key))
-    _(urls).forEach(preload)
-  )
-
   # Initialize event listeners
   window.addEventListener('load', ->
 
@@ -106,6 +91,21 @@ require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/element', 'r/ind
 
     )
 
+  )
+
+  # Preload priority images
+  window.addEventListener('load', ->
+    Index      = Services.Index
+    imageNames = ['question-mark', 'simple-plus', 'simple-x']
+    urls       = _(imageNames).map((name) -> Index.genPriorityImageURL(name))
+    _(urls).forEach(preload)
+  )
+
+  # Preload card images
+  window.addEventListener('load', ->
+    Index = Services.Index
+    urls  = Object.keys(Cards).map((key) -> Index.genCardImageURL(key))
+    _(urls).forEach(preload)
   )
 
   preload = (url) -> $('<img/>').attr('src', url)
