@@ -18,10 +18,10 @@ define(['r/api/jquery', 'r/api/prototypes'], ($, []) ->
     text = _generateCardText(name)
 
     elem = $("""<div class='entry-wrapper horiz-centered-children'>
-             |  <div class=#{imgHolderClass}></div>
-             |  <br>
-             |  <div class=#{textHolderClass}></div>
-             |</div>""".stripMargin())
+               |  <div class=#{imgHolderClass}></div>
+               |  <br>
+               |  <div class=#{textHolderClass}></div>
+               |</div>""".stripMargin())
 
     elem.find(".#{imgHolderClass}") .replaceWith(img)
     elem.find(".#{textHolderClass}").replaceWith(text)
