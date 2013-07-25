@@ -21,7 +21,7 @@ define(['r/index/card-iterator', 'r/api/prototypes'], (CardIterator, []) ->
       "Arkmer":           { enabled: true,  faction: "Ullar"   },
       "Arrow Gruts":      { enabled: true,  faction: "Utgar"   },
       "Aubrien Archers":  { enabled: true,  faction: "Ullar"   },
-      "Basilisk":         { enabled: true, faction: "Choobar" },
+      "Basilisk":         { enabled: true,  faction: "Choobar" },
       "Blade Gruts":      { enabled: true,  faction: "Utgar"   },
       "Blastatrons":      { enabled: true,  faction: "Vydar"   },
       "Braxas":           { enabled: true,  faction: "Vydar"   },
