@@ -23,7 +23,7 @@ define(['r/api/jquery', 'r/api/prototypes'], ($, []) ->
                |  <div class=#{textHolderClass}></div>
                |</div>""".stripMargin())
 
-    elem.find(".#{imgHolderClass}") .replaceWith(img)
+    elem.find(".#{imgHolderClass}"). replaceWith(img)
     elem.find(".#{textHolderClass}").replaceWith(text)
 
     elem
