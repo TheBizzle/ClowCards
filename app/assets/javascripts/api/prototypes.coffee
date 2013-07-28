@@ -26,6 +26,11 @@ require(['r/api/underscore'], (_) ->
           acc.append(x)
     , [])
 
+  # (Int) => Array[T]
+  Array::removeAt = (index) ->
+    xs = this.slice(0)
+    xs.splice(index, 1)
+    xs
 
 
   # Function refinements

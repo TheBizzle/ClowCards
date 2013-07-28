@@ -48,4 +48,23 @@ define(['r/api/prototypes'], ([]) ->
 
   )
 
+  test("removeAt", ->
+
+    arrS1 = []
+    arrE1 = arrS1.removeAt(0)
+
+    arrS2 = ["crapples", "snapples", "mapples", "apples"]
+    arrE2 = arrS2.removeAt(0)
+    arrE3 = arrS2.removeAt(1)
+    arrE4 = arrS2.removeAt(3)
+
+    deepEqual(arrS1, [])
+    deepEqual(arrE1, [])
+    deepEqual(arrE2, ["snapples", "mapples",  "apples"])
+    deepEqual(arrE3, ["crapples", "mapples",  "apples"])
+    deepEqual(arrE4, ["crapples", "snapples", "mapples"])
+    deepEqual(arrS2, ["crapples", "snapples", "mapples", "apples"])
+
+  )
+
 )
