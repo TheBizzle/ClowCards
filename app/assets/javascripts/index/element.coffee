@@ -21,7 +21,8 @@ define(['r/api/jquery', 'r/api/prototypes'], ($, []) ->
                |  <div class=#{imgHolderClass}></div>
                |  <br>
                |  <div class=#{textHolderClass}></div>
-               |</div>""".stripMargin())
+               |</div>
+             """.stripMargin().trim())
 
     elem.find(".#{imgHolderClass}"). replaceWith(img)
     elem.find(".#{textHolderClass}").replaceWith(text)
@@ -71,7 +72,8 @@ define(['r/api/jquery', 'r/api/prototypes'], ($, []) ->
       name    = cardname.slugify()
       checked = if isEnabled then " checked" else ""
       $("""<input type="checkbox" id="check-#{name}" name="version" class="check-button version-button dynamic-check-button"#{checked}/>
-          |<label for="check-#{name}" class="unselectable check-label dynamic-check-label">#{cardname}</label>""".stripMargin())
+          |<label for="check-#{name}" class="unselectable check-label dynamic-check-label">#{cardname}</label>
+        """.stripMargin().trim())
 
     # (String, String, String, String) => jQuery
     generateCardEntryColumn: (name, id, url, faction) ->
