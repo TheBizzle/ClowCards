@@ -64,16 +64,6 @@ require(['r/api/prototypes', 'r/api/jquery'], ([], $) ->
       )
     )
 
-    $('.os-button').each(->
-      elem = $(this)
-      if not elem[0].checked then elem.click()
-    )
-
-    $('.date-chooser').each(->
-      elem = $(this)
-      elem.datepicker()
-    )
-
   )
 
 )
