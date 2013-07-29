@@ -5,9 +5,11 @@ require.config({
 })
 
 define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery", "r/api/underscore"
-       ,"r/index/card-iterator", "r/index/cards", "r/index/constants", "r/index/globals", "r/index/element", "r/index/jglobals", "r/index/onload"]
+       ,"r/index/card-iterator", "r/index/cards", "r/index/constants", "r/index/globals", "r/index/element"
+       ,"r/index/jglobals", "r/index/onload", "r/index/model"]
       , (main,     [],                 Obj,         Opt,            $,              _
-       , CardIterator,            Cards,           Constants,           globals,           Element,           $globals,           []) ->
+       , CardIterator,            Cards,           Constants,           globals,           Element
+       , $globals,           [],               model) ->
 
   class Index
 
@@ -41,15 +43,9 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
       if not _(name).isEmpty()
         if _(globals.playerNums).size() < Constants.MaxPlayerCount
           $input.val("")
-          @_genRow(name)
+          model.get('players').push({ name: name })
       else
         $input.addClass('glowing-border')
-
-    # (String) => Unit
-    removeRow: (id) ->
-      $.byID(id).remove()
-      num = generateNumFromID(id)
-      globals.playerNums = _(globals.playerNums).filter((n) -> n != num)
 
     # () => Unit
     genCards: ->
@@ -77,18 +73,6 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
     # (String) => String
     genPriorityImageURL: (name) ->
       "/assets/images/index/priority/#{name}.png"
-
-    # (String) => Unit
-    _genRow: (name) =>
-
-      nums   = globals.playerNums
-      num    = if _(nums).isEmpty() then 1 else (_(nums).last() + 1)
-      id     = generatePlayerID(num)
-      elemID = "#{id}-elem"
-
-      globals.playerNums = nums.append(num)
-
-      Element.generatePlayerRow(name, id, elemID, => @removeRow(id)).insertBefore($globals.$adderTable)
 
     # () => Unit
     _genCardForEachPlayer: =>
@@ -143,11 +127,6 @@ define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery
     # (String) => String
     generatePlayerID = (num) ->
       "player-#{num}"
-
-    # (String) => Int
-    generateNumFromID = (id) ->
-      [[], num, []] = _(id).words("-")
-      parseInt(num)
 
     # () => Obj[Object[Any]]
     getCards = ->

@@ -79,41 +79,6 @@ define(['r/api/jquery', 'r/api/prototypes'], ($, []) ->
     generateCardEntryColumn: (name, id, url, faction) ->
       $("<td></td>").append(_generateCardEntry(name, id, url, faction))
 
-    # (String, String, String, () => Unit) => jQuery
-    generatePlayerRow: (name, id, imgID, onclick) ->
-      img  = $("""<img id='#{imgID}' src='/assets/images/index/priority/simple-x.png' class="player-button">""").click(onclick)
-      elem = $(
-        """
-        <table id="#{id}" class="player-table round-bordered card-row has-headroom">
-          <tr>
-            <td class="player-content">
-              <table>
-                <tr>
-                  <td>
-                    <span class="player-name">#{name}</span>
-                  </td>
-                  <td>
-                    <div class="placeholder">
-                  </td>
-                </tr>
-              </table>
-            </td>
-            <td>
-              <div class="row-divider"></div>
-            </td>
-            <td class="row-content">
-              <table>
-                <tr class="row-content-row">
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-        """
-      )
-      elem.find(".placeholder").replaceWith(img)
-      elem
-
   }
 
 )
