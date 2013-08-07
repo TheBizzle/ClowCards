@@ -1,7 +1,5 @@
 require.config({
-  paths: {
-    'tr': '/assets/test/javascripts'
-  }
+  baseUrl: '/assets/test/javascripts'
 })
 
-require(['tr/adt/iterator.test', 'tr/adt/obj.test', 'tr/adt/option.test'])
+require(['adt/iterator.test', 'adt/obj.test', 'adt/option.test'])

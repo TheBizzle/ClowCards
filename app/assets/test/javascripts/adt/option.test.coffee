@@ -1,10 +1,8 @@
 require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
+  baseUrl: '/assets/javascripts'
 })
 
-define(['r/adt/option'], (Opt) ->
+define(['adt/option'], (Opt) ->
 
   Option = Opt.Option
   Some   = Opt.Some

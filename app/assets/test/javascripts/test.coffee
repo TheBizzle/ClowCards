@@ -1,3 +1,7 @@
 QUnit.config.autostart = false
 
-require(['./api/test', './index/test', './adt/test'], -> QUnit.start())
+require.config({
+  baseUrl: '/assets/test/javascripts'
+})
+
+require(['api/test', 'index/test', 'adt/test'], -> QUnit.start())

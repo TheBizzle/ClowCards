@@ -1,10 +1,8 @@
 require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
+  baseUrl: '/assets/javascripts'
 })
 
-define(['r/api/prototypes'], ([]) ->
+define(['api/prototypes'], ([]) ->
 
   module("String Tests")
 

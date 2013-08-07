@@ -1,10 +1,8 @@
 require.config({
-  paths: {
-   'r': '/assets/javascripts'
-  }
+  baseUrl: '/assets/javascripts'
 })
 
-define(['r/adt/obj'], (Obj) ->
+define(['adt/obj'], (Obj) ->
 
   module("Obj Tests")
 

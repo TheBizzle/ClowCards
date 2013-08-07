@@ -1,7 +1,5 @@
 require.config({
-  paths: {
-    'tr': '/assets/test/javascripts'
-  }
+  baseUrl: '/assets/test/javascripts'
 })
 
-require(['tr/index/card-iterator.test'])
+require(['index/card-iterator.test'])

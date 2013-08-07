@@ -1,10 +1,8 @@
 require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
+  baseUrl: '/assets/javascripts'
 })
 
-define(['r/adt/iterator', 'r/adt/option', 'r/api/underscore'], (Iterator, Opt, _) ->
+define(['adt/iterator', 'adt/option', 'api/underscore'], (Iterator, Opt, _) ->
 
   None   = Opt.None
   Option = Opt.Option

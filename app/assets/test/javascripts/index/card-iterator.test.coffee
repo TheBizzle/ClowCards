@@ -1,10 +1,8 @@
 require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
+  baseUrl: '/assets/javascripts'
 })
 
-define(['r/index/card-iterator', 'r/api/prototypes'], (CardIterator, []) ->
+define(['index/card-iterator', 'api/prototypes'], (CardIterator, []) ->
 
   module("CardIterator Tests")
 

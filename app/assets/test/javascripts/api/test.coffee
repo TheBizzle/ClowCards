@@ -1,7 +1,5 @@
 require.config({
-  paths: {
-    'tr': '/assets/test/javascripts'
-  }
+  baseUrl: '/assets/test/javascripts'
 })
 
-require(['tr/api/array.test', 'tr/api/function.test', 'tr/api/string.test'])
+require(['api/array.test', 'api/function.test', 'api/string.test'])
