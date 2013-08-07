@@ -1,3 +1,4 @@
+# Still needs to be here for Dev mode
 require.config({
   paths: {
     'underscore':        '/assets/javascripts/managed/underscore-1.4.4.min',

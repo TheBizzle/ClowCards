@@ -1,13 +1,7 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
-})
-
 # Currently, this structure is very similar in operation to a `State` monad
 # Once `iterate` returns `undefined`, the `Iterator` is considered to have reached the end of iteration
-define(['r/api/prototypes', 'r/adt/option', 'r/api/underscore']
-     , ( [],                 Opt,            _) ->
+define(['api/prototypes', 'adt/option', 'api/underscore']
+     , ( [],               Opt,          _) ->
 
   Option = Opt.Option
   None   = Opt.None

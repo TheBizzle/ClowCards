@@ -1,12 +1,5 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
-})
-
 # All public functions should return a single object of type `jQuery`
-
-define(['r/api/jquery', 'r/api/prototypes'], ($, []) ->
+define(['api/jquery', 'api/prototypes'], ($, []) ->
 
   # (String, String, String, String) => jQuery
   _generateCardEntry = (name, id, url, faction) ->

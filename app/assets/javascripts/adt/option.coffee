@@ -1,10 +1,4 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
-})
-
-define(['r/api/prototypes'], ([]) ->
+define(['api/prototypes'], ([]) ->
 
   # Type Parameter: T (the type that is maybe (or maybe not) wrapped inside of the `Option`)
   class Option

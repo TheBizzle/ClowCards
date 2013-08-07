@@ -1,13 +1,7 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
-})
-
-define(["r/main", "r/api/prototypes", "r/adt/obj", "r/adt/option", "r/api/jquery", "r/api/underscore"
-       ,"r/index/card-iterator", "r/index/cards", "r/index/constants", "r/index/globals", "r/index/element", "r/index/jglobals", "r/index/onload"]
-      , (main,     [],                 Obj,         Opt,            $,              _
-       , CardIterator,            Cards,           Constants,           globals,           Element,           $globals,           []) ->
+define(["main", "api/prototypes", "adt/obj", "adt/option", "api/jquery", "api/underscore"
+       ,"index/card-iterator", "index/cards", "index/constants", "index/globals", "index/element", "index/jglobals", "index/onload"]
+      , (main,   [],               Obj,       Opt,          $,            _
+       , CardIterator,          Cards,         Constants,         globals,         Element,         $globals,         []) ->
 
   class Index
 

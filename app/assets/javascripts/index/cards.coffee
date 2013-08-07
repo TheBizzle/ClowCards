@@ -1,9 +1,3 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
-})
-
 define({
   "Agent Carr":                  { enabled: true,  faction: "Vydar"   },
   "Airborne Elite":              { enabled: true,  faction: "Jandar"  },

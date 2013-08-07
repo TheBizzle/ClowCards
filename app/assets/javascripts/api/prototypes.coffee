@@ -1,11 +1,5 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
-})
-
 # Don't refactor these out into their own files; RequireJS gets funny when you explicitly load these transitive dependencies --Jason 6/17/13
-require(['r/api/underscore'], (_) ->
+require(['api/underscore'], (_) ->
 
   # Array refinements
   # Assume that `this` is an `Array[T]`

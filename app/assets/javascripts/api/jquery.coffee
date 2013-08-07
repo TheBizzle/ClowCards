@@ -1,3 +1,4 @@
+# Still needs to be here for Dev mode
 require.config({
   paths: {
     'jquery':    '/assets/javascripts/managed/jquery-1.9.0.min',

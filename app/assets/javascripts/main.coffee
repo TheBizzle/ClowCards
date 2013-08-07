@@ -1,10 +1,4 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
-})
-
-require(['r/api/prototypes', 'r/api/jquery'], ([], $) ->
+require(['api/prototypes', 'api/jquery'], ([], $) ->
 
   $(document).ready(->
 

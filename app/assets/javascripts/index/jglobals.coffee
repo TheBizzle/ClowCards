@@ -1,9 +1,3 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
-})
-
 # Globals into which to cache jQuery selector results
 define({
   $adderBtn:       undefined

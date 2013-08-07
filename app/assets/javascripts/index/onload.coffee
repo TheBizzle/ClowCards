@@ -1,13 +1,7 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts/'
-  }
-})
-
-require(['r/main', 'r/index/cards', 'r/index/globals', 'r/index/element', 'r/index/jglobals', 'r/index/main', 'r/index/services'
-        ,'r/api/prototypes', 'r/adt/obj', 'r/api/jquery', 'r/api/underscore']
-       , ([],       Cards,           globals,           Element,           $globals,           Index,          Services
-        , [],                 Obj,         $,              _) ->
+require(['main', 'index/cards', 'index/globals', 'index/element', 'index/jglobals', 'index/main', 'index/services'
+        ,'api/prototypes', 'adt/obj', 'api/jquery', 'api/underscore']
+       , ([],     Cards,         globals,         Element,         $globals,         Index,        Services
+        , [],               Obj,       $,            _) ->
 
   # Initialize globals and selectors
   window.addEventListener('load', ->

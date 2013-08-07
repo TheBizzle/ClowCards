@@ -1,11 +1,5 @@
-require.config({
-  paths: {
-    'r': '/assets/javascripts'
-  }
-})
-
-define(['r/api/prototypes', 'r/api/jquery', 'r/adt/iterator', 'r/adt/obj']
-      , ([],                 $,              Iterator,         Obj) ->
+define(['api/prototypes', 'api/jquery', 'adt/iterator', 'adt/obj']
+      , ([],               $,            Iterator,       Obj) ->
 
   class CardIterator extends Iterator
 

@@ -14,8 +14,8 @@ object ApplicationBuild extends Build {
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
-    requireJs     += "index/main.js",
-    requireJsShim := "index/main.js"
+    requireJs     += "index.js",
+    requireJsShim := "require-config.js"
   )
 
 }
