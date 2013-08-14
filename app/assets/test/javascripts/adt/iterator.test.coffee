@@ -116,7 +116,7 @@ define(['adt/iterator', 'adt/option', 'api/underscore'], (Iterator, Opt, _) ->
   )
 
   test("maxBy", ->
-    deepEqual(iterator.clone().maxBy((x) -> 1),                 100)
+    deepEqual(iterator.clone().maxBy((x) -> 1),                 1)
     deepEqual(iterator.clone().maxBy((x) -> x),                 100)
     deepEqual(iterator.clone().maxBy((x) -> -x),                1)
     deepEqual(iterator.clone().maxBy((x) -> (x + "").length),   100)

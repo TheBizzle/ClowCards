@@ -1,1 +1,1 @@
-define(['index/main'])
+define(['index/finalize'])

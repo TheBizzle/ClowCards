@@ -1,10 +1,7 @@
-require(['main', 'index/cards', 'index/globals', 'index/element', 'index/jglobals', 'index/main', 'index/services'
-        ,'api/prototypes', 'adt/obj', 'api/jquery', 'api/underscore']
-       , ([],     Cards,         globals,         Element,         $globals,         Index,        Services
-        , [],               Obj,       $,            _) ->
+require(['main', 'index/cards', 'index/globals', 'index/element', 'index/jglobals', 'api/prototypes', 'adt/obj', 'api/jquery']
+       , ([],     Cards,         globals,         Element,         $globals,         [],               Obj,       $) ->
 
-  # Initialize globals and selectors
-  window.addEventListener('load', ->
+  initGlobalsAndSelectors = ->
 
     $globals.$adderButton    = $.byID("adder-button")
     $globals.$adderTable     = $.byID("adder-table")
@@ -15,15 +12,10 @@ require(['main', 'index/cards', 'index/globals', 'index/element', 'index/jglobal
 
     globals.playerNums = []
 
-  )
-
-  # Cleaning individual element CSS after jQuery-UI inits
-  window.addEventListener('load', ->
+  cleanupCSS = ->
     $.byID("main-box").css('overflow', 'auto')
-  )
 
-  # Populate `card-holder`
-  window.addEventListener('load', ->
+  populateCardHolder = ->
 
     $cardHolder = $globals.$cardHolder
     cardPool    = new Obj(Cards).clone().value()
@@ -49,59 +41,9 @@ require(['main', 'index/cards', 'index/globals', 'index/element', 'index/jglobal
       )
     )
 
-  )
 
-  # Initialize `Index` object
-  window.addEventListener('load', ->
-    Services.Index = new Index
-  )
-
-  # Initialize event listeners
-  window.addEventListener('load', ->
-
-    Index = Services.Index
-
-    $globals.$adderButton.   click   (        -> Index.addRow())
-    $globals.$nameInput.     keypress((event) -> Index.handleRowKey(event))
-    $globals.$nameInput.     focus   (        -> Index.clearErrorFuzz())
-    $globals.$nameInput.     unfocus (        -> if not _($(this).val()).isEmpty() then Index.addRow())
-    $globals.$cardNumSpinner.keyup   ((event) -> Index.handleNumPickerKey(event))
-    $globals.$pickBtn.       click   (        -> Index.genCards())
-
-    $globals.$cardNumSpinner.change(->
-
-      elem  = $(this)
-      value = elem.val()
-
-      newValue =
-        if value < 0
-          0
-        else
-          _(value).filter((c) -> c >= 0 and c <= 9).join("")
-
-      finalValue = if _(newValue).isEmpty() then 0 else newValue
-
-      elem.val(finalValue)
-
-    )
-
-  )
-
-  # Preload priority images
-  window.addEventListener('load', ->
-    Index      = Services.Index
-    imageNames = ['question-mark', 'simple-plus', 'simple-x']
-    urls       = _(imageNames).map((name) -> Index.genPriorityImageURL(name))
-    _(urls).forEach(preload)
-  )
-
-  # Preload card images
-  window.addEventListener('load', ->
-    Index = Services.Index
-    urls  = Object.keys(Cards).map((key) -> Index.genCardImageURL(key))
-    _(urls).forEach(preload)
-  )
-
-  preload = (url) -> $('<img/>').attr('src', url)
+  initGlobalsAndSelectors()
+  cleanupCSS()
+  populateCardHolder()
 
 )

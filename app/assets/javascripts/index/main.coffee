@@ -140,7 +140,7 @@ define(["main", "api/prototypes", "adt/obj", "adt/option", "api/jquery", "api/un
 
     # (String) => Int
     generateNumFromID = (id) ->
-      [[], num, []] = _(id).words("-")
+      [[], num, []] = id.split("-")
       parseInt(num)
 
     # () => Obj[Object[Any]]

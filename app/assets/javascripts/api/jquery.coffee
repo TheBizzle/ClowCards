@@ -1,21 +1,9 @@
-# Still needs to be here for Dev mode
-require.config({
-  paths: {
-    'jquery':    '/assets/javascripts/managed/jquery-1.9.0.min',
-    'jquery-ui': '/assets/javascripts/managed/jquery-ui-1.9.2.custom.min'
-  },
-  shim: {
-    'jquery-ui': {
-      exports: '$',
-      deps: ['jquery']
-    }
-  }
-})
+define(['webjars!jquery-ui.js'], ([]) ->
 
-define(['jquery-ui'], ($) ->
+  _$ = $
 
   # (String) => jQuery
-  $.byID = (id) -> $('#' + id)
+  $.byID = (id) -> _$('#' + id)
 
   # Selector enhancements
   $.fn.extend({
@@ -24,11 +12,11 @@ define(['jquery-ui'], ($) ->
     unfocus: (f) -> this.blur.apply(this, arguments)
 
     # (Unit) => String
-    outerHTML: ->  $(this).clone().wrap('<div></div>').parent().html()
+    outerHTML: ->  _$(this).clone().wrap('<div></div>').parent().html()
 
   })
 
-  $
+  $.noConflict()
 
 )
 
