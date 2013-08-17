@@ -4,4 +4,4 @@ A browser-based Heroscape card random-drafter.  To draft, simply supply one or m
 
 If you're interested in deploying this application via a single, minified `.js` file, run the `play start` command.  Then, patiently wait several minutes while RequireJS uglifies the code and builds the output file.  Once that's done, Play will handle the rest for you.
 
-__Note__: Some cards are revised or renamed versions of official cards, and some others are entirely custom-made.  Usefulness to third parties may vary.  To appropriate the cardset to meet your needs, it shouldn't be too hard to customize the `/app/assets/javascripts/index/cards.coffee` file to properly represent your own cardset.
+__Note__: Some cards are revised or renamed versions of official cards, and some others are entirely custom-made.  <u>Usefulness to third parties may vary.</u>  To appropriate the cardset to meet your needs, it shouldn't be too hard to customize the `/app/assets/javascripts/index/cards.coffee` file to properly represent your own cardset.
