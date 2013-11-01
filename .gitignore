@@ -15,7 +15,6 @@
 /project/target
 /public/graphs
 /public/javascripts/managed/
-/public/stylesheets/managed/
 /public/test/javascripts/managed/
 /public/test/stylesheets/managed/
 *.swp
