@@ -25,6 +25,10 @@ object Application extends Controller {
     Ok(views.html.index())
   }
 
+  def basic = Action {
+    Ok(views.html.basic())
+  }
+
   def redirect(path: String) = Action {
     MovedPermanently(s"/$path")
   }

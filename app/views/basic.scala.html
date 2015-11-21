@@ -1,0 +1,11 @@
+@main("Heroscape Card Drafter") {
+    <!-- Base indentation of 6 spaces! -->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/index.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
+    <script src="@routes.Assets.at("lib/requirejs/require.js")" data-main="@routes.Assets.at("javascripts/basic.js")"></script>
+    <input type="number" id="chunk-size" value="5" min="1" style="width: 50px; font-size: large;" onkeypress="handleNumKeys(event)">
+    <button onclick="derptown()" style="font-size: large">Generate!</button>
+    <br>
+    <br>
+    <div id="name-container"></div>
+}
