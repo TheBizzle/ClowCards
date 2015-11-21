@@ -9,7 +9,7 @@ define({
   "Arrow Gruts":                 { enabled: true,  faction: "Utgar"   },
   "Aubrien Archers":             { enabled: true,  faction: "Ullar"   },
   "Basilisk":                    { enabled: false, faction: "Choobar" },
-  "Belthasar":                   { enabled: true,  faction: "Choobar" }.
+  "Belthasar":                   { enabled: true,  faction: "Choobar" },
   "Blade Gruts":                 { enabled: true,  faction: "Utgar"   },
   "Blastatrons":                 { enabled: true,  faction: "Vydar"   },
   "Braxas":                      { enabled: true,  faction: "Vydar"   },
