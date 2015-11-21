@@ -118,4 +118,3 @@ define({
   "Wolves of Badru":             { enabled: true,  faction: "Utgar"   },
   "Zettian Guards":              { enabled: true,  faction: "Utgar"   }
 })
-

@@ -10,9 +10,6 @@ GET     /test/js                    controllers.Test.javascripts
 # Redirect trailing slashes
 GET     /*path/                     controllers.Application.redirect(path)
 
-GET     /webjars/*file              controllers.WebJarAssets.at(file)
-GET     /require.js                 controllers.WebJarAssets.requirejs
-
 # Override default assets route for 'index' images
 GET     /assets/images/index/*file  controllers.Application.indexImage(path="/public/images/index", file)
 

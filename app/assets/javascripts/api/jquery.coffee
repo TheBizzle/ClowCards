@@ -1,4 +1,4 @@
-define(['webjars!jquery-ui.js'], ([]) ->
+define(['jqui'], ([]) ->
 
   _$ = $
 
