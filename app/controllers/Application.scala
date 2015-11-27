@@ -1,6 +1,9 @@
 package controllers
 
 import
+  scala.concurrent.Future
+
+import
   org.joda.time.Duration
 
 import
@@ -12,12 +15,12 @@ object Application extends Controller {
 
   def indexImage(path: String, file: String) = Action.async {
     request =>
-      Assets.at(path, file)(request) match {
-        case NotFound =>
+      Assets.at(path, file)(request).flatMap {
+        case result if result.header.status == 404 =>
           Assets.at("/public/images/index/priority", "question-mark.png")(request)
         case result =>
           val CacheTime = Duration.standardDays(1).getStandardSeconds
-          result map (_.withHeaders("Cache-Control" -> s"public, max-age=$CacheTime"))
+          Future(result.withHeaders("Cache-Control" -> s"public, max-age=$CacheTime"))
       }
   }
 
