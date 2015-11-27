@@ -1,101 +1,113 @@
-define(['api/prototypes'], ([]) ->
+hidden_exports.adt_option = null
 
-  # Type Parameter: T (the type that is maybe (or maybe not) wrapped inside of the `Option`)
-  class Option
+exports.adt_option =
+  (->
+    if hidden_exports.adt_option isnt null
+      hidden_exports.adt_option
+    else
+      hidden_exports.adt_option =
+        (->
 
-    constructor: ->
+          exports.api_prototypes()
 
-    # (() => U) => U (such that U >: T)
-    getOrElse: (x) =>
-      if @isEmpty() then x() else @get()
+          # Type Parameter: T (the type that is maybe (or maybe not) wrapped inside of the `Option`)
+          class Option
 
-    # (T) => U
-    map: (f) =>
-      if @isEmpty() then NoneObj else new Some(f(@get()))
+            constructor: ->
 
-    # (T) => Option[U]
-    flatMap: (f) =>
-      if @isEmpty() then NoneObj else f(@get())
+            # (() => U) => U (such that U >: T)
+            getOrElse: (x) =>
+              if @isEmpty() then x() else @get()
 
-    # (T) => Boolean
-    filter: (f) =>
-      if @isEmpty() or f(@get()) then this else NoneObj
+            # (T) => U
+            map: (f) =>
+              if @isEmpty() then NoneObj else new Some(f(@get()))
 
-    # (T) => Boolean
-    filterNot: (f) =>
-      if @isEmpty() or not f(@get()) then this else NoneObj
+            # (T) => Option[U]
+            flatMap: (f) =>
+              if @isEmpty() then NoneObj else f(@get())
 
-    # (T) => Boolean
-    exists: (f) =>
-      not @isEmpty() and f(@get())
+            # (T) => Boolean
+            filter: (f) =>
+              if @isEmpty() or f(@get()) then this else NoneObj
 
-    # (T) => Unit
-    foreach: (f) =>
-      if not @isEmpty() then f(@get())
-      return
+            # (T) => Boolean
+            filterNot: (f) =>
+              if @isEmpty() or not f(@get()) then this else NoneObj
 
-    # ((V) => U) => Option[U] (such that T >: V)
-    collect: (f) =>
-      if not @isEmpty()
-        result = f(@get())
-        if result?
-          new Some(result)
-        else
-          NoneObj
-      else
-        NoneObj
+            # (T) => Boolean
+            exists: (f) =>
+              not @isEmpty() and f(@get())
 
-    # (() => Option[U]) => Option[U] (such that U >: T)
-    orElse: (optFunc) =>
-      if @isEmpty() then optFunc() else this
+            # (T) => Unit
+            foreach: (f) =>
+              if not @isEmpty() then f(@get())
+              return
 
-    # () => Array[T]
-    toArray: =>
-      if @isEmpty() then [] else [].append(@get())
+            # ((V) => U) => Option[U] (such that T >: V)
+            collect: (f) =>
+              if not @isEmpty()
+                result = f(@get())
+                if result?
+                  new Some(result)
+                else
+                  NoneObj
+              else
+                NoneObj
 
-  class Some extends Option
+            # (() => Option[U]) => Option[U] (such that U >: T)
+            orElse: (optFunc) =>
+              if @isEmpty() then optFunc() else this
 
-    # _value: T
-    constructor: (@_value) ->
-      super
+            # () => Array[T]
+            toArray: =>
+              if @isEmpty() then [] else [].append(@get())
 
-    # () => T
-    get: =>
-      @_value
+          class Some extends Option
 
-    # () => Boolean
-    isEmpty: =>
-      false
+            # _value: T
+            constructor: (@_value) ->
+              super
 
-  class None extends Option
+            # () => T
+            get: =>
+              @_value
 
-    constructor: ->
-      super
+            # () => Boolean
+            isEmpty: =>
+              false
 
-    # () => T
-    get: =>
-      throw new Error("None.get")
+          class None extends Option
 
-    # () => Boolean
-    isEmpty: =>
-      true
+            constructor: ->
+              super
 
-  OptionCompanion = {
+            # () => T
+            get: =>
+              throw new Error("None.get")
 
-    # (T) => Option[T]
-    from: (value) -> if value? then new Some(value) else @empty
+            # () => Boolean
+            isEmpty: =>
+              true
 
-    # None
-    empty: new None
+          OptionCompanion = {
 
-  }
+            # (T) => Option[T]
+            from: (value) -> if value? then new Some(value) else @empty
 
-  NoneObj = OptionCompanion.empty
+            # None
+            empty: new None
 
-  {
-    Some:   Some
-    None:   NoneObj
-    Option: OptionCompanion
-  }
+          }
 
-)
+          NoneObj = OptionCompanion.empty
+
+          {
+            Some:   Some
+            None:   NoneObj
+            Option: OptionCompanion
+          }
+
+        )()
+      hidden_exports.adt_option
+  )

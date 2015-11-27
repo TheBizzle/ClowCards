@@ -1,22 +1,31 @@
-define(['jqui'], ([]) ->
+hidden_exports.api_jquery = null
 
-  _$ = $
+exports.api_jquery =
+  (->
+    if hidden_exports.api_jquery isnt null
+      hidden_exports.api_jquery
+    else
+      hidden_exports.api_jquery =
+        (->
 
-  # (String) => jQuery
-  $.byID = (id) -> _$('#' + id)
+          _$ = jQuery
 
-  # Selector enhancements
-  $.fn.extend({
+          # (String) => jQuery
+          jQuery.byID = (id) -> _$('#' + id)
 
-    # ((Unit) => Unit) => Unit
-    unfocus: (f) -> this.blur.apply(this, arguments)
+          # Selector enhancements
+          jQuery.fn.extend({
 
-    # (Unit) => String
-    outerHTML: ->  _$(this).clone().wrap('<div></div>').parent().html()
+            # ((Unit) => Unit) => Unit
+            unfocus: (f) -> this.blur.apply(this, arguments)
 
-  })
+            # (Unit) => String
+            outerHTML: ->  _$(this).clone().wrap('<div></div>').parent().html()
 
-  $.noConflict()
+          })
 
-)
+          jQuery.noConflict()
 
+        )()
+      hidden_exports.api_jquery
+  )

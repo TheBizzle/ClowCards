@@ -11,7 +11,7 @@ define(['adt/iterator', 'adt/option', 'api/underscore'], (Iterator, Opt, _) ->
 
   refreshIterator = -> iterator = new Iterator([1..100], (xs) ->
     ys = _(xs)
-    [ys.head(), ys.tail()]
+    [ys.head(), ys.tail().value()]
   )
 
   bumbleHash =
@@ -102,7 +102,7 @@ define(['adt/iterator', 'adt/option', 'api/underscore'], (Iterator, Opt, _) ->
     deepEqual(i1.toArray(),   [4..103])
     deepEqual(i2.toArray(),   x for x in [16..412] by 4)
     deepEqual(i3.toArray(),   [4..103])
-    deepEqual(i4.toArray(), _([4..103]).map((x) -> x + "!"))
+    deepEqual(i4.toArray(), _([4..103]).map((x) -> x + "!").value())
 
   )
 
@@ -137,9 +137,9 @@ define(['adt/iterator', 'adt/option', 'api/underscore'], (Iterator, Opt, _) ->
 
     down   = (y for y in [50..1])
     up     = (z for z in [51..100])
-    zipped = _(_(down).zip(up)).foldl(((acc, x) -> acc.concat(x)), []).reverse()
+    zipped = _(_(down).zip(up)).foldl(((acc, x) -> acc.concat(x)), []).reverse().value()
 
-    bumbledSubtarget = _([1..100]).filter((x) -> not (x is 21 or x is 89))
+    bumbledSubtarget = _([1..100]).filter((x) -> not (x is 21 or x is 89)).value()
     bumbledTarget    = [89].concat(bumbledSubtarget).append(21)
 
     deepEqual(iterator.clone().sortBy((x) -> x),                 [1..100])
@@ -159,7 +159,7 @@ define(['adt/iterator', 'adt/option', 'api/underscore'], (Iterator, Opt, _) ->
     target2 = { 1: [1..9], 2: [10..99], 3: [100] }
 
     arr3    = iterator.clone().groupBy(bumbleHash)
-    target3 = { '-9001': [89], 0: _([1..100]).filter((x) -> not (x is 21 or x is 89)), 9001: [21] }
+    target3 = { '-9001': [89], 0: _([1..100]).filter((x) -> not (x is 21 or x is 89)).value(), 9001: [21] }
 
     deepEqual(arr1, target1)
     deepEqual(arr2, target2)
@@ -182,7 +182,7 @@ define(['adt/iterator', 'adt/option', 'api/underscore'], (Iterator, Opt, _) ->
     target2 = [100..101]
 
     source3 = iterator.clone().filter((x) -> x % 2 is 0).drop(20).map((x) -> x * 10).take(10)
-    target3 = _(x for x in [420..1000] by 20).take(10)
+    target3 = _(x for x in [420..1000] by 20).take(10).value()
 
     deepEqual(source1, target1)
     deepEqual(source2, target2)

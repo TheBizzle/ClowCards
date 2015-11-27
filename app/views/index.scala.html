@@ -1,7 +1,32 @@
 @main("Heroscape Card Drafter") {
       <!-- Base indentation of 6 spaces! -->
       <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/index.css")">
-      <script src="@routes.Assets.at("lib/requirejs/require.js")" data-main="@routes.Assets.at("javascripts/index.js")"></script>
+      <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="//code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+      <script>
+        hidden_exports = {};
+        exports = {};
+      </script>
+      <script src="@routes.Assets.at("javascripts/api/jquery.js")"></script>
+      <script src="@routes.Assets.at("javascripts/api/prototypes.js")"></script>
+      <script src="@routes.Assets.at("javascripts/api/cloner.js")"></script>
+      <script src="@routes.Assets.at("javascripts/adt/option.js")"></script>
+      <script src="@routes.Assets.at("javascripts/adt/obj.js")"></script>
+      <script src="@routes.Assets.at("javascripts/adt/iterator.js")"></script>
+      <script src="@routes.Assets.at("javascripts/index/cards.js")"></script>
+      <script src="@routes.Assets.at("javascripts/index/constants.js")"></script>
+      <script src="@routes.Assets.at("javascripts/index/globals.js")"></script>
+      <script src="@routes.Assets.at("javascripts/index/jglobals.js")"></script>
+      <script src="@routes.Assets.at("javascripts/index/element.js")"></script>
+      <script src="@routes.Assets.at("javascripts/index/card-iterator.js")"></script>
+      <script src="@routes.Assets.at("javascripts/main.js")"></script>
+      <script src="@routes.Assets.at("javascripts/index/onload.js")"></script>
+      <script src="@routes.Assets.at("javascripts/index/main.js")"></script>
+      <script src="@routes.Assets.at("javascripts/index/finalize.js")"></script>
+      <script>
+        window.addEventListener('load', function() { exports.index_finalize(); });
+      </script>
       <div id="index-accordion" class="collapsible-accordion">
         <h3>Draft Cards</h3>
         <div id="main-box" class="ui-widget ui-widget-content ui-corner-all outer-wrapper accordion-div">

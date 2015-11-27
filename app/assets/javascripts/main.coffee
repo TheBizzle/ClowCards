@@ -1,63 +1,76 @@
-require(['api/prototypes', 'api/jquery'], ([], $) ->
+hidden_exports.root_main = null
 
-  $(document).ready(->
+exports.root_main =
+  (->
+    if hidden_exports.root_main isnt null
+      hidden_exports.root_main
+    else
+      hidden_exports.root_main =
+        (->
 
-    $('.collapsible-accordion').accordion({
-      heightStyle: "fill"
-    })
+          exports.api_prototypes()
+          $ = exports.api_jquery()
 
-    $('.ui-button').each(->
-      elem = $(this)
-      elem.button()
-    )
+          $(document).ready(->
 
-    $('.ui-tabs').each(->
-      elem = $(this)
-      elem.tabs()
-    )
+            $('.collapsible-accordion').accordion({
+              heightStyle: "fill"
+            })
 
-    $('.ui-spinner').each(->
-      elem = $(this)
-      elem.spinner()
-      elem.val("1")
-    )
+            $('.ui-button').each(->
+              elem = $(this)
+              elem.button()
+            )
 
-    $('.ui-spinner-button').click(->
-      elem = $(this)
-      elem.siblings('input').change()
-    )
+            $('.ui-tabs').each(->
+              elem = $(this)
+              elem.tabs()
+            )
 
-    $('.checkboxes').each(->
-      elem = $(this)
-      elem.buttonset()
-    )
+            $('.ui-spinner').each(->
+              elem = $(this)
+              elem.spinner()
+              elem.val("1")
+            )
 
-    $('.check-set').each(->
-      elem = $(this)
-      elem.buttonset()
-    )
+            $('.ui-spinner-button').click(->
+              elem = $(this)
+              elem.siblings('input').change()
+            )
 
-    $('.radio-set').each(->
-      elem = $(this)
-      elem.buttonset()
-    )
+            $('.checkboxes').each(->
+              elem = $(this)
+              elem.buttonset()
+            )
 
-    $('.check-button').each(->
-      elem = $(this)
-      elem.button()
-    )
+            $('.check-set').each(->
+              elem = $(this)
+              elem.buttonset()
+            )
 
-    $('.check-label').each(->
-      elem = $(this)
-      elem.click(->
-        btn = $("#" + elem.attr("for"))
-        btn[0].checked = not btn[0].checked
-        btn.button("refresh")
-        btn.change()
-        false
-      )
-    )
+            $('.radio-set').each(->
+              elem = $(this)
+              elem.buttonset()
+            )
 
+            $('.check-button').each(->
+              elem = $(this)
+              elem.button()
+            )
+
+            $('.check-label').each(->
+              elem = $(this)
+              elem.click(->
+                btn = $("#" + elem.attr("for"))
+                btn[0].checked = not btn[0].checked
+                btn.button("refresh")
+                btn.change()
+                false
+              )
+            )
+
+          )
+
+        )()
+      hidden_exports.root_main
   )
-
-)

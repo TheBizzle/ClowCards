@@ -1,47 +1,64 @@
-require(['index/cards', 'index/jglobals', 'index/main', 'index/onload', 'api/jquery', 'api/prototypes', 'api/underscore']
-       , (Cards,         $globals,         Index,        [],             $,            [],               _) ->
+hidden_exports.index_finalize = null
 
-  _index   = new Index
-  _preload = (url) -> $('<img/>').attr('src', url)
+exports.index_finalize =
+  (->
+    if hidden_exports.index_finalize isnt null
+      hidden_exports.index_finalize
+    else
+      hidden_exports.index_finalize =
+        (->
 
-  initEventListeners = ->
+          exports.api_prototypes()
+          exports.index_onload()
 
-    $globals.$adderButton.   click   (        -> _index.addRow())
-    $globals.$nameInput.     keypress((event) -> _index.handleRowKey(event))
-    $globals.$nameInput.     focus   (        -> _index.clearErrorFuzz())
-    $globals.$nameInput.     unfocus (        -> if not _($(this).val()).isEmpty() then _index.addRow())
-    $globals.$cardNumSpinner.keyup   ((event) -> _index.handleNumPickerKey(event))
-    $globals.$pickBtn.       click   (        -> _index.genCards())
+          $ = exports.api_jquery()
 
-    $globals.$cardNumSpinner.change(->
+          Cards    = exports.index_cards()
+          $globals = exports.index_jglobals()
+          Index    = exports.index_main()
 
-      elem  = $(this)
-      value = elem.val()
+          _index   = new Index
+          _preload = (url) -> $('<img/>').attr('src', url)
 
-      newValue =
-        if value < 0
-          0
-        else
-          _(value).filter((c) -> c >= 0 and c <= 9).join("")
+          initEventListeners = ->
 
-      finalValue = if _(newValue).isEmpty() then 0 else newValue
+              $globals.$adderButton.   click   (        -> _index.addRow())
+              $globals.$nameInput.     keypress((event) -> _index.handleRowKey(event))
+              $globals.$nameInput.     focus   (        -> _index.clearErrorFuzz())
+              $globals.$nameInput.     unfocus (        -> if not _($(this).val()).isEmpty() then _index.addRow())
+              $globals.$cardNumSpinner.keyup   ((event) -> _index.handleNumPickerKey(event))
+              $globals.$pickBtn.       click   (        -> _index.genCards())
 
-      elem.val(finalValue)
+              $globals.$cardNumSpinner.change(->
 
-    )
+                  elem  = $(this)
+                  value = elem.val()
 
-  preloadPriorityImages = ->
-    imageNames = ['question-mark', 'simple-plus', 'simple-x']
-    urls       = _(imageNames).map((name) -> _index.genPriorityImageURL(name))
-    _(urls).forEach(_preload)
+                  newValue =
+                      if value < 0
+                          0
+                      else
+                          _(value).filter((c) -> c >= 0 and c <= 9).value().join("")
 
-  preloadCardImages = ->
-    urls  = Object.keys(Cards).map((key) -> _index.genCardImageURL(key))
-    _(urls).forEach(_preload)
+                  finalValue = if _(newValue).isEmpty() then 0 else newValue
 
-  initEventListeners()
-  preloadPriorityImages()
-  preloadCardImages()
+                  elem.val(finalValue)
 
-)
+              )
 
+          preloadPriorityImages = ->
+              imageNames = ['question-mark', 'simple-plus', 'simple-x']
+              urls       = _(imageNames).map((name) -> _index.genPriorityImageURL(name))
+              _(urls).forEach(_preload).value()
+
+          preloadCardImages = ->
+              urls  = Object.keys(Cards).map((key) -> _index.genCardImageURL(key))
+              _(urls).forEach(_preload).value()
+
+          initEventListeners()
+          preloadPriorityImages()
+          preloadCardImages()
+
+        )()
+      hidden_exports.index_finalize
+  )

@@ -1,162 +1,182 @@
-define(["main", "api/prototypes", "adt/obj", "adt/option", "api/jquery", "api/underscore"
-       ,"index/card-iterator", "index/cards", "index/constants", "index/globals", "index/element", "index/jglobals", "index/onload"]
-      , (main,   [],               Obj,       Opt,          $,            _
-       , CardIterator,          Cards,         Constants,         globals,         Element,         $globals,         []) ->
+hidden_exports.index_main = null
 
-  class Index
+exports.index_main =
+  (->
+    if hidden_exports.index_main isnt null
+      hidden_exports.index_main
+    else
+      hidden_exports.index_main =
+        (->
 
-    constructor: ->
-      @_resetIterator()
+          exports.root_main()
+          exports.api_prototypes()
+          exports.index_onload()
 
-    # (Event) => Unit
-    handleRowKey: (event) ->
-      switch (event.keyCode or event.which)
-        when 13 then @addRow()
-        else return
+          Obj = exports.adt_obj()
+          $   = exports.api_jquery()
 
-    # (Event) => Unit
-    handleNumPickerKey: (event) ->
-      switch (event.keyCode or event.which)
-        when 13 then @genCards()
-        else return
+          CardIterator = exports.index_carditerator()
+          Cards        = exports.index_cards()
+          Constants    = exports.index_constants()
+          globals      = exports.index_globals()
+          $globals     = exports.index_jglobals()
+          Element      = exports.index_element()
 
-    # () => Unit
-    clearErrorFuzz: ->
-      $globals.$nameInput.removeClass('glowing-border')
+          class Index
 
-    # () => Unit
-    addRow: ->
+            constructor: ->
+              @_resetIterator()
 
-      @clearErrorFuzz()
+            # (Event) => Unit
+            handleRowKey: (event) ->
+              switch (event.keyCode or event.which)
+                when 13 then @addRow()
+                else return
 
-      $input = $globals.$nameInput
-      name   = $input.val()
+            # (Event) => Unit
+            handleNumPickerKey: (event) ->
+              switch (event.keyCode or event.which)
+                when 13 then @genCards()
+                else return
 
-      if not _(name).isEmpty()
-        if _(globals.playerNums).size() < Constants.MaxPlayerCount
-          $input.val("")
-          @_genRow(name)
-      else
-        $input.addClass('glowing-border')
+            # () => Unit
+            clearErrorFuzz: ->
+              $globals.$nameInput.removeClass('glowing-border')
 
-    # (String) => Unit
-    removeRow: (id) ->
-      $.byID(id).remove()
-      num = generateNumFromID(id)
-      globals.playerNums = _(globals.playerNums).filter((n) -> n != num)
+            # () => Unit
+            addRow: ->
 
-    # () => Unit
-    genCards: ->
+              @clearErrorFuzz()
 
-      @clearErrorFuzz()
+              $input = $globals.$nameInput
+              name   = $input.val()
 
-      numCards   = parseInt($globals.$cardNumSpinner.val())
-      maxCards   = new Obj(getCards()).filter((k, v) -> v.enabled).size() # Not really great, but... good enough, I guess --Jason (4/30/13)
-      totalCards = _(globals.playerNums).size() * numCards
+              if not _(name).isEmpty()
+                if _(globals.playerNums).size() < Constants.MaxPlayerCount
+                  $input.val("")
+                  @_genRow(name)
+              else
+                $input.addClass('glowing-border')
 
-      if totalCards <= maxCards
-        @_cleanupLastCardGen()
-        _([0...numCards]).forEach((x) => @_genCardForEachPlayer())
-      else
-        msg = """You attempted to generate #{totalCards} cards, but there are only #{maxCards} available.
-                |
-                |Please reduce the number of cards or players and try again.
-              """.stripMargin().trim()
-        alert(msg)
+            # (String) => Unit
+            removeRow: (id) ->
+              $.byID(id).remove()
+              num = generateNumFromID(id)
+              globals.playerNums = _(globals.playerNums).filter((n) -> n != num).value()
 
-    # (String) => String
-    genCardImageURL: (name) ->
-      _genCardImageURL(name)
+            # () => Unit
+            genCards: ->
 
-    # (String) => String
-    genPriorityImageURL: (name) ->
-      "/assets/images/index/priority/#{name}.png"
+              @clearErrorFuzz()
 
-    # (String) => Unit
-    _genRow: (name) =>
+              numCards   = parseInt($globals.$cardNumSpinner.val())
+              maxCards   = new Obj(getCards()).filter((k, v) -> v.enabled).size() # Not really great, but... good enough, I guess --Jason (4/30/13)
+              totalCards = _(globals.playerNums).size() * numCards
 
-      nums   = globals.playerNums
-      num    = if _(nums).isEmpty() then 1 else (_(nums).last() + 1)
-      id     = generatePlayerID(num)
-      elemID = "#{id}-elem"
+              if totalCards <= maxCards
+                @_cleanupLastCardGen()
+                _([0...numCards]).forEach((x) => @_genCardForEachPlayer()).value()
+              else
+                msg = """You attempted to generate #{totalCards} cards, but there are only #{maxCards} available.
+                        |
+                        |Please reduce the number of cards or players and try again.
+                      """.stripMargin().trim()
+                alert(msg)
 
-      globals.playerNums = nums.append(num)
+            # (String) => String
+            genCardImageURL: (name) ->
+              _genCardImageURL(name)
 
-      Element.generatePlayerRow(name, id, elemID, => @removeRow(id)).insertBefore($globals.$adderTable)
+            # (String) => String
+            genPriorityImageURL: (name) ->
+              "/assets/images/index/priority/#{name}.png"
 
-    # () => Unit
-    _genCardForEachPlayer: =>
-      _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach((id) => @_insertCardForID(id))
+            # (String) => Unit
+            _genRow: (name) =>
 
-    # (String) => Unit
-    _insertCardForID: (id) =>
+              nums   = globals.playerNums
+              num    = if _(nums).isEmpty() then 1 else (_(nums).last() + 1)
+              id     = generatePlayerID(num)
+              elemID = "#{id}-elem"
 
-      card = @_cardIterator.next()
+              globals.playerNums = nums.append(num)
 
-      if card?
-        # Given how this is currently implemented, this number is irrelevant; if multiple of the same card can be drawn though,
-        # this then make it so that ID collisions are unlikely. --Jason (6/8/13)
-        safetyNum = 10000
-        r         = Math.floor(Math.random() * safetyNum)
-        cardID    = "#{card.slugify()}-#{r}"
-        imgURL    = _genCardImageURL(card)
-        column    = Element.generateCardEntryColumn(card, cardID, imgURL, Cards[card].faction)
-        $.byID(id).find(".row-content-row").append(column)
-      else
-        alert("Card pool exhausted!  Pick fewer cards!")
+              Element.generatePlayerRow(name, id, elemID, => @removeRow(id)).insertBefore($globals.$adderTable)
 
-    # () => Unit
-    _cleanupLastCardGen: =>
-      clearCardBuckets()
-      @_resetIterator()
+            # () => Unit
+            _genCardForEachPlayer: =>
+              _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach((id) => @_insertCardForID(id)).value()
 
-    # () => Unit
-    _resetIterator: =>
-      @_cardIterator = new CardIterator(getCards())
+            # (String) => Unit
+            _insertCardForID: (id) =>
 
-    # (String) => Unit
-    makeImageVisible = (id) ->
+              card = @_cardIterator.next()
 
-      loaderID = "#{id}-loading"
-      img      = $.byID(id)
-      loader   = $.byID(loaderID)
+              if card?
+                # Given how this is currently implemented, this number is irrelevant; if multiple of the same card can be drawn though,
+                # this then make it so that ID collisions are unlikely. --Jason (6/8/13)
+                safetyNum = 10000
+                r         = Math.floor(Math.random() * safetyNum)
+                cardID    = "#{card.slugify()}-#{r}"
+                imgURL    = _genCardImageURL(card)
+                column    = Element.generateCardEntryColumn(card, cardID, imgURL, Cards[card].faction)
+                $.byID(id).find(".row-content-row").append(column)
+              else
+                alert("Card pool exhausted!  Pick fewer cards!")
 
-      img.removeClass("hidden")
-      loader.remove()
+            # () => Unit
+            _cleanupLastCardGen: =>
+              clearCardBuckets()
+              @_resetIterator()
 
-    # () => Unit
-    clearCardBuckets = ->
-      _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach(
-        (id) -> $.byID(id).find(".row-content-row").empty()
-      )
+            # () => Unit
+            _resetIterator: =>
+              @_cardIterator = new CardIterator(getCards())
 
-    # (String) => String
-    _genCardImageURL = (name) ->
-      "/assets/images/index/#{name.slugify()}.png"
+            # (String) => Unit
+            makeImageVisible = (id) ->
 
-    # (String) => String
-    generatePlayerID = (num) ->
-      "player-#{num}"
+              loaderID = "#{id}-loading"
+              img      = $.byID(id)
+              loader   = $.byID(loaderID)
 
-    # (String) => Int
-    generateNumFromID = (id) ->
-      [[], num, []] = id.split("-")
-      parseInt(num)
+              img.removeClass("hidden")
+              loader.remove()
 
-    # () => Obj[Object[Any]]
-    getCards = ->
+            # () => Unit
+            clearCardBuckets = ->
+              _(globals.playerNums).map((num) -> generatePlayerID(num)).forEach(
+                (id) -> $.byID(id).find(".row-content-row").empty()
+              ).value()
 
-      cardObj = new Obj(Cards).clone().value()
-      labels  = $globals.$cardHolder.children("label").map(-> $(this))
+            # (String) => String
+            _genCardImageURL = (name) ->
+              "/assets/images/index/#{name.slugify()}.png"
 
-      _(labels).forEach(
-        (elem) ->
-          id   = elem.attr("for")
-          name = elem.text()
-          cardObj[name].enabled = $.byID(id)[0].checked
-      )
+            # (String) => String
+            generatePlayerID = (num) ->
+              "player-#{num}"
 
-      cardObj
+            # (String) => Int
+            generateNumFromID = (id) ->
+              [[], num, []] = id.split("-")
+              parseInt(num)
 
-)
+            # () => Obj[Object[Any]]
+            getCards = ->
 
+              cardObj = new Obj(Cards).clone().value()
+              labels  = $globals.$cardHolder.children("label").map(-> $(this))
+
+              _(labels).forEach(
+                (elem) ->
+                  id   = elem.attr("for")
+                  name = elem.text()
+                  cardObj[name].enabled = $.byID(id)[0].checked
+              ).value()
+
+              cardObj
+
+        )()
+      hidden_exports.index_main
+  )

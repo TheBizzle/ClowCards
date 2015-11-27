@@ -1,213 +1,224 @@
 # Currently, this structure is very similar in operation to a `State` monad
 # Once `iterate` returns `undefined`, the `Iterator` is considered to have reached the end of iteration
-define(['api/prototypes', 'adt/option', 'api/underscore']
-     , ( [],               Opt,          _) ->
 
-  Option = Opt.Option
-  None   = Opt.None
+hidden_exports.adt_iterator = null
 
-  class Iterator
+exports.adt_iterator =
+  (->
+    if hidden_exports.adt_iterator isnt null
+      hidden_exports.adt_iterator
+    else
+      hidden_exports.adt_iterator =
+        (->
 
-    # Takes an initial state (_state: T), and a function for iterating over that state (_f: (T) => [U, T])
-    # `_f` should be a function that takes a single argument (`_state`) and returns `[x, newState]`,
-    # where `x` is some value, or `undefined` only when iteration is complete.
-    constructor: (@_state, @_f) ->
-      @_atEnd     = false
-      @_cached    = undefined # Kinda gross, but... okay (necessary for `dropWhile`; nice for `takeWhile`)
-      @_manipList = new ManipList([])
+          exports.api_prototypes()
+          { Option, None } = exports.adt_option()
 
-    # () => U
-    _iterate: =>
+          class Iterator
 
-      iterationFunc = =>
+            # Takes an initial state (_state: T), and a function for iterating over that state (_f: (T) => [U, T])
+            # `_f` should be a function that takes a single argument (`_state`) and returns `[x, newState]`,
+            # where `x` is some value, or `undefined` only when iteration is complete.
+            constructor: (@_state, @_f) ->
+              @_atEnd     = false
+              @_cached    = undefined # Kinda gross, but... okay (necessary for `dropWhile`; nice for `takeWhile`)
+              @_manipList = new ManipList([])
 
-        [x, s, []] = @_f(@_state)
-        @_state = s
+            # () => U
+            _iterate: =>
 
-        if not x?
-          @_atEnd = true
-          x
-        else
-          @_manipList.processArg(x).getOrElse(-> iterationFunc())
+              iterationFunc = =>
 
-      if @_cached?
-        x = @_cached
-        @_cached = undefined
-        x
-      else if not @_atEnd
-        iterationFunc()
-      else
-        undefined
+                [x, s, []] = @_f(@_state)
+                @_state = s
 
-    # () => U
-    next: =>
-      _(@take(1)).head()
+                if not x?
+                  @_atEnd = true
+                  x
+                else
+                  @_manipList.processArg(x).getOrElse(-> iterationFunc())
 
-    # (Int) => Array[U]
-    take: (n) =>
-      helper = (n, acc) =>
-        if n <= 0
-          acc
-        else
-          x = @_iterate()
-          if not x?
-            acc
-          else
-            helper(n - 1, acc.append(x))
-      helper(n, [])
+              if @_cached?
+                x = @_cached
+                @_cached = undefined
+                x
+              else if not @_atEnd
+                iterationFunc()
+              else
+                undefined
 
-    # ((U) => Boolean) => Array[U]
-    takeWhile: (g) =>
-      helper = (acc, g) =>
-        x = @_iterate()
-        if not x? or not g(x)
-          @_cached = x
-          acc
-        else
-          helper(acc.append(x), g)
-      helper([], g)
+            # () => U
+            next: =>
+              _(@take(1)).head()
 
-    # (Int) => Iterator[T, U]
-    drop: (n) =>
-      @take(n)
-      this
+            # (Int) => Array[U]
+            take: (n) =>
+              helper = (n, acc) =>
+                if n <= 0
+                  acc
+                else
+                  x = @_iterate()
+                  if not x?
+                    acc
+                  else
+                    helper(n - 1, acc.append(x))
+              helper(n, [])
 
-    # ((U) => Boolean) => Iterator[T, U]
-    dropWhile: (g) =>
-      @takeWhile(g)
-      this
+            # ((U) => Boolean) => Array[U]
+            takeWhile: (g) =>
+              helper = (acc, g) =>
+                x = @_iterate()
+                if not x? or not g(x)
+                  @_cached = x
+                  acc
+                else
+                  helper(acc.append(x), g)
+              helper([], g)
 
-    # () => Boolean
-    isEmpty: =>
-      @_atEnd
+            # (Int) => Iterator[T, U]
+            drop: (n) =>
+              @take(n)
+              this
 
-    # ((U) => Boolean) => Iterator[T, U]
-    filter: (g) =>
-      copy = @clone()
-      copy._manipList = copy._manipList.append(new FilterManip(g))
-      copy
+            # ((U) => Boolean) => Iterator[T, U]
+            dropWhile: (g) =>
+              @takeWhile(g)
+              this
 
-    # ((U) => Boolean) => Iterator[T, U]
-    filterNot: (g) =>
-      @filter((x) -> not g.apply(this, arguments))
+            # () => Boolean
+            isEmpty: =>
+              @_atEnd
 
-    # ((U) => V) => Unit
-    foreach: (g) =>
+            # ((U) => Boolean) => Iterator[T, U]
+            filter: (g) =>
+              copy = @clone()
+              copy._manipList = copy._manipList.append(new FilterManip(g))
+              copy
 
-      checkState = =>
-        x = @next()
-        if not @isEmpty()
-          performG(x)
-        else
-          undefined
+            # ((U) => Boolean) => Iterator[T, U]
+            filterNot: (g) =>
+              @filter((x) -> not g.apply(this, arguments))
 
-      performG = (x) =>
-        g(x)
-        checkState()
+            # ((U) => V) => Unit
+            foreach: (g) =>
 
-      checkState()
+              checkState = =>
+                x = @next()
+                if not @isEmpty()
+                  performG(x)
+                else
+                  undefined
 
-    # () => Iterator[T, U]
-    clone: =>
-      copy = new Iterator(@_state, @_f)
-      copy._atEnd     = @_atEnd
-      copy._cached    = @_cached
-      copy._manipList = @_manipList
-      copy
+              performG = (x) =>
+                g(x)
+                checkState()
 
-    # ((U) => V) => Iterator[T, V]
-    map: (g) =>
-      copy = @clone()
-      copy._manipList = copy._manipList.append(new MapManip(g))
-      copy
+              checkState()
 
-    # ((U) => Boolean) => Option[U]
-    find: (g) =>
+            # () => Iterator[T, U]
+            clone: =>
+              copy = new Iterator(@_state, @_f)
+              copy._atEnd     = @_atEnd
+              copy._cached    = @_cached
+              copy._manipList = @_manipList
+              copy
 
-      checkState = =>
-        x = @next()
-        if not @isEmpty()
-          checkG(x)
-        else
-          None
+            # ((U) => V) => Iterator[T, V]
+            map: (g) =>
+              copy = @clone()
+              copy._manipList = copy._manipList.append(new MapManip(g))
+              copy
 
-      checkG = (x) =>
-        if g(x)
-          Option.from(x)
-        else
-          checkState()
+            # ((U) => Boolean) => Option[U]
+            find: (g) =>
 
-      checkState()
+              checkState = =>
+                x = @next()
+                if not @isEmpty()
+                  checkG(x)
+                else
+                  None
 
-    # ((U) => Boolean) => U
-    maxBy: (g) =>
-      arr = @toArray()
-      _(arr).max(g)
+              checkG = (x) =>
+                if g(x)
+                  Option.from(x)
+                else
+                  checkState()
 
-    # ((U) => Boolean) => U
-    minBy: (g) =>
-      arr = @toArray()
-      _(arr).min(g)
+              checkState()
 
-    # ((U) => Boolean) => Array[U]
-    sortBy: (g) =>
-      arr = @toArray()
-      _(arr).sortBy(g)
+            # ((U) => Boolean) => U
+            maxBy: (g) =>
+              arr = @toArray()
+              _(arr).max(g)
 
-    # ((U) => String) => Object[Array[U]]
-    groupBy: (g) =>
-      arr = @toArray()
-      _(arr).groupBy(g)
+            # ((U) => Boolean) => U
+            minBy: (g) =>
+              arr = @toArray()
+              _(arr).min(g)
 
-    # () => Array[U]
-    toArray: =>
-      @takeWhile((x) => true)
+            # ((U) => Boolean) => Array[U]
+            sortBy: (g) =>
+              arr = @toArray()
+              _(arr).sortBy(g).value()
 
+            # ((U) => String) => Object[Array[U]]
+            groupBy: (g) =>
+              arr = @toArray()
+              _(arr).groupBy(g).value()
 
-  class ManipList
-
-    # _arr: Array[Manipulator]
-    constructor: (@_arr) ->
-
-    # The `Z` here is the output type of the last `MapManip` that gets executed in the chain
-    # (T) => Option[Z]
-    processArg: (arg) =>
-      _(@_arr).foldl(((acc, manipulator) -> manipulator.manip(acc)), Option.from(arg))
-
-    # (Manipulator) => ManipList
-    append: (manipulator) =>
-      new ManipList(@_arr.append(manipulator))
+            # () => Array[U]
+            toArray: =>
+              @takeWhile((x) => true)
 
 
-  class Manipulator
+          class ManipList
 
-    # _f: (T) => U
-    constructor: (@_f) ->
+            # _arr: Array[Manipulator]
+            constructor: (@_arr) ->
 
-    # (Option[T]) => Option[V]
-    manip: (argOpt) => argOpt
+            # The `Z` here is the output type of the last `MapManip` that gets executed in the chain
+            # (T) => Option[Z]
+            processArg: (arg) =>
+              _(@_arr).foldl(((acc, manipulator) -> manipulator.manip(acc)), Option.from(arg))
 
-
-  class FilterManip extends Manipulator
-
-    # _f: (T) => Boolean
-    constructor: (_f) ->
-      super(_f)
-
-    # (Option[T]) => Option[T]
-    manip: (argOpt) => argOpt.flatMap((arg) => if @_f(arg) then Option.from(arg) else None)
+            # (Manipulator) => ManipList
+            append: (manipulator) =>
+              new ManipList(@_arr.append(manipulator))
 
 
-  class MapManip extends Manipulator
+          class Manipulator
 
-    # _f: (T) => U
-    constructor: (_f) ->
-      super(_f)
+            # _f: (T) => U
+            constructor: (@_f) ->
 
-    # (Option[T]) => Option[U]
-    manip: (argOpt) => argOpt.map((arg) => @_f(arg))
+            # (Option[T]) => Option[V]
+            manip: (argOpt) => argOpt
 
 
-  Iterator
+          class FilterManip extends Manipulator
 
-)
+            # _f: (T) => Boolean
+            constructor: (_f) ->
+              super(_f)
+
+            # (Option[T]) => Option[T]
+            manip: (argOpt) => argOpt.flatMap((arg) => if @_f(arg) then Option.from(arg) else None)
+
+
+          class MapManip extends Manipulator
+
+            # _f: (T) => U
+            constructor: (_f) ->
+              super(_f)
+
+            # (Option[T]) => Option[U]
+            manip: (argOpt) => argOpt.map((arg) => @_f(arg))
+
+
+          Iterator
+
+        )()
+      hidden_exports.adt_iterator
+  )
+

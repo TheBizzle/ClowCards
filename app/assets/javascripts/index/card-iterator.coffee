@@ -1,32 +1,46 @@
-define(['api/prototypes', 'api/jquery', 'adt/iterator', 'adt/obj']
-      , ([],               $,            Iterator,       Obj) ->
+hidden_exports.index_carditerator = null
 
-  class CardIterator extends Iterator
+exports.index_carditerator =
+  (->
+    if hidden_exports.index_carditerator isnt null
+      hidden_exports.index_carditerator
+    else
+      hidden_exports.index_carditerator =
+        (->
 
-    # state: Object[T]
-    constructor: (state) ->
+          exports.api_prototypes()
 
-      iterateFunc = (p) =>
+          Iterator = exports.adt_iterator()
+          Obj      = exports.adt_obj()
 
-        iterateHelper = (pool) ->
+          class CardIterator extends Iterator
 
-          num  = Math.floor(Math.random() * pool.size())
-          card = pool.fetchKeyByIndex(num)
+            # state: Object[T]
+            constructor: (state) ->
 
-          if not card?
-            [card, pool]
-          else
-            cardObj = pool.get(card)
-            newPool = pool.without(card)
-            if cardObj.enabled
-              [card, newPool]
-            else
-              iterateHelper(newPool)
+              iterateFunc = (p) =>
 
-        iterateHelper(p)
+                iterateHelper = (pool) ->
 
-      super(new Obj(state), iterateFunc)
+                  num  = Math.floor(Math.random() * pool.size())
+                  card = pool.fetchKeyByIndex(num)
 
-  CardIterator
+                  if not card?
+                    [card, pool]
+                  else
+                    cardObj = pool.get(card)
+                    newPool = pool.without(card)
+                    if cardObj.enabled
+                      [card, newPool]
+                    else
+                      iterateHelper(newPool)
 
-)
+                iterateHelper(p)
+
+              super(new Obj(state), iterateFunc)
+
+          CardIterator
+
+        )()
+      hidden_exports.index_carditerator
+  )

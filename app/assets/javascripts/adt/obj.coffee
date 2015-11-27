@@ -1,92 +1,105 @@
 # This class represents a wrapper around `Object`s, with some methods for doing things non-stupidly
-define(['api/cloner', 'api/prototypes', 'api/underscore']
-     , ( Cloner,       [],               _) ->
 
-  class Obj
+hidden_exports.adt_obj = null
 
-    # _obj: Object[T]
-    constructor: (@_obj) ->
+exports.adt_obj =
+  (->
+    if hidden_exports.adt_obj isnt null
+      hidden_exports.adt_obj
+    else
+      hidden_exports.adt_obj =
+        (->
 
-    # () => Object[T]
-    value: =>
-      @_obj
+          exports.api_prototypes()
+          Cloner = exports.api_cloner()
 
-    # (String) => T
-    get: (x) =>
-      @_obj[x]
+          class Obj
 
-    # (String, T) => Obj[T]
-    append: (x, y) =>
-      @_withNew((out) => out[x] = y)
+            # _obj: Object[T]
+            constructor: (@_obj) ->
 
-    # (String) => Obj[T]
-    without: (x) =>
-      @_withNew((out) => delete out[x])
+            # () => Object[T]
+            value: =>
+              @_obj
 
-    # ((String, T) => Boolean) => Obj[T]
-    filter: (f) =>
-      @_morph((out, k, v) => if not f(k, v) then delete out[k])
+            # (String) => T
+            get: (x) =>
+              @_obj[x]
 
-    # ((String, T) => Boolean) => Obj[T]
-    filterNot: (f) =>
-      @filter((x) -> not f.apply(this, arguments))
+            # (String, T) => Obj[T]
+            append: (x, y) =>
+              @_withNew((out) => out[x] = y)
 
-    # ((String) => Boolean) => Obj[T]
-    filterKeys: (f) =>
-      @_morph((out, k, v) => if not f(k) then delete out[k])
+            # (String) => Obj[T]
+            without: (x) =>
+              @_withNew((out) => delete out[x])
 
-    # ((String, T) => [String, U]) => Obj[U]
-    map: (f) =>
-      @_comprehend(
-        (out, k, v) =>
-          [key, value, []] = f(k, v)
-          delete out[k]
-          out[key] = value
-      )
+            # ((String, T) => Boolean) => Obj[T]
+            filter: (f) =>
+              @_morph((out, k, v) => if not f(k, v) then delete out[k])
 
-    # () => Obj[T]
-    clone: =>
-      new Obj(Cloner(@_obj))
+            # ((String, T) => Boolean) => Obj[T]
+            filterNot: (f) =>
+              @filter((x) -> not f.apply(this, arguments))
 
-    # () => Array[Array[String|T]]
-    toArray: =>
-      for k, v of @_obj
-        [k, v]
+            # ((String) => Boolean) => Obj[T]
+            filterKeys: (f) =>
+              @_morph((out, k, v) => if not f(k) then delete out[k])
 
-    # (Int) => String
-    fetchKeyByIndex: (n) =>
-      Object.keys(@_obj)[n]
+            # ((String, T) => [String, U]) => Obj[U]
+            map: (f) =>
+              @_comprehend(
+                (out, k, v) =>
+                  [key, value, []] = f(k, v)
+                  delete out[k]
+                  out[key] = value
+              )
 
-    # (Int) => T
-    fetchValueByIndex: (n) =>
-      key = @fetchKeyByIndex(n)
-      @_obj[key]
+            # () => Obj[T]
+            clone: =>
+              new Obj(Cloner(@_obj))
 
-    # () => Int
-    size: =>
-      _(@_obj).size()
+            # () => Array[Array[String|T]]
+            toArray: =>
+              for k, v of @_obj
+                [k, v]
 
-    # ((Obj[T], String, T) => Obj[U]) => Obj[U]
-    _comprehend: (f) =>
-      @_withNew(
-        (out) =>
-          for k, v of out
-            f(out, k, v)
-      )
+            # (Int) => String
+            fetchKeyByIndex: (n) =>
+              Object.keys(@_obj)[n]
 
-    # ((Obj[T], String, T) => Unit) => Obj[T]
-    _morph: (f) =>
-      @_withNew(
-        (out) =>
-          for k, v of out
-            f(out, k, v)
-          out
-      )
+            # (Int) => T
+            fetchValueByIndex: (n) =>
+              key = @fetchKeyByIndex(n)
+              @_obj[key]
 
-    # ((Object[T]) => U) => Obj[T]
-    _withNew: (f) =>
-      out = @clone().value()
-      f(out)
-      new Obj(out)
+            # () => Int
+            size: =>
+              _(@_obj).size()
 
-)
+            # ((Obj[T], String, T) => Obj[U]) => Obj[U]
+            _comprehend: (f) =>
+              @_withNew(
+                (out) =>
+                  for k, v of out
+                    f(out, k, v)
+            )
+
+            # ((Obj[T], String, T) => Unit) => Obj[T]
+            _morph: (f) =>
+              @_withNew(
+                (out) =>
+                  for k, v of out
+                    f(out, k, v)
+                  out
+              )
+
+            # ((Object[T]) => U) => Obj[T]
+            _withNew: (f) =>
+              out = @clone().value()
+              f(out)
+              new Obj(out)
+
+        )()
+      hidden_exports.adt_obj
+  )
