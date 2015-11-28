@@ -1,18 +1,9 @@
-hidden_exports.api_cloner = null
+f =
+  ->
 
-exports.api_cloner =
-  (->
-    if hidden_exports.api_cloner isnt null
-      hidden_exports.api_cloner
-    else
-      hidden_exports.api_cloner =
-        (->
+    $ = dependOn("api_jquery")
 
-          $ = exports.api_jquery()
+    # (Object[T]) => Object[T]
+    (o) -> $.extend(true, {}, o)
 
-          # (Object[T]) => Object[T]
-          (o) -> $.extend(true, {}, o)
-
-        )()
-      hidden_exports.api_cloner
-  )
+declareModule("api_cloner", f)

@@ -5,8 +5,25 @@
       <script src="//code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
       <script>
-        hidden_exports = {};
-        exports = {};
+        window.__bizzleModuleCache = {};
+        window.__bizzleLazyCache   = {};
+
+        window.declareModule =
+          function(name, f) {
+            __bizzleModuleCache[name] = null;
+            __bizzleLazyCache[name]   = f;
+          };
+
+        window.dependOn =
+          function(name) {
+              if (__bizzleModuleCache[name] === null) {
+                __bizzleModuleCache[name] = __bizzleLazyCache[name]();
+              }
+              if (__bizzleLazyCache[name] === undefined) {
+                throw new Error(name + " is not a defined module");
+              }
+              return __bizzleModuleCache[name];
+          };
       </script>
       <script src="@routes.Assets.at("javascripts/api/jquery.js")"></script>
       <script src="@routes.Assets.at("javascripts/api/prototypes.js")"></script>
@@ -25,7 +42,7 @@
       <script src="@routes.Assets.at("javascripts/index/main.js")"></script>
       <script src="@routes.Assets.at("javascripts/index/finalize.js")"></script>
       <script>
-        window.addEventListener('load', function() { exports.index_finalize(); });
+        window.addEventListener('load', function() { dependOn("index_finalize"); });
       </script>
       <div id="index-accordion" class="collapsible-accordion">
         <h3>Draft Cards</h3>

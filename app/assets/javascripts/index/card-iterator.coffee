@@ -1,46 +1,37 @@
-hidden_exports.index_carditerator = null
+f =
+  ->
 
-exports.index_carditerator =
-  (->
-    if hidden_exports.index_carditerator isnt null
-      hidden_exports.index_carditerator
-    else
-      hidden_exports.index_carditerator =
-        (->
+    dependOn("api_prototypes")
 
-          exports.api_prototypes()
+    Iterator = dependOn("adt_iterator")
+    Obj      = dependOn("adt_obj")
 
-          Iterator = exports.adt_iterator()
-          Obj      = exports.adt_obj()
+    class CardIterator extends Iterator
 
-          class CardIterator extends Iterator
+      # state: Object[T]
+      constructor: (state) ->
 
-            # state: Object[T]
-            constructor: (state) ->
+        iterateFunc = (p) =>
 
-              iterateFunc = (p) =>
+          iterateHelper = (pool) ->
 
-                iterateHelper = (pool) ->
+            num  = Math.floor(Math.random() * pool.size())
+            card = pool.fetchKeyByIndex(num)
 
-                  num  = Math.floor(Math.random() * pool.size())
-                  card = pool.fetchKeyByIndex(num)
+            if not card?
+              [card, pool]
+            else
+              cardObj = pool.get(card)
+              newPool = pool.without(card)
+              if cardObj.enabled
+                [card, newPool]
+              else
+                iterateHelper(newPool)
 
-                  if not card?
-                    [card, pool]
-                  else
-                    cardObj = pool.get(card)
-                    newPool = pool.without(card)
-                    if cardObj.enabled
-                      [card, newPool]
-                    else
-                      iterateHelper(newPool)
+          iterateHelper(p)
 
-                iterateHelper(p)
+        super(new Obj(state), iterateFunc)
 
-              super(new Obj(state), iterateFunc)
+    CardIterator
 
-          CardIterator
-
-        )()
-      hidden_exports.index_carditerator
-  )
+declareModule("index_carditerator", f)
