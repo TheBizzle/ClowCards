@@ -19,6 +19,7 @@ f =
       "Chardris":                    { enabled: true,  faction: "Ullar"   },
       "Charon":                      { enabled: false, faction: "Jacob"   },
       "Charos":                      { enabled: true,  faction: "Ullar"   },
+      "Chunak":                      { enabled: true,  faction: "Utgar"   },
       "Concan":                      { enabled: true,  faction: "Jandar"  },
       "Crixus":                      { enabled: true,  faction: "Einar"   },
       "Crucian":                     { enabled: true,  faction: "Choobar" },
