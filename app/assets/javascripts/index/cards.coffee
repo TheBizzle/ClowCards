@@ -9,6 +9,7 @@ f =
       "Arkmer":                      { enabled: true,  faction: "Ullar"   },
       "Ariella":                     { enabled: true,  faction: "Ullar"   },
       "Arrow Gruts":                 { enabled: true,  faction: "Utgar"   },
+      "Aruthan":                     { enabled: true,  faction: "Einar"   },
       "Aubrien Archers":             { enabled: true,  faction: "Ullar"   },
       "Basilisk":                    { enabled: false, faction: "Choobar" },
       "Belthasar":                   { enabled: true,  faction: "Choobar" },
